@@ -129,6 +129,7 @@ xcuserdata/**/*
 # Workspace layout is quite spammy. For reference:
 #
 # /(root)/
+*/meetSam/meetSAM/*
 */meetSAM.xcodeproj/*
 #     project.pbxproj
 #     /project.xcworkspace/
