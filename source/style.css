@@ -15,7 +15,7 @@ body {
     margin-left:auto;
     margin-right:auto;
 }
-
+/*--- Middle Css Section ---*/
 .cat1 {
     margin: 4px;
     width: 114px;
@@ -44,3 +44,11 @@ body {
     width: 114px;
     height: 95px;
 }
+
+
+.adFb {
+    margin: 4px;
+    width: 468px;
+    height: 60px;
+}
+/*--- End Middle Css Section ---*/
