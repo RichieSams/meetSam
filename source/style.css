@@ -45,6 +45,11 @@ body {
     height: 95px;
 }
 
+.fullBanner {
+    width: 468px;
+    height: 60px;
+    
+}
 
 .adFb {
     margin: 4px;
