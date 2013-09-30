@@ -99,7 +99,7 @@ body {
 .fullBanner {
     width: 468px;
     height: 60px;
-    
+    float; left;
 }
 
 .adFb {
