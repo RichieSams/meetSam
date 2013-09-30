@@ -15,7 +15,12 @@ body {
     margin-left:auto;
     margin-right:auto;
 }
-/*--- Middle Css Section ---*/
+/*--- Middle CSS Section ---*/
+.middle {
+    width: 468px;
+    float: left;
+}
+
 .cat1 {
     margin: 4px;
     width: 114px;
