@@ -106,5 +106,38 @@ body {
     margin: 4px;
     width: 468px;
     height: 60px;
+    float; left;
 }
-/*--- End Middle Css Section ---*/
+
+.spnsrdHead {
+    margin: 4px;
+    width: 111px;
+    float: left;
+}
+
+.spnsrdHead p{
+    margin-top: 0px;
+}
+
+.spnsrdHead h4{
+    margin-bottom: 0px;
+}
+
+.sponsImg1 {
+    margin: 0px;
+    width: 111px;
+    height: 95px;
+}
+
+.sponsImg2 {
+    margin: 0px;
+    width: 111px;
+    height: 95px;
+}
+
+.featurePhoto {
+    margin: 4px;
+    width: 350px;
+}
+
+/*--- End Middle CSS    Section ---*/
