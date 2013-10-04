@@ -146,14 +146,14 @@ nav ul li.selected a {
 .fullBanner {
     width: 468px;
     height: 60px;
-    float; left;
+    float: left;
 }
 
 .adFb {
     margin: 4px;
     width: 468px;
     height: 60px;
-    float; left;
+    float: left;
 }
 
 .spnsrdHead {
@@ -187,4 +187,4 @@ nav ul li.selected a {
     width: 350px;
 }
 
-/*--- End Middle CSS    Section ---*/
+/*--- End Middle CSS Section ---*/
