@@ -21,6 +21,9 @@ body {
     float: left;
 }
 
+h4{
+    margin-top: 0px;
+}
 .cat1 {
     margin-left: 0px;
     width: 111px;
