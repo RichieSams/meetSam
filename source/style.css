@@ -65,15 +65,16 @@ body {
 nav {
     left: 0;
     width: 100%;
-    border: red 2px solid;
     display: block;
     background-color: darkorange;
+    overflow: hidden;
 }
 
 nav ul {
     margin: 0 auto;
-    width: 940px;
+    width: 950px;
     list-style: none;
+    padding: 0px;
 }
 
 nav ul li {
@@ -82,21 +83,20 @@ nav ul li {
 
 nav ul li a {
     display: block;
-    margin-right: 20px;
-    width: 140px;
+    margin: 0px;
+    width: 190px;
     font-size: 14px;
-    line-height: 44px;
     text-align: center;
     text-decoration: none;
-    color: #777;
+    color: #000000;
 }
 
 nav ul li a:hover {
-    color: #fff;
+    color: #0000ff;
 }
 
 nav ul li.selected a {
-    color: #fff;
+    color: #000000;
 }
 
 /*--- End Top CSS Section ---*/
