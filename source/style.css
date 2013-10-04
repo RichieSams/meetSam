@@ -187,4 +187,68 @@ nav ul li.selected a {
     width: 350px;
 }
 
+<<<<<<< Updated upstream
 /*--- End Middle CSS Section ---*/
+=======
+/*--- End Middle CSS    Section ---*/
+
+.bottom{
+    
+    border: 3px solid red;
+    height: 390px;
+    width:900px; 
+    margin-top: 420px;
+    
+}
+
+.bot_left{
+    padding-left:10px;
+    border: blue 3px solid;
+    width: 111px;
+    padding: 10px;
+   
+}
+
+.print_version{
+    width: 111px;
+    text-align: center;
+}
+
+.bot_ad{
+    padding-top: 100px;
+    width: 111px;
+    height: 150px;
+    background-color: red;
+}
+
+.head_lines{
+    color: green;
+    width: 505px;
+    height:100px;
+    background-color: black;
+    float: left;
+}
+
+.bot_right{
+    float: left;
+    border: 3px solid;
+    width: 111px;
+}
+
+.footer{
+    margin-top: 10px;
+    border: 3px solid;
+    background-color: yellow;
+    height: 22px;
+}
+
+.about{
+    float: left;
+    padding-left: 10px;
+}
+
+.contact{
+    float:left;
+    padding-left: 20px;
+}
+>>>>>>> Stashed changes
