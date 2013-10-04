@@ -18,15 +18,17 @@ body {
 }
 
 .left_main_col {
-    width: 585px;
+    width: 705px;
     margin-right: 15px;
     float: left;
+    background-color: lightgray;
 }
 
 .right_main_col {
-    width: 300px;
+    width: 180px;
     margin: 0px;
     float: left;
+    background-color: lightgray;
 }
 
 /*--- Top CSS Section ---*/
