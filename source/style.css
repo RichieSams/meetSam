@@ -145,4 +145,10 @@ h4{
     float: left;
 }
 
+.fPhoto {
+    margin: 0px;
+    width: 345px;
+    height: 124px;
+}
+
 /*--- End Middle CSS    Section ---*/
