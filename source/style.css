@@ -64,6 +64,7 @@ nav ul li.selected a {
 
 /*--- Middle CSS Section ---*/
 .middle {
+    margin-top: 50px;
     width: 468px;
     float: left;
 }
