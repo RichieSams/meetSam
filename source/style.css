@@ -139,8 +139,9 @@ h4{
 }
 
 .featurePhoto {
-    margin: 4px;
+    margin: 4px 0px 0px 4px;
     width: 345px;
+    height: 124px;
     float: left;
 }
 
