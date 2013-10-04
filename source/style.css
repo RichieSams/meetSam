@@ -15,6 +15,53 @@ body {
     margin-left:auto;
     margin-right:auto;
 }
+
+/*--- Top CSS Section ---*/
+
+.title {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: darkorange;
+}
+
+nav ul {
+    margin: 0 auto;
+    width: 940px;
+    list-style: none;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    margin-right: 20px;
+    width: 140px;
+    font-size: 14px;
+    line-height: 44px;
+    text-align: center;
+    text-decoration: none;
+    color: #777;
+}
+
+nav ul li a:hover {
+    color: #fff;
+}
+
+nav ul li.selected a {
+    color: #fff;
+}
+
+/*--- End Top CSS Section ---*/
+
 /*--- Middle CSS Section ---*/
 .middle {
     width: 468px;
@@ -99,14 +146,14 @@ body {
 .fullBanner {
     width: 468px;
     height: 60px;
-    float; left;
+    float: left;
 }
 
 .adFb {
     margin: 4px;
     width: 468px;
     height: 60px;
-    float; left;
+    float: left;
 }
 
 .spnsrdHead {
@@ -140,4 +187,4 @@ body {
     width: 350px;
 }
 
-/*--- End Middle CSS    Section ---*/
+/*--- End Middle CSS Section ---*/
