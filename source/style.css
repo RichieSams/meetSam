@@ -160,6 +160,13 @@ h4{
     float: left;
 }
 
+.left_inner_col{
+    display: block;
+    width:111px;
+    height: auto;
+    float: left;
+}
+
 .spnsrdHead {
     margin: 4px;
     width: 111px;
@@ -186,15 +193,19 @@ h4{
     height: 95px;
 }
 
+.middle_inner_col{
+    display: inline;
+    width: 345px;
+    height: 450px;
+}
+
 .featurePhoto {
-    margin: 4px 0px 0px 4px;
+    display: inline;
     width: 345px;
     height: 124px;
-    float: left;
 }
 
 .fPhoto {
-    margin: 0px;
     width: 345px;
     height: 124px;
 }
