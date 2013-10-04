@@ -52,8 +52,14 @@ body {
 
 .title {
     width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 15px auto 0px auto;
+}
+
+.title_text {
+    width: 800px;
+    text-align: center;
+    font-size: 12px;
+    margin: 0px auto 8px auto;
 }
 
 nav {
