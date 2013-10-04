@@ -28,6 +28,25 @@ body {
 
 /*--- Top CSS Section ---*/
 
+.float_container {
+    overflow: hidden;
+}
+
+.top_ad {
+    width: 293px;
+    height: 175px;
+    background-color: red;
+    float: left;
+}
+
+.middle_image {
+    width: 294px;
+    height: 175px;
+    background-color: blue;
+    float: left;
+    margin: 0px 10px;
+}
+
 .title {
     width: 800px;
     margin-left: auto;
