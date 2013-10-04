@@ -137,7 +137,8 @@ body {
 
 .featurePhoto {
     margin: 4px;
-    width: 350px;
+    width: 345px;
+    float: left;
 }
 
 /*--- End Middle CSS    Section ---*/
