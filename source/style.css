@@ -103,6 +103,47 @@ nav ul li.selected a {
 
 /*--- End Top CSS Section ---*/
 
+/*--- Right Main Column Section ---*/
+
+.multi{
+    display: inline-block;
+    width: 180px;
+}
+
+.multi h4{
+    margin-bottom: 0px;
+}
+
+.videos{
+    display: inline;
+    width: 180px;
+    height: 60px;
+}
+
+.vid2 {
+    margin-left: 1px;
+    width: 56px;
+    height: 56px;
+    float: left;
+}
+
+.vid3{
+    margin-left: 5px;
+    width: 56px;
+    height: 56px;
+    float: left;
+}
+
+.vid4{
+    margin-left: 5px;
+    width: 56px;
+    height: 56px;
+    float: left;
+}
+
+
+/*--- Right Main Column Section ---*/
+
 /*--- Middle CSS Section ---*/
 .middle {
     display: inline;
