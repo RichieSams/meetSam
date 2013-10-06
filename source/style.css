@@ -172,7 +172,26 @@ nav ul li.selected a {
     list-style: #CC5500;
     padding-left: 3px;
     
+}.bot_right{
+    float: left;
+    width: 180px;
+    height: 360px;
+    
 }
+
+.bot_right h3{
+    margin-bottom: 0px;
+}
+
+.bot_right img{
+    margin-left: 5px;
+}
+
+.bot_right a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
 
 /*--- Right Main Column Section ---*/
 
