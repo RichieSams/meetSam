@@ -244,13 +244,21 @@ h4{
 
 .featurePhoto {
     display: inline;
-    width: 345px;
-    height: 124px;
+    width: 563px;
+    height: 335px;
+}
+
+.feature_Title{
+    margin: 3px 0px 0px 12px;
+    width: 563px;
+    height: 19px;
+    float: left;
 }
 
 .fPhoto {
-    width: 345px;
-    height: 124px;
+    margin: 0px 0px 5px 12px;
+    width: 563px;
+    height: 316px;
 }
 
 /*--- End Middle CSS Section ---*/
