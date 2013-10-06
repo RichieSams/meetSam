@@ -115,13 +115,13 @@ h4{
 }
 .cat1 {
     margin-left: 0px;
-    width: 111px;
+    width: 170px;
     float: left;
 }
 
 .cat1 p{
     margin: 0px;
-    width: 111px;
+    width: 170px;
     height: 92px;
     overflow: hidden;
 }
@@ -133,13 +133,13 @@ h4{
 
 .cat2 {
     margin-left: 8px;
-    width: 111px;
+    width: 170px;
     float: left;
 }
 
 .cat2 p{
     margin: 0px;
-    width: 111px;
+    width: 170px;
     height: 92px;
     overflow: hidden;
 }
@@ -150,13 +150,13 @@ h4{
 
 .cat3 {
     margin-left: 8px;
-    width: 111px;
+    width: 170px;
     float: left;
 }
 
 .cat3 p{
     margin: 0px;
-    width: 111px;
+    width: 170px;
     height: 92px;
     overflow: hidden;
 }
@@ -167,13 +167,13 @@ h4{
 
 .cat4 {
     margin-left: 8px;
-    width: 111px;
+    width: 170px;
     float: left;
 }
 
 .cat4 p{
     margin: 0px;
-    width: 111px;
+    width: 170px;
     height: 92px;
     overflow: hidden;
 }
@@ -184,8 +184,9 @@ h4{
 
 .catImg {
     margin: 0px;
-    width: 111px;
-    height: 95px;
+    width: 170px;
+    height: 144px;
+    float: left;
 }
 
 .fullBanner {
