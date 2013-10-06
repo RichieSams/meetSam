@@ -105,9 +105,9 @@ nav ul li.selected a {
 
 /*--- Middle CSS Section ---*/
 .middle {
+    display: inline;
     margin-top: 50px;
-    width: 468px;
-    float: left;
+    width: 705px;
 }
 
 h4{
