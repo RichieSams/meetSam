@@ -154,6 +154,8 @@ nav ul li.selected a {
 h4{
     margin-top: 0px;
 }
+
+/*--- Category Section ---*/
 .cat1 {
     margin-left: 0px;
     width: 170px;
@@ -229,6 +231,7 @@ h4{
     height: 144px;
     float: left;
 }
+/*--- End Category Section ---*/
 
 .fullBanner {
     width: 705px;
@@ -243,6 +246,7 @@ h4{
     float: left;
 }
 
+/*--- Left Inner Column Section ---*/
 .left_inner_col{
     display: block;
     width:130px;
@@ -275,7 +279,9 @@ h4{
     width: 130px;
     height: 95px;
 }
+/*--- End Left Inner Column Section ---*/
 
+/*--- Middle Inner Column Section ---*/
 .middle_inner_col{
     display: inline;
     width: 563px;
@@ -301,6 +307,7 @@ h4{
     width: 563px;
     height: 316px;
 }
+/*--- End Middle Inner Column Section ---*/
 
 /*--- End Middle CSS Section ---*/
 
