@@ -141,6 +141,38 @@ nav ul li.selected a {
     float: left;
 }
 
+.topten{
+    margin-top: 10px;
+    width: 180px;
+}
+
+.ten_title{
+    
+}
+.ten_title h4{
+    margin: 5px 0 0 5px;
+}
+
+.ten_links{
+    text-align: center;
+}
+
+.ten_links a{
+    text-decoration: none;
+    color: #CC5500;
+}
+
+.ten_stories{
+    width: 180px;
+}
+
+.ten_stories ol{
+    list-style-position:inside;
+    margin-top: 0px;
+    list-style: #CC5500;
+    padding-left: 3px;
+    
+}
 
 /*--- Right Main Column Section ---*/
 
