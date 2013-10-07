@@ -359,8 +359,25 @@ h4{
 .adImg1 {
     margin: 4px;
     width: 130px;
-    height: 95px;
+    height: 200px;
 }
+
+.adImg2 {
+    margin: 4px;
+    width: 130px;
+    height: 200px;
+}
+.adImg3 {
+    margin: 4px;
+    width: 130px;
+    height: 200px;
+}
+.adImg4 {
+    margin: 4px;
+    width: 130px;
+    height: 200px;
+}
+
 /*--- End Left Inner Column Section ---*/
 
 /*--- Middle Inner Column Section ---*/
