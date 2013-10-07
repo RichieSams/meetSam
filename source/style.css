@@ -64,7 +64,7 @@ body {
     margin: 0px auto 8px auto;
 }
 
-nav {
+.nav_bar, .footer {
     left: 0;
     width: 100%;
     display: block;
@@ -72,32 +72,42 @@ nav {
     overflow: hidden;
 }
 
-nav ul {
+.nav_bar ul, .footer ul {
     margin: 0 auto;
     width: 950px;
     list-style: none;
     padding: 0px;
 }
 
-nav ul li {
+.nav_bar ul li, .footer ul li {
     float: left;
 }
 
-nav ul li a {
+.nav_bar ul li a, .nav_bar ul li div {
     display: block;
     margin: 0px;
     width: 190px;
+    text-decoration: none;
     font-size: 14px;
     text-align: center;
-    text-decoration: none;
     color: #000000;
 }
 
-nav ul li a:hover {
+.footer ul li a, .footer ul li div {
+    display: block;
+    margin: 0px;
+    width: 158px;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    color: #000000;
+}
+
+.nav_bar ul li a:hover, .footer ul li a:hover {
     color: #0000ff;
 }
 
-nav ul li.selected a {
+.mav_Bar ul li.selected a, .footer ul li.selected a {
     color: #000000;
 }
 
