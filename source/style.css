@@ -435,3 +435,7 @@ h4{
     float:left;
     padding-left: 20px;
 }
+
+.twitter_feed {
+    height: 400px;
+}
