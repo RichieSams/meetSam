@@ -19,6 +19,7 @@ body {
 
 .left_main_col {
     width: 705px;
+    margin-top: 10px;
     margin-right: 15px;
     float: left;
     background-color: lightgray;
@@ -26,7 +27,7 @@ body {
 
 .right_main_col {
     width: 180px;
-    margin: 0px;
+    margin: 10px 0px 0px 0px;
     float: left;
     background-color: lightgray;
 }
