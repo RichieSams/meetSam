@@ -444,18 +444,9 @@ h4{
 
 /*--- End Middle CSS Section ---*/
 
-.bottom{
-    
-    border: 3px solid red;
-    height: 390px;
-    width:900px; 
-    margin-top: 420px;
-    
-}
 
 .bot_left{
     padding-left:10px;
-    border: blue 3px solid;
     width: 111px;
     padding: 10px;
    
@@ -473,13 +464,6 @@ h4{
     background-color: red;
 }
 
-.head_lines{
-    color: green;
-    width: 100px;
-    height:100px;
-    background-color: black;
-    float: left;
-}
 
 .bot_right{
     float: left;
