@@ -383,6 +383,18 @@ h4{
     width: 563px;
     height: 316px;
 }
+
+.head_lines{
+    display: inline;
+    width: 563px;
+    height: 335px;
+}
+
+.head_lines a{
+  color: inherit;
+  text-decoration: inherit;
+}
+
 /*--- End Middle Inner Column Section ---*/
 
 /*--- End Middle CSS Section ---*/
@@ -408,6 +420,10 @@ h4{
     width: 111px;
     text-align: center;
 }
+.print_version a{
+  color: inherit;
+  text-decoration: inherit;
+}
 
 .bot_ad{
     padding-top: 100px;
@@ -416,13 +432,6 @@ h4{
     background-color: red;
 }
 
-.head_lines{
-    color: green;
-    width: 100px;
-    height:100px;
-    background-color: black;
-    float: left;
-}
 
 .bot_right{
     float: left;
@@ -430,15 +439,7 @@ h4{
     width: 111px;
 }
 
-.about{
-    float: left;
-    padding-left: 10px;
-}
 
-.contact{
-    float:left;
-    padding-left: 20px;
-}
 
 .twitter_feed {
     height: 400px;
