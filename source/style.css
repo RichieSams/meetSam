@@ -65,6 +65,14 @@ body {
     margin: 0px auto 8px auto;
 }
 
+.date {
+    width: 800px;
+    text-align: center;
+    margin: 0px auto 8px auto;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .nav_bar, .footer {
     left: 0;
     width: 100%;
@@ -110,20 +118,6 @@ body {
 
 .mav_Bar ul li.selected a, .footer ul li.selected a {
     color: #000000;
-}
-
-.main_article {
-    position: relative;
-}
-
-.main_article_text {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-image: url('images/main_article_background_img.png');
-    font-size: 24px;
-    font-weight: bold;
-    padding: 10px;
 }
 
 /*--- End Top CSS Section ---*/
@@ -194,10 +188,16 @@ body {
 .ten_stories ol{
     list-style-position:inside;
     margin-top: 0px;
-    list-style: #CC5500;
     padding-left: 3px;
-    
-}.bot_right{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.ten_stories ol li span {
+    font-weight: normal;
+}
+
+.bot_right{
     float: left;
     width: 180px;
     height: 360px;
@@ -217,10 +217,24 @@ body {
     text-decoration: inherit;
 }
 
-
-/*--- Right Main Column Section ---*/
+/*--- End Right Main Column Section ---*/
 
 /*--- Middle CSS Section ---*/
+
+.main_article {
+    position: relative;
+}
+
+.main_article_text {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background-image: url('images/main_article_background_img.png');
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+}
+
 .middle {
     display: inline;
     margin-top: 50px;
@@ -330,17 +344,17 @@ h4{
     float: left;
 }
 
-.spnsrdHead {
+.sponsoredHead {
     margin: 4px;
     width: 130px;
     float: left;
 }
 
-.spnsrdHead p{
+.sponsoredHead p{
     margin-top: 0px;
 }
 
-.spnsrdHead h4{
+.sponsoredHead h4{
     margin-bottom: 0px;
 }
 
@@ -491,8 +505,6 @@ h4{
     border: 3px solid;
     width: 111px;
 }
-
-
 
 .twitter_feed {
     height: 400px;
