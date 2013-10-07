@@ -124,6 +124,10 @@ body {
 
 /*--- Right Main Column Section ---*/
 
+.weather {
+    margin-bottom: 10px;
+}
+
 .multi{
     display: inline-block;
     width: 180px;
