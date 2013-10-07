@@ -101,6 +101,20 @@ nav ul li.selected a {
     color: #000000;
 }
 
+.main_article {
+    position: relative;
+}
+
+.main_article_text {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-image: url('images/main_article_background_img.png');
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+}
+
 /*--- End Top CSS Section ---*/
 
 /*--- Right Main Column Section ---*/
