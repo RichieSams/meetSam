@@ -1,0 +1,34 @@
+.main{
+    
+    position: relative;
+    width: 840px;
+}
+
+.grid{
+    float: left;
+    background-image: url('./images/puzzleback.gif');
+    background-repeat: no-repeat;
+    background-position: top left;
+    height: 300px;
+    width: 400px;
+}
+
+#images{
+    float: left;
+    display: inline;
+    margin-left: 20px;
+    margin-top: -5px;
+    width: 420px;
+    height: 300px;
+}
+
+#puzzles span{
+    margin: 30px;
+}
+
+
+.img {
+    float: left;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    }
