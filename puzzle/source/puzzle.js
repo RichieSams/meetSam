@@ -17,3 +17,22 @@ function initImage(puzzleNum){
         count.splice(picNum, 1);
     }
 }
+
+//Function will check individual tile placement.
+function checkMatch(sqrNumber, tileNumber)
+{
+    ...
+}
+
+//Function will check tileArray for values of total result. If any tile placement is incorrect will fail.
+function checkResult(tileArray[][])
+{
+    if(checkMatch(tileArray[])
+    {
+        alert("Congratulations! You got it!");
+    }
+    else
+    {
+        alert("Better luck next time...")
+    }
+}
