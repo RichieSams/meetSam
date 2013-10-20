@@ -1,18 +1,32 @@
+//Function initiates the random images right of the grid.
 function initImage(puzzleNum){
-    
+    //Hides puzzle selection.
     dom = document.getElementById("puzzles").style;
     dom.visibility = "hidden";
+    
+    //Randomizes images.
     var count = new Array();
     for(i=0; i<12; i++){
         count[i] = i+1;
     }
     
     var picNum;
-    while(count.length>0){
+    var temp1 = 0;
+    var temp2 = 0;
+    while(count.length>0){        
         picNum = Math.floor(Math.random()*count.length);
         var newImg = document.createElement("img");
         newImg.src = "./images/img"+puzzleNum+"-"+count[picNum]+".jpg";
         newImg.setAttribute("class", "img");
+        newImg.setAttribute("id", "img"+count[picNum]);
+        if(temp2 > 3)
+            {
+            temp1 = temp1 + 1;
+            temp2 = 0;
+            }
+        newImg.style.top = ((100 * temp1)+(temp1*5)) + "px";
+        newImg.style.left = ((100 * temp2)+(temp2*5)) + "px";
+        temp2 = temp2 + 1;
         document.getElementById("images").appendChild(newImg);
         count.splice(picNum, 1);
     }
