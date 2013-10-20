@@ -14,12 +14,10 @@
 }
 
 #images{
+    position: relative;
     float: left;
-    display: inline;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: -5px;
-    width: 420px;
-    height: 300px;
 }
 
 #puzzles span{
@@ -28,7 +26,5 @@
 
 
 .img {
-    float: left;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    position: absolute;
     }
