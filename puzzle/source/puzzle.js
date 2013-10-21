@@ -2,7 +2,8 @@
  Define variables for the values computed by the grabber event
  handler but needed by mover event handler
  */
-var time, diffX, diffY, theElement, tileArray, timer;
+var diffX, diffY, theElement, origX, origY;
+var tileArray = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
 
 //Function initiates the random images right of the grid.
 function initImage(puzzleNum){
@@ -29,7 +30,7 @@ function initImage(puzzleNum){
         var newImg = document.createElement("img");
         newImg.src = "images/img" + puzzleNum + "-" + (count[picNum] + 1) + ".jpg";
         newImg.setAttribute("class", "img");
-        newImg.setAttribute("id", "img" + count[picNum]);
+        newImg.setAttribute("id", count[picNum]);
         newImg.setAttribute("onmousedown", "grabber(event);");
 
         newImg.style.top = ((100 * row) + (row * 5)) + "px";
@@ -73,13 +74,13 @@ function grabber(event) {
 
     // Determine the position of the word to be grabbed,
     //  first removing the units from left and top
-    var posX = parseInt(theElement.style.left);
-    var posY = parseInt(theElement.style.top);
+    origX = parseInt(theElement.style.left);
+    origY = parseInt(theElement.style.top);
 
     // Compute the difference between where it is and
     // where the mouse click occurred
-    diffX = event.clientX - posX;
-    diffY = event.clientY - posY;
+    diffX = event.clientX - origX;
+    diffY = event.clientY - origY;
 
     // Now register the event handlers for moving and
     // dropping the word
@@ -90,7 +91,6 @@ function grabber(event) {
     // browser action
     event.stopPropagation();
     event.preventDefault();
-
 }
 
 
@@ -101,19 +101,42 @@ function mover(event) {
     theElement.style.top = (event.clientY - diffY) + "px";
 
     // Prevent propagation of the event
-
     event.stopPropagation();
 }
 
 // The event handler function for dropping the word
 function dropper(event) {
     // Unregister the event handlers for mouseup and mousemove
-
     document.removeEventListener("mouseup", dropper, true);
     document.removeEventListener("mousemove", mover, true);
 
     // Prevent propagation of the event
     event.stopPropagation();
+
+    // Calculate which tile we are in
+    // Use the center of the image as the deciding point
+    var centerHoriz = parseInt(theElement.style.left) + 50;
+    var centerVert = parseInt(theElement.style.top) + 50;
+
+    for (var y = 0; y < 3; ++y) {
+        var breakOut = false;
+        for (var x = 0; x < 4; ++x) {
+            if (centerHoriz >= (x * 100) && centerHoriz <= (x * 100) + 100 && centerVert >= (y * 100) && centerVert <= (y * 100) + 100) {
+                if (tileArray[4 * y + x] == -1) {
+                    tileArray[4 * y + x] = parseInt(theElement.id);
+                    theElement.style.left = x * 100;
+                    theElement.style.top = y * 100;
+
+                    breakOut = true;
+                    break;
+                }
+            }
+        }
+        if (breakOut) {
+            break;
+        }
+    }
+
 }
 
 
