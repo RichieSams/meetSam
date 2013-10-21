@@ -161,16 +161,27 @@ function dropper(event) {
 //Function will check tileArray for values of total result. If any tile placement is incorrect will fail.
 function checkResult()
 {
-    var msg = '';
-    for (var i = 0; i < 12; i++) {
-        msg += tileArray[i].toString() + ', ';
+    var checkMatch = false;    
+    for (var i = 0; i < 12; i++)
+    {
+        if(tileArray[i] != i)
+        {
+            break;
+        }
+        else if (tileArray[i] == 11)
+        {
+            if(tileArray[i] == i)
+            {
+                checkMatch = true
+            }
+        }
+        
     }
-    alert(msg);
-    if(checkMatch(tileArray))
+    if(checkMatch == true)
     {
         //Stops Clock
         clearInterval(timer);
-        alert("Congratulations! You got it!");
+        alert("Congratulations! You got it! time= ");
     }
     else
     {
