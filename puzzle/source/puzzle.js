@@ -179,7 +179,7 @@ function checkResult()
     {
         //Stops Clock
         clearInterval(timer);
-        alert("Congratulations! You got it! time= ");
+        alert("Congratulations! You got it!");
     }
     else
     {
