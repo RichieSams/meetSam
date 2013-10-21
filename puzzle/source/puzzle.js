@@ -2,7 +2,7 @@
  Define variables for the values computed by the grabber event
  handler but needed by mover event handler
  */
-var diffX, diffY, theElement, tileArray;
+var time, diffX, diffY, theElement, tileArray, timer;
 
 //Function initiates the random images right of the grid.
 function initImage(puzzleNum){
