@@ -45,17 +45,25 @@ function initImage(puzzleNum){
     }
 }
 
+//Set start time
+time = 0;
+
+//Clock function that call the number creator
 function Timer() { 
-    var time = 0;
-    setInterval(function() {
-        time++;
-        var numSec = time % 60;
-        var numMin = (time - numSec)/60 % 60;
-        var numHour = (time - numSec - numMin * 60)/3600;
-        var str= numHour+':' + ("0"+numMin).slice(-2) + ':' + ("0"+numSec).slice(-2);
-        document.getElementById("timeTaken").value = str;
-    },1000);
+    timer = setInterval(function(){numbers()},1000);
 }
+
+//Create clock count for timmer
+function numbers()
+{
+    time++;
+    var numSec = time % 60;
+    var numMin = (time - numSec)/60 % 60;
+    var numHour = (time - numSec - numMin * 60)/3600;
+    var str= numHour+':' + ("0"+numMin).slice(-2) + ':' + ("0"+numSec).slice(-2);
+    document.getElementById("timeTaken").value = str;
+}
+
 
 
 // The event handler function for grabbing the word
