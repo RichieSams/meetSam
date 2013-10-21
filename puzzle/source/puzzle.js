@@ -72,6 +72,8 @@ function grabber(event) {
     // Set the global variable for the element to be moved
     theElement = event.currentTarget;
 
+    theElement.style.zIndex = 99;
+
     // Determine the position of the word to be grabbed,
     //  first removing the units from left and top
     origX = parseInt(theElement.style.left);
@@ -157,6 +159,8 @@ function dropper(event) {
             break;
         }
     }
+
+    theElement.style.zIndex = 2;
 }
 
 
