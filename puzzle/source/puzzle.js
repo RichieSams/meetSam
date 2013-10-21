@@ -109,6 +109,8 @@ function dropper(event) {
 //Function will check tileArray for values of total result. If any tile placement is incorrect will fail.
 function checkResult(tileArray)
 {
+    //Stops Clock
+    clearInterval(document.getElementById("timeTaken"));
     if(checkMatch(tileArray))
     {
         alert("Congratulations! You got it!");
