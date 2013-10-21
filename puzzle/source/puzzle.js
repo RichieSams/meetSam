@@ -105,17 +105,11 @@ function dropper(event) {
     event.stopPropagation();
 }
 
-/*
-//Function will check individual tile placement.
-function checkMatch(sqrNumber, tileNumber)
-{
-    //...
-}
 
 //Function will check tileArray for values of total result. If any tile placement is incorrect will fail.
-function checkResult(tileArray[][])
+function checkResult(tileArray)
 {
-    if(checkMatch(tileArray[])
+    if(checkMatch(tileArray))
     {
         alert("Congratulations! You got it!");
     }
