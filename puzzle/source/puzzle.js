@@ -2,7 +2,7 @@
 //Function initiates the random images right of the grid.
 function initImage(puzzleNum){
     //Hides puzzle selection.
-    dom = document.getElementById("puzzles").style;
+    var dom = document.getElementById("puzzles").style;
     dom.visibility = "hidden";
     dom = document.getElementById("output").style;
     document.getElementById("timeTaken").value = "0:00:00";
@@ -11,7 +11,7 @@ function initImage(puzzleNum){
     
     //Randomizes images.
     var count = new Array();
-    for(i=0; i<12; i++){
+    for(var i=0; i<12; i++){
         count[i] = i+1;
     }
     
@@ -25,11 +25,10 @@ function initImage(puzzleNum){
         newImg.setAttribute("class", "img");
         newImg.setAttribute("id", "img"+count[picNum]);
         newImg.setAttribute("onmousedown", "grabber(event);");
-        if(temp2 > 3)
-            {
+        if(temp2 > 3) {
             temp1 = temp1 + 1;
             temp2 = 0;
-            }
+        }
         newImg.style.top = ((100 * temp1)+(temp1*5)) + "px";
         newImg.style.left = ((100 * temp2)+(temp2*5)) + "px";
         temp2 = temp2 + 1;
@@ -59,66 +58,53 @@ var diffX, diffY, theElement;
 
 // The event handler function for grabbing the word
 function grabber(event) {
+    // Set the global variable for the element to be moved
+    theElement = event.currentTarget;
 
-// Set the global variable for the element to be moved
+    // Determine the position of the word to be grabbed,
+    //  first removing the units from left and top
+    var posX = parseInt(theElement.style.left);
+    var posY = parseInt(theElement.style.top);
 
-  theElement = event.currentTarget;
+    // Compute the difference between where it is and
+    // where the mouse click occurred
+    diffX = event.clientX - posX;
+    diffY = event.clientY - posY;
 
-// Determine the position of the word to be grabbed,
-//  first removing the units from left and top
+    // Now register the event handlers for moving and
+    // dropping the word
+    document.addEventListener("mousemove", mover, true);
+    document.addEventListener("mouseup", dropper, true);
 
-  var posX = parseInt(theElement.style.left);
-  var posY = parseInt(theElement.style.top);
+    // Stop propagation of the event and stop any default
+    // browser action
+    event.stopPropagation();
+    event.preventDefault();
 
-// Compute the difference between where it is and
-// where the mouse click occurred
+}
 
-  diffX = event.clientX - posX;
-  diffY = event.clientY - posY;
-
-// Now register the event handlers for moving and
-// dropping the word
-
-  document.addEventListener("mousemove", mover, true);
-  document.addEventListener("mouseup", dropper, true);
-
-// Stop propagation of the event and stop any default
-// browser action
-
-  event.stopPropagation();
-  event.preventDefault();
-
-}  //** end of grabber
-
-// *******************************************************
 
 // The event handler function for moving the word
-
 function mover(event) {
-// Compute the new position, add the units, and move the word
+    // Compute the new position, add the units, and move the word
+    theElement.style.left = (event.clientX - diffX) + "px";
+    theElement.style.top = (event.clientY - diffY) + "px";
 
-  theElement.style.left = (event.clientX - diffX) + "px";
-  theElement.style.top = (event.clientY - diffY) + "px";
+    // Prevent propagation of the event
 
-// Prevent propagation of the event
+    event.stopPropagation();
+}
 
-  event.stopPropagation();
-}  //** end of mover
-
-// *********************************************************
 // The event handler function for dropping the word
-
 function dropper(event) {
+    // Unregister the event handlers for mouseup and mousemove
 
-// Unregister the event handlers for mouseup and mousemove
+    document.removeEventListener("mouseup", dropper, true);
+    document.removeEventListener("mousemove", mover, true);
 
-  document.removeEventListener("mouseup", dropper, true);
-  document.removeEventListener("mousemove", mover, true);
-
-// Prevent propagation of the event
-
-  event.stopPropagation();
-}  //** end of dropper
+    // Prevent propagation of the event
+    event.stopPropagation();
+}
 
 /*
 //Function will check individual tile placement.
