@@ -9,6 +9,14 @@
     width: 400px;
 }
 
+.welcome {
+    margin-bottom: 0px;
+}
+
+#puzzleInstr {
+    margin-top: 0px;
+}
+
 #puzzles span{
     margin: 30px;
     color: #2367AA;

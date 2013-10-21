@@ -10,6 +10,8 @@ function initImage(puzzleNum){
     //Hides puzzle selection.
     var dom = document.getElementById("puzzles").style;
     dom.visibility = "hidden";
+    dom = document.getElementById("puzzleInstr").style;
+    dom.visibility = "hidden";
     dom = document.getElementById("output").style;
     document.getElementById("timeTaken").value = "0:00:00";
     dom.visibility = "visible";
