@@ -16,35 +16,38 @@ function initImage(puzzleNum){
     
     //Randomizes images.
     var count = new Array();
-    for(var i=0; i<12; i++){
+    for (var i = 0; i < 12; i++){
         count[i] = i;
     }
     
     var picNum;
-    var temp1 = 0;
-    var temp2 = 0;
-    while(count.length>0){        
+    var row = 0;
+    var col = 0;
+    while(count.length > 0){
         picNum = Math.floor(Math.random() * count.length);
+
         var newImg = document.createElement("img");
-        newImg.src = "./images/img" + puzzleNum+ "-" + count[picNum] - 1 + ".jpg";
+        newImg.src = "images/img" + puzzleNum + "-" + (count[picNum] + 1) + ".jpg";
         newImg.setAttribute("class", "img");
         newImg.setAttribute("id", "img" + count[picNum]);
         newImg.setAttribute("onmousedown", "grabber(event);");
-        if(temp2 > 3) {
-            temp1 = temp1 + 1;
-            temp2 = 0;
+
+        newImg.style.top = ((100 * row) + (row * 5)) + "px";
+        newImg.style.left = ((100 * col) + (col * 5) + 420) + "px";
+
+        col++;
+        if (col > 3) {
+            row++;
+            col = 0;
         }
-        newImg.style.top = ((100 * temp1) + (temp1 * 5)) + "px";
-        newImg.style.left = ((100 * temp2) + (temp2 * 5)) + "px";
-        temp2 = temp2 + 1;
-        document.getElementById("images").appendChild(newImg);
+        document.getElementById("main").appendChild(newImg);
         count.splice(picNum, 1);
     }
 }
 
 function Timer() { 
     var time = 0;
-    setInterval(function(){
+    setInterval(function() {
         time++;
         var numSec = time % 60;
         var numMin = (time - numSec)/60 % 60;
