@@ -86,9 +86,11 @@ function grabber(event) {
         var breakOut = false;
         for (var x = 0; x < 4; ++x) {
             if (centerHoriz >= (x * 100) && centerHoriz <= (x * 100) + 100 && centerVert >= (y * 100) && centerVert <= (y * 100) + 100) {
-                tileArray[4 * y + x] = -1;
-                breakOut = true;
-                break;
+                if (tileArray[4 * y + x] == parseInt(theElement.id)) {
+                    tileArray[4 * y + x] = -1;
+                    breakOut = true;
+                    break;
+                }
             }
         }
         if (breakOut) {
