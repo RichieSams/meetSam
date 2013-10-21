@@ -17,7 +17,7 @@
 
 .img {
     position: absolute;
-    z-index: 99;
+    z-index: 3;
 }
     
 #output{
