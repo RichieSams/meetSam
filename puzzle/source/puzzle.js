@@ -1,8 +1,13 @@
+
 //Function initiates the random images right of the grid.
 function initImage(puzzleNum){
     //Hides puzzle selection.
     dom = document.getElementById("puzzles").style;
     dom.visibility = "hidden";
+    dom = document.getElementById("output").style;
+    document.getElementById("timeTaken").value = "0:00:00";
+    dom.visibility = "visible";
+    Timer()
     
     //Randomizes images.
     var count = new Array();
@@ -32,10 +37,22 @@ function initImage(puzzleNum){
     }
 }
 
+function Timer() { 
+    var time = 0;
+    setInterval(function(){
+        time++;
+        var numSec = time % 60;
+        var numMin = (time-numSec)/60 % 60;
+        var numHour = (time-numSec-numMin*60)/3600;
+        var str= numHour+':'+("0"+numMin).slice(-2)+':'+("0"+numSec).slice(-2);
+        document.getElementById("timeTaken").value = str;
+    },1000);
+}
+/*
 //Function will check individual tile placement.
 function checkMatch(sqrNumber, tileNumber)
 {
-    ...
+    //...
 }
 
 //Function will check tileArray for values of total result. If any tile placement is incorrect will fail.
@@ -47,6 +64,7 @@ function checkResult(tileArray[][])
     }
     else
     {
-        alert("Better luck next time...")
+        alert("Better luck next time...");
     }
 }
+*/

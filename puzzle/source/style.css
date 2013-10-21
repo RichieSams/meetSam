@@ -28,3 +28,9 @@
 .img {
     position: absolute;
     }
+    
+#output{
+    position: absolute;
+    top: 500px;
+    visibility: hidden;
+}
