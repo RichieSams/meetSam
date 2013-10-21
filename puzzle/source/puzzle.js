@@ -77,6 +77,25 @@ function grabber(event) {
     origX = parseInt(theElement.style.left);
     origY = parseInt(theElement.style.top);
 
+    // Calculate which tile we are in
+    // Use the center of the image as the deciding point
+    var centerHoriz = origX + 50;
+    var centerVert = origY + 50;
+
+    for (var y = 0; y < 3; ++y) {
+        var breakOut = false;
+        for (var x = 0; x < 4; ++x) {
+            if (centerHoriz >= (x * 100) && centerHoriz <= (x * 100) + 100 && centerVert >= (y * 100) && centerVert <= (y * 100) + 100) {
+                tileArray[4 * y + x] = -1;
+                breakOut = true;
+                break;
+            }
+        }
+        if (breakOut) {
+            break;
+        }
+    }
+
     // Compute the difference between where it is and
     // where the mouse click occurred
     diffX = event.clientX - origX;
@@ -124,8 +143,8 @@ function dropper(event) {
             if (centerHoriz >= (x * 100) && centerHoriz <= (x * 100) + 100 && centerVert >= (y * 100) && centerVert <= (y * 100) + 100) {
                 if (tileArray[4 * y + x] == -1) {
                     tileArray[4 * y + x] = parseInt(theElement.id);
-                    theElement.style.left = x * 100;
-                    theElement.style.top = y * 100;
+                    theElement.style.left = (x * 100) + 'px';
+                    theElement.style.top = (y * 100) + 'px';
 
                     breakOut = true;
                     break;
@@ -136,13 +155,17 @@ function dropper(event) {
             break;
         }
     }
-
 }
 
 
 //Function will check tileArray for values of total result. If any tile placement is incorrect will fail.
-function checkResult(tileArray)
-{    
+function checkResult()
+{
+    var msg = '';
+    for (var i = 0; i < 12; i++) {
+        msg += tileArray[i].toString() + ', ';
+    }
+    alert(msg);
     if(checkMatch(tileArray))
     {
         //Stops Clock
