@@ -1,3 +1,8 @@
+/*
+ Define variables for the values computed by the grabber event
+ handler but needed by mover event handler
+ */
+var diffX, diffY, theElement;
 
 //Function initiates the random images right of the grid.
 function initImage(puzzleNum){
@@ -48,12 +53,6 @@ function Timer() {
         document.getElementById("timeTaken").value = str;
     },1000);
 }
-
-/*
- Define variables for the values computed by the grabber event 
- handler but needed by mover event handler
-*/
-var diffX, diffY, theElement;
 
 
 // The event handler function for grabbing the word
