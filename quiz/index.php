@@ -20,13 +20,7 @@ Page;
       $script = $_SERVER['PHP_SELF'];
        
         print <<<LOGIN
-            <html>
-              <head>
-                <title> Astronomy Quiz </title>
-                <script type ="text/javascript" src = "./validate.js"></script>
-              </head>
-              
-              <body>
+         
                 <h1>Log In</h1>        
                   <form  id = "login" action = "$script" method = "POST" 
                   onsubmit = "return validate();">
