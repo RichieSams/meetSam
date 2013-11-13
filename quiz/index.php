@@ -53,15 +53,26 @@ LOGIN;
     //Will change the passwd.txt to having a 1 instead of 0 
     //signifying the quiz being started.
     
-    //NOT COMPLETE
-    function changeStart(){
+    //Maybe COMPLETE NOt TESTED
+    function changeStart($name){
         $fileName = "./passwd.txt";
         $newFileName = "./passCp.txt";
         copy($fileName, $newFileName);
         $file = fopen($fileName, "w");
         $newFile = fopen($newFileName, "r");
         while(! feof($newFile)){
-            
+              $curText = fgets($file);
+              $break1 = strpos($curText, ":");
+              $curName = substr($curText,0,$break1);
+              if($curName == $name){
+                $break2 = strpos($curText, ":", $break1+1);
+                $break3 = strpos($curText, ":", $break2+1);
+                $nameAndPass = substr($curText,0,$break2+1);
+                fwrite($file, "$nameAndPass1");
+              }
+              else{
+                fwrite($file, $curText);
+              }
             }
         
 #################################################################
@@ -92,7 +103,7 @@ LOGIN;
             $curNum = substr($curText,$break2 + 1, $break3 - $break2 - 1);
             $curStart = substr($curText,$break3 + 1);
             setcookie ("quizTimer", 1, time()+60*15);
-            changeStart();
+            changeStart($name);
             echo "<p>Thank you for logging in for your quiz.
                      You will have six question on basic Astronomy questions
                      that you must answer in 15 min. You may only take the quiz once.
