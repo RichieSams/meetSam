@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <html>
 <head>
     <title> Astronomy Quiz </title>
@@ -35,73 +37,68 @@ function logIn(){
           </form>';
 }
 
-#################################################################
-//Will change the passwd.txt to having a 1 instead of 0
-//signifying the quiz being started.
 
-//Maybe COMPLETE NOt TESTED
-function changeStart($name){
-    $fileName = "passwd.txt";
-    $newFileName = "passCp.txt";
-    copy($fileName, $newFileName);
-    $file = fopen($fileName, "w");
-    $newFile = fopen($newFileName, "r");
-    while(! feof($newFile)) {
-        $curText = fgets($file);
-        $break1 = strpos($curText, ":");
-        $curName = substr($curText,0,$break1);
-        if($curName == $name) {
-            $break2 = strpos($curText, ":", $break1+1);
-            $break3 = strpos($curText, ":", $break2+1);
-            $nameAndPass = substr($curText,0,$break2+1);
-            fwrite($file, "$nameAndPass1");
-        } else {
-            fwrite($file, $curText);
-        }
-    }
-}
-        
-#################################################################
 //checks for login information and initiates quiz
 function startQuiz() {
-    $check = FALSE;
+    $check = false;
     $passwd = $_POST["passwd"];
     $name = $_POST["name"];
-    $file = fopen("./passwd.txt", "r");
-    while(! feof($file) AND $check == FALSE) {
-        $curText = fgets($file);
-        $break1 = strpos($curText, ":");
-        $break2 = strpos($curText, ":", $break1+1);
-        $curName = substr($curText,0,$break1);
-        $curPasswd = substr($curText,$break1 + 1, $break2 - $break1 - 1);
 
-        if ($name == $curName AND $passwd == $curPasswd) {
-            $check = TRUE;
-            break;
+    $hasStarted = 0;
+
+    $fileContents = "";
+    $file = fopen("passwd.txt", "r");
+    while(!feof($file)) {
+        $line = fgets($file);
+        $lineElements = explode(':', $line);
+
+        if ($name == $lineElements[0] && $passwd == $lineElements[1]) {
+            $hasStarted = trim($lineElements[2]);
+            $check = true;
+        } else {
+            $fileContents .= $line;
         }
     }
+    fclose($file);
 
-    if ($check == FALSE) {
+    if (!$check) {
         echo "<h1>Incorrect Username or Password</h1>";
         logIn();
     } else {
-        $curStart = substr($curText,$break2 + 1);
-        if($curStart == 0) {
-            session_start();
-            $_SESSION["question"] = 1;
-            $_SESSION["results"] = 0;
-            setcookie ("quizTimer", session_id(), time()+60*15);
+        if ($hasStarted == "0") {
+            // Check if the user has any time left
+            if (!isset($_SESSION["results"])) {
+
+            }
+            if (!isset($_SESSION["startTime"])) {
+                $_SESSION["startTime"] = time();
+            } elseif (time() - $_SESSION["startTime"] > 900) {
+                echo "<h3>You are out of time</h3>";
+
+                return;
+            }
+
+            if (!isset($_SESSION["questionNumber"])) {
+                $_SESSION["questionNumber"] = 1;
+            }
+
+            // Update the passwd file to signal that the user has started the test
+            $file = fopen("passwd.txt", "w");
+            fwrite($file, $fileContents . "$name:$passwd:1");
+            fclose($file);
+
             changeStart($name);
             echo '<p>Thank you for logging in for your quiz. You will have six question on basic Astronomy that you must answer in 15 min. You may only take the quiz once. Good luck!</p>';
             quiz();
-        } elseif( isset ($_CCOKIE["quizTimer"])) {
-            //don't quite know what to do here
         } else {
-            Echo "<h3> You have run out of time </h3>";
+            echo "<h3>You have already taken the test</h3>";
         }
     }
+}
 
-    fclose($file);
+
+function getQuestion($questionNumber){
+
 }
 
 #################################################################
