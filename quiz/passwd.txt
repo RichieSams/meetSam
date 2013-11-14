@@ -1,5 +1,5 @@
-blaise:pascal:0
-charles:babbage:0
-herman:hollerith:0
-konrad:zuse:0
-howard:aiken:0
+blaise:pascal
+charles:babbage
+herman:hollerith
+konrad:zuse
+howard:aiken
