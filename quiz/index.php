@@ -117,12 +117,49 @@ function gradeQuestion($questionNumber) {
 }
 
 function getQuestion($questionNumber){
-    $question = array( '<form></form>',
-                       '<form></form>');
-
-
-
-    return $question[$questionNumber];
+    
+    //Array of the test unique to the questions
+    $questionText = array('<tr>
+                          <td>According to Kepler the orbit of the earth is a circle with the sun at the center.</td>
+                          <td><input type="radio" name="circle" value="True">True</td>
+                          <td><input type="radio" name="circle" value="False">False</td>
+                          </tr>
+                          <tr></tr>',
+                          '<tr>
+                          <td>Ancient astronomers did consider the heliocentric model of the solar system but </br>rejected it because they could not detect parallax.</td>
+                          <td><input type="radio" name="solar" value="True">True</td>
+                          <td><input type="radio" name="solar" value="False">False</td>
+                          </tr>
+                          <tr></tr>',
+                          '<tr>
+                          <td>The total amount of energy that a star emits is directly related to its </td>
+                          <td><input type="radio" name="star" value="1">Surface gravity and magnetic field</td>
+                          <td><input type="radio" name="star" value="2">Radius and temperature</td>
+                          <td><input type="radio" name="star" value="3">Pressure and volume </td>
+                          <td><input type="radio" name="star" value="4">Location and velocity </td>
+                          </tr>
+                          <tr></tr>',
+                          '<tr>
+                          <td>Stars that live the longest have </td>
+                          <td><input type="radio" name="longest" value="1">High mass</td>
+                          <td><input type="radio" name="longest" value="2">High temperature</td>
+                          <td><input type="radio" name="longest" value="3">Lots of hydrogen</td>
+                          <td><input type="radio" name="longest" value="4">Small mass </td>
+                          </tr>
+                          <tr></tr>',
+                          '<tr>
+                          <td colspan="2">A collection of a hundred billion stars, gas, and dust is called a <input type="text" name="loa">. (galaxy)</td>
+                          </tr>
+                          <tr></tr>',
+                          '<tr>
+                          <td colspan="2">The inverse of the Hubble\'s constant is a measure of the <input type="text" name="loa">of the universe. (age) </td>
+                          </tr>
+                          <tr></tr>');
+      
+    // Full HTML of the question with referance to the array for the question number.
+    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber].'<td><button type="button" value="Submit" onclick="validator();">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
+                          
+    return $questionHTML;
 }
 
 ?>
