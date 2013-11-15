@@ -123,6 +123,13 @@ function gradeQuestion($questionNumber) {
         if($_POST($fieldName) == $answerKey[$fieldName])
         {
             $_SESSION["questionsRight"]++;
+            $_SESSION["questionNumber"]++;
+            echo getQuestion($_SESSION["questionNumber"]);
+        }
+        else
+        {
+            echo '<p>Sorry Wrong. Thank you! Good luck!</p>';
+            echo getQuestion($_SESSION["questionNumber"]);
         }
     }
     elseif ($_SESSION["questionNumber"] = 5)
