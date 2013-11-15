@@ -114,6 +114,17 @@ function startQuiz() {
 }
 
 function gradeQuestion($questionNumber) {
+    $answerKey = array("False","True","2","4","galaxy","age");
+    
+    if($_SESSION["questionNumber"] < 5)
+    {
+        $po
+        if($_POST($questionNumber) ==
+    }
+    elseif ($_SESSION["questionNumber"] = 5)
+    {
+        
+    }
 
 }
 
@@ -158,7 +169,7 @@ function getQuestion($questionNumber){
                           <tr></tr>');
       
     // Full HTML of the question with referance to the array for the question number.
-    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber].'<td><button type="submit" value="Submit" onclick="validate();">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
+    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber].'<td><button type="submit" value="Submit" onclick="gradeQuestion($questionNumber);">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
                           
     return $questionHTML;
 }
