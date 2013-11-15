@@ -182,7 +182,7 @@ function getQuestion($questionNumber){
                           <tr></tr>');
       
     // Full HTML of the question with referance to the array for the question number.
-    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber-1].'<td><button type="submit" value="Submit" onclick="gradeQuestion($questionNumber);">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
+    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber-1].'<td><button name="qsubmit" type="submit" value="Submit" onclick="gradeQuestion($questionNumber);">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
                           
     return $questionHTML;
 }
