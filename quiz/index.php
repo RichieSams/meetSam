@@ -114,12 +114,16 @@ function startQuiz() {
 }
 
 function gradeQuestion($questionNumber) {
-    $answerKey = array("False","True","2","4","galaxy","age");
+    $answerKey = array("circle"=>"False","solar"=>"True","star"=>"2","longest"=>"4","collection"=>"galaxy","hubble"=>"age");
+    $formNames = array("1"=>"circle","2"=>"solar","3"=>"star","4"=>"longest","5"=>"collection","6"=>"hubble");
+    $fieldName = $formNames[$questionNumber];
     
     if($_SESSION["questionNumber"] < 5)
     {
-        $po
-        if($_POST($questionNumber) ==
+        if($_POST($fieldName) == $answerKey[$fieldName])
+        {
+            $_SESSION["questionsRight"]++;
+        }
     }
     elseif ($_SESSION["questionNumber"] = 5)
     {
