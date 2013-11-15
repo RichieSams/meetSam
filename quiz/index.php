@@ -34,8 +34,8 @@ if(isset($_POST["loggedIn"])){
             fclose($file);
             return;
         }
-        gradeQuestion($_SESSION["questionNumber"]);
-        getQuestion(++$_SESSION["questionNumber"]);
+
+        getQuestion($_SESSION["questionNumber"]);
     } else {
         startQuiz();
     }
@@ -46,8 +46,23 @@ elseif(!isset($_SESSION["ID"]))
 }
 elseif(isset($_COOKIE['PHPSESSID']))
 {
-    if (gradeQuestion($_SESSION["questionNumber"])) {
-        echo getQuestion(++$_SESSION["questionNumber"]);
+    if (time() - $_SESSION["startTime"] > 900) {
+        echo "<h3>You are out of time</h3>";
+
+        // Write results to file
+        $file = fopen("results.txt", "a");
+        fwrite($file, $_SESSION["userName"] . ":" . $_SESSION['results'] . "\n");
+        fclose($file);
+        return;
+    }
+
+    gradeQuestion($_SESSION["questionNumber"]);
+
+    if ($_SESSION["questionNumber"] == 7) {
+        echo '<p>Thank you! The Quiz is over! You got ' . $_SESSION["questionsRight"] . ' questions correct.</p>';
+        session_destroy();
+    } else {
+        echo getQuestion($_SESSION["questionNumber"]);
     }
 }
 else
@@ -128,18 +143,14 @@ function gradeQuestion($questionNumber) {
     $formNames = array("1"=>"circle","2"=>"solar","3"=>"star","4"=>"longest","5"=>"collection","6"=>"hubble");
     $fieldName = $formNames[$questionNumber];
 
+    if (!isset($_POST[$fieldName]) || !isset($answerKey[$fieldName]))
+        return;
+
     //Comparison if statements for the actual grading. splint in to all questions before last and last question as else.
     if($_POST[$fieldName] == $answerKey[$fieldName]) {
         $_SESSION["questionsRight"]++;
+        $_SESSION["questionNumber"]++;
     }
-
-    if ($_SESSION["questionNumber"] == 6) {
-        echo '<p>Thank you! The Quiz is over! You got ' . $_SESSION["questionsRight"] . ' questions correct.</p>';
-        session_destroy();
-        return false;
-    }
-
-    return true;
 }
 
 function getQuestion($questionNumber){
@@ -183,7 +194,7 @@ function getQuestion($questionNumber){
                           <tr></tr>');
       
     // Full HTML of the question with referance to the array for the question number.
-    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber-1].'<td><button name="qsubmit" type="submit" value="Submit" onclick="gradeQuestion($questionNumber);">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
+    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber-1].'<td><button type="submit" value="Submit" onclick="gradeQuestion($questionNumber);">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
                           
     return $questionHTML;
 }
