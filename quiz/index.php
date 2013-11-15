@@ -134,7 +134,15 @@ function gradeQuestion($questionNumber) {
     }
     elseif ($_SESSION["questionNumber"] = 5)
     {
-        
+        if($_POST($fieldName) == $answerKey[$fieldName])
+        {
+            $_SESSION["questionsRight"]++;
+            echo '<p>Thank you! The Quiz is over!</p>';
+        }
+        else
+        {
+            echo '<p>Sorry Wrong. Thank you! Good luck!</p>';
+        }
     }
 
 }
