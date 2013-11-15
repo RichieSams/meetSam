@@ -7,6 +7,7 @@
 <html>
 <head>
     <title> Astronomy Quiz </title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="all" />
     <script type ="text/javascript" src = "validate.js"></script>
 </head>
 <body>
