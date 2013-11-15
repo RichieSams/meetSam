@@ -106,6 +106,7 @@ function startQuiz() {
     $_SESSION["results"] = 0;
     $_SESSION["startTime"] = time();
     $_SESSION["questionNumber"] = 0;
+    $_SESSION["questionsRight"] = 0;
 
     echo '<p>Thank you for logging in for your quiz. You will have six questions on basic Astronomy that you must answer in 15 min. You may only take the quiz once. Good luck!</p>';
     echo getQuestion($_SESSION["questionNumber"]);
