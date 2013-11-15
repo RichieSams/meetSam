@@ -189,16 +189,16 @@ function getQuestion($questionNumber){
                           </tr>
                           <tr></tr>',
                           '<tr>
-                          <td colspan="2">A collection of a hundred billion stars, gas, and dust is called a <input type="text" name="collection">. (galaxy)</td>
+                          <td colspan="2">A collection of a hundred billion stars, gas, and dust is called a <input type="text" name="collection">.</td>
                           </tr>
                           <tr></tr>',
                           '<tr>
-                          <td colspan="2">The inverse of the Hubble\'s constant is a measure of the <input type="text" name="hubble">of the universe. (age) </td>
+                          <td colspan="2">The inverse of the Hubble\'s constant is a measure of the <input type="text" name="hubble">of the universe.</td>
                           </tr>
                           <tr></tr>');
       
     // Full HTML of the question with referance to the array for the question number.
-    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber].'<td><button type="submit" value="Submit" onclick="gradeQuestion($questionNumber);">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
+    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber-1].'<td><button type="submit" value="Submit" onclick="gradeQuestion($questionNumber);">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
                           
     return $questionHTML;
 }
