@@ -1,6 +1,7 @@
 <?php
 // TODO: Add logic to store the session ID in a cookie just in case the user's browser crashes or they accidentally close the window
-session_start();
+    date_default_timezone_set('America/Chicago');
+    session_start();
 ?>
 
 <html>
