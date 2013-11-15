@@ -118,6 +118,7 @@ function gradeQuestion($questionNumber) {
     $formNames = array("1"=>"circle","2"=>"solar","3"=>"star","4"=>"longest","5"=>"collection","6"=>"hubble");
     $fieldName = $formNames[$questionNumber];
     
+    //Comparission if statements for the actuall grading. splint in to all questions before last and last question as else.
     if($_SESSION["questionNumber"] < 5)
     {
         if($_POST($fieldName) == $answerKey[$fieldName])
@@ -138,10 +139,12 @@ function gradeQuestion($questionNumber) {
         {
             $_SESSION["questionsRight"]++;
             echo '<p>Thank you! The Quiz is over!</p>';
+            session_destroy();
         }
         else
         {
             echo '<p>Sorry Wrong. Thank you! Good luck!</p>';
+            session_destroy();
         }
     }
 
