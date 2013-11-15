@@ -93,23 +93,23 @@ function startQuiz() {
 
         if ($_SESSION["userName"] == $lineElements[0]) {
             echo "<h3>You have already taken the test</h3>";
-            fclose($file);
             return;
         }
     }
     fclose($file);
 
     // Start the user
-    fopen("started.txt", "a");
+    $file = fopen("started.txt", "a");
     fwrite($file, $_SESSION["userName"] . "\n");
     fclose($file);
 
     $_SESSION["results"] = 0;
     $_SESSION["startTime"] = time();
-    $_SESSION["questionNumber"] = 1;
+    $_SESSION["questionNumber"] = 0;
 
-    echo '<p>Thank you for logging in for your quiz. You will have six question on basic Astronomy that you must answer in 15 min. You may only take the quiz once. Good luck!</p>';
-    getQuestion($_SESSION["questionNumber"]);
+    echo '<p>Thank you for logging in for your quiz. You will have six questions on basic Astronomy that you must answer in 15 min. You may only take the quiz once. Good luck!</p>';
+    echo getQuestion($_SESSION["questionNumber"]);
+    
 }
 
 function gradeQuestion($questionNumber) {
@@ -157,7 +157,7 @@ function getQuestion($questionNumber){
                           <tr></tr>');
       
     // Full HTML of the question with referance to the array for the question number.
-    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber].'<td><button type="button" value="Submit" onclick="validator();">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
+    $questionHTML = '<form name="quizQ" action="" target="_self" method="post"><table>'.$questionText[$questionNumber].'<td><button type="submit" value="Submit" onclick="validator();">Submit</button></td><td><button type="reset" value="Reset">Clear</button></td></tr></table></form>';
                           
     return $questionHTML;
 }
