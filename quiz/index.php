@@ -45,13 +45,16 @@ elseif(!isset($_SESSION["ID"]))
 }
 elseif(isset($_COOKIE['PHPSESSID']))
 {
-    echo getQuestion($_SESSION["questionNumber"]);
+    if (gradeQuestion($_SESSION["questionNumber"])) {
+        echo getQuestion(++$_SESSION["questionNumber"]);
+    }
 }
 else
 {
     echo "Oops Oh No There is An Issue!";
-
 }
+
+
 function createLoginForm(){
     echo '<h1>Log In</h1>
           <form action="' . $_SERVER['PHP_SELF'] . '" method="POST" onsubmit="return validate();">
@@ -117,44 +120,25 @@ function startQuiz() {
 
     echo '<p>Thank you for logging in for your quiz. You will have six questions on basic Astronomy that you must answer in 15 min. You may only take the quiz once. Good luck!</p>';
     echo getQuestion($_SESSION["questionNumber"]);
-    
 }
 
 function gradeQuestion($questionNumber) {
     $answerKey = array("circle"=>"False","solar"=>"True","star"=>"2","longest"=>"4","collection"=>"galaxy","hubble"=>"age");
     $formNames = array("1"=>"circle","2"=>"solar","3"=>"star","4"=>"longest","5"=>"collection","6"=>"hubble");
     $fieldName = $formNames[$questionNumber];
-    
-    //Comparission if statements for the actuall grading. splint in to all questions before last and last question as else.
-    if($_SESSION["questionNumber"] < 5)
-    {
-        if($_POST($fieldName) == $answerKey[$fieldName])
-        {
-            $_SESSION["questionsRight"]++;
-            $_SESSION["questionNumber"]++;
-            echo getQuestion($_SESSION["questionNumber"]);
-        }
-        else
-        {
-            echo '<p>Sorry Wrong. Thank you! Good luck!</p>';
-            echo getQuestion($_SESSION["questionNumber"]);
-        }
-    }
-    elseif ($_SESSION["questionNumber"] = 5)
-    {
-        if($_POST($fieldName) == $answerKey[$fieldName])
-        {
-            $_SESSION["questionsRight"]++;
-            echo '<p>Thank you! The Quiz is over!</p>';
-            session_destroy();
-        }
-        else
-        {
-            echo '<p>Sorry Wrong. Thank you! Good luck!</p>';
-            session_destroy();
-        }
+
+    //Comparison if statements for the actual grading. splint in to all questions before last and last question as else.
+    if($_POST[$fieldName] == $answerKey[$fieldName]) {
+        $_SESSION["questionsRight"]++;
     }
 
+    if ($_SESSION["questionNumber"] == 6) {
+        echo '<p>Thank you! The Quiz is over! You got ' . $_SESSION["questionsRight"] . ' questions correct.</p>';
+        session_destroy();
+        return false;
+    }
+
+    return true;
 }
 
 function getQuestion($questionNumber){
