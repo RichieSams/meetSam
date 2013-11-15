@@ -39,10 +39,11 @@ if(isset($_POST["loggedIn"])){
     } else {
         startQuiz();
     }
-} else {
+}
+else
+{
     createLoginForm();
 }
-
 
 function createLoginForm(){
     echo '<h1>Log In</h1>
@@ -62,7 +63,6 @@ function createLoginForm(){
               <input type="reset" value="Reset" />
           </form>';
 }
-
 
 function checkLogin() {
     $name = $_POST["name"];
@@ -84,14 +84,12 @@ function checkLogin() {
     return false;
 }
 
-
 function startQuiz() {
     // Find out if the user has already started the test
     $file = fopen("started.txt", "r");
     while(!feof($file)) {
         $line = trim(fgets($file));
         $lineElements = explode(':', $line);
-
         if ($_SESSION["userName"] == $lineElements[0]) {
             echo "<h3>You have already taken the test</h3>";
             return;
