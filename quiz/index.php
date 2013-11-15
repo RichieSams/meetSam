@@ -40,7 +40,7 @@ if(isset($_POST["loggedIn"])){
         startQuiz();
     }
 }
-else
+elseif(!isset($_SESSION["ID"]))
 {
     createLoginForm();
 }
