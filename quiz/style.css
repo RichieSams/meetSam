@@ -1,0 +1,81 @@
+/*
+    File: style.css
+    
+    Description: Adds style to file index.php
+    
+    Author: MAV
+    
+    Date created: 20 Sept 2013
+    
+    Date modified: 31 Oct 2013
+    
+*/
+html{
+    background-color:#7BA9E9
+}
+
+body{
+    width: 70%;
+    margin: auto;
+    background-color:#D0DFF2;
+    font-family:sans-serif;
+}
+
+h1{
+    width: 50%;
+    margin: auto;
+}
+
+h3{
+    width: 50%;
+    margin: auto;
+}
+
+img{
+    margin: auto;
+}
+
+#centered{
+    width: 50%;
+    margin: auto;
+}
+
+#grid{
+    height: 350px;
+}
+
+p{
+    margin-left: 5px;
+}
+
+.sig{
+    width: 215px;
+    margin-left:auto;
+}
+
+.inputs{
+    width: 250px;
+}
+
+.names{
+    width: 250px;
+    text-align: center;
+}
+
+.times{
+    text-align: center;
+    width: 100px;
+}
+
+.sub{
+    margin-left: 25px;
+}
+
+.userName, .password, .buttons, tr{
+    width: 50%;
+    margin: auto;
+}
+
+table{
+    margin: auto;
+}
