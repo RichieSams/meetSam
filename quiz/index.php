@@ -51,7 +51,7 @@ elseif(isset($_COOKIE['PHPSESSID']))
 
         // Write results to file
         $file = fopen("results.txt", "a");
-        fwrite($file, $_SESSION["userName"] . ":" . $_SESSION['results'] . "\n");
+        fwrite($file, $_SESSION["userName"] . ":" . $_SESSION['questionsRight'] . "\n");
         fclose($file);
         return;
     }
@@ -60,6 +60,12 @@ elseif(isset($_COOKIE['PHPSESSID']))
 
     if ($_SESSION["questionNumber"] == 7) {
         echo '<p>Thank you! The Quiz is over! You got ' . $_SESSION["questionsRight"] . ' questions correct.</p>';
+
+        // Write results to file
+        $file = fopen("results.txt", "a");
+        fwrite($file, $_SESSION["userName"] . ":" . $_SESSION['questionsRight'] . "\n");
+        fclose($file);
+
         session_destroy();
     } else {
         echo getQuestion($_SESSION["questionNumber"]);
