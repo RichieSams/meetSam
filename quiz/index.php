@@ -157,8 +157,9 @@ function gradeQuestion($questionNumber) {
     //Comparison if statements for the actual grading. splint in to all questions before last and last question as else.
     if($_POST[$fieldName] == $answerKey[$fieldName]) {
         $_SESSION["questionsRight"]++;
-        $_SESSION["questionNumber"]++;
     }
+
+    $_SESSION["questionNumber"]++;
 }
 
 function getQuestion($questionNumber){
