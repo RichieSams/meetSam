@@ -85,8 +85,10 @@ function createLoginForm(){
                   </label>
                   <br/><br/>
               </div>
-              <input type="submit" value="Submit" name="loggedIn" />
-              <input type="reset" value="Reset" />
+              <div class="buttons">
+                  <input type="submit" value="Submit" name="loggedIn" />
+                  <input type="reset" value="Reset" />
+              </div>
           </form>';
 }
 
