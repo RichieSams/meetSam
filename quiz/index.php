@@ -76,6 +76,7 @@ function checkLogin() {
         if ($name == $lineElements[0] && $pass == $lineElements[1]) {
             fclose($file);
             $_SESSION["userName"] = $name;
+            $_SESSION["ID"] = $_COOKIE['PHPSESSID'];
             return true;
         }
     }
