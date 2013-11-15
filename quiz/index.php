@@ -33,7 +33,6 @@ if(isset($_POST["loggedIn"])){
             fclose($file);
             return;
         }
-
         gradeQuestion($_SESSION["questionNumber"]);
         getQuestion(++$_SESSION["questionNumber"]);
     } else {
@@ -44,7 +43,15 @@ elseif(!isset($_SESSION["ID"]))
 {
     createLoginForm();
 }
+elseif(isset($_COOKIE['PHPSESSID']))
+{
+    echo getQuestion($_SESSION["questionNumber"]);
+}
+else
+{
+    echo "Oops Oh No There is An Issue!";
 
+}
 function createLoginForm(){
     echo '<h1>Log In</h1>
           <form action="' . $_SERVER['PHP_SELF'] . '" method="POST" onsubmit="return validate();">
