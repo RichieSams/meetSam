@@ -58,7 +58,7 @@ body {
     width: 100%;
     display: block;
     overflow: hidden;
-    background: #00CCFF linear-gradient(to right, #F2F2F2, #00CCFF, #F2F2F2);
+    background: #548dd4 linear-gradient(to right, #F2F2F2, #548dd4, #F2F2F2);
 }
 
 .nav_bar ul{
@@ -125,15 +125,23 @@ body {
 }
 
 .login a{
-	display:block;
+	display: block;
 	height: 150px;
 	width: 300px;
 	line-height:150px;
 	font-size: 30px;
-	background: linear-gradient(-45deg, #F2F2F2 ,#DE8716);
+	background: linear-gradient(-45deg, #F2F2F2 ,#f3ac88);
 	text-decoration : none;
-	border-style: solid;
-	border-width : 1px;
+    border: 1px solid #b3b3b3;
+    color: #000000;
+}
+
+.login a:hover {
+    color: #0000ff;
+}
+
+.login a:visited {
+    color: #000000;
 }
 
 /*--- End of Main Body Section ---*/
