@@ -57,9 +57,8 @@ body {
     left: 0;
     width: 100%;
     display: block;
-    background-color: #00CCFF;
     overflow: hidden;
-	background: linear-gradient(to right, #F2F2F2, #00CCFF, #F2F2F2);
+    background: #00CCFF linear-gradient(to right, #F2F2F2, #00CCFF, #F2F2F2);
 }
 
 .nav_bar ul{
@@ -71,7 +70,7 @@ body {
 
 .footer ul {
     margin: 0 auto;
-    width: 450px;
+    width: 600px;
     list-style: none;
     padding: 0px;
 }
@@ -93,7 +92,7 @@ body {
 .footer ul li a, .footer ul li div {
     display: block;
     margin: 0px;
-    width: 150px;
+    width: 200px;
     text-decoration: none;
     font-size: 14px;
     text-align: center;
