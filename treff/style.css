@@ -14,9 +14,9 @@ body {
 
 .main_body {
     width: 900px;
-    margin-left:auto;
-    margin-right:auto;
+    margin: 15px auto;
     overflow: hidden;
+    padding: 0px;
 }
 
 .info {
@@ -115,7 +115,7 @@ body {
 }
 
 .info h1{
-    font-size: 45px;
+    font-size: 36px;
 }
 
 .join, .create {
@@ -130,7 +130,7 @@ body {
 	width: 300px;
 	line-height:150px;
 	font-size: 30px;
-	background: linear-gradient(-45deg, #F2F2F2 ,#f3ac88);
+	background: linear-gradient(-45deg, #F2F2F2 ,#ffa273);
 	text-decoration : none;
     border: 1px solid #b3b3b3;
     color: #000000;
@@ -156,20 +156,18 @@ body {
     font-size: 20px;
 }
 
-.discription  h1{
+.description  h1{
     font-size: 45px;
 }
 
-.discription  h4{
-    margin: 15px 0px 0px;
-    font-size: 24px;
-}
-
-.discription p{
-    margin: 2px 0px 0px;
+.description  h4{
+    margin: 0;
     font-size: 20px;
 }
+
+.description p{
+    margin: 2px 0px 0px;
+    font-size: 18px;
+}
+
 /*--- End of Contact and Description Section ---*/
-
-
-
