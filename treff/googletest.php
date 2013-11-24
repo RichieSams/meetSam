@@ -1,6 +1,6 @@
 <?php
 //    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
-    $goKey = AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4;
+    $goKey = "AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ";
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@ body { height: 100%; margin: 0; padding: 0 }
 #map-canvas { height: 100% }
 </style>
 <script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=<?php echo $goKey ?>&sensor=true">
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ&sensor=true">
 </script>
 <script type="text/javascript">
 function initialize() {
