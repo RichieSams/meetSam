@@ -26,6 +26,10 @@
         {
             echo errorPage();
         }
+        else
+        {
+            return true;
+        }
     }
     
     //Sanatize request
