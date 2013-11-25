@@ -1,24 +1,43 @@
+<?php
+    include 'functions.php';
+    htmlspecialchars($_GET["id"]) . '!';
+?>
+
 <?php include 'header.php'; ?>
 
 <div class="main_body">
-	<div class="info">
-		<h1>Need a half-way meeting point?</h1>
-		<p>
-            Treff is a service for creating meeting points for people.<br /><br />
-            Treff will ask for your location and the phone numbers or emails of the people
-            you would like to meet up with. Then it will find a meeting point and automatically
-            send out personalized directions to everyone.
-	    </p>
-	</div>
+	<div class="infoJoin">
+		<h1><?php
+                if(isset($_GET["id"]))
+                {
+                    echo 'Joining ' . htmlspecialchars($_GET["id"]) . '!';
 
-	<div class="login">
-		<div class="create">
-			<a href="dummy.php">Create a Treff</a>
-		</div>
-		<div class="join">
-			<a href="dummy.php">Join a Treff</a>
-		</div>
+                }
+            ?>
+            </h1>
 	</div>
+    <div class="jointreff">
+         <form action="" method="post">
+            <table>
+                <tr>
+                    <td>First Name:</td>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input type="text" name="lname"></td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td><input type="text" name="strtaddress"></td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td><input type="text" name="city"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div> <!-- End of main_body -->
 
 <?php include 'footer.php'; ?>
