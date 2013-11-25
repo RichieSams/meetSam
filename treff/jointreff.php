@@ -2,7 +2,7 @@
     include 'functions.php';
     $eInfo = $_GET;
     
-    if(checkId(clean($eInfo["id"])) && checkEmail(clean($eInfo["email"],clean($eInfo["id"])))
+    if(checkId(clean($eInfo["id"])) && checkEmail(clean($eInfo["email"],clean($eInfo["id"]))))
     {
         $email = clean($eInfo["email"]);
         $treffId = clean($eInfo["id"]);
