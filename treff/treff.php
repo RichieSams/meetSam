@@ -1,6 +1,8 @@
 <?php
 //    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
     $goKey = 'AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ';
+    $id = "placeholder";
+    include 'functions.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,7 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="style.css" media="all" />
 
-
+<!--//-----Start Google Maps API ------>
     <script type="text/javascript" src=<?php echo "https://maps.googleapis.com/maps/api/js?key=".$goKey."&sensor=true" ?>>
     </script>
 
@@ -46,6 +48,8 @@
         google.maps.event.addDomListener(window, 'load', initialize);
         codeAddress();
     </script>
+<!--//-----End Google Maps API ------>
+
     </head>
 <body>
 <div class="header">
@@ -59,7 +63,21 @@
     </ul>
 </nav>
 <div class="main_body">
-    <div id="map-canvas"/>
-<div>
-</body>
-</html>
+    <div class="infoTreff">
+        <div class="status">
+            <h1>Status:</h1> <?php echo checkStat($id); ?>
+        </div>
+		<p> Treff is a service for creating meeting points for people.<br /><br />
+            Treff will ask for your location and the phone numbers or emails of the people
+            you would like to meet up with. Then it will find a meeting point and automatically
+            send out personalized directions to everyone.
+	    </p>
+        <h1>Send Reminder Email</h1>
+        <p>	    </p>
+
+
+	</div>
+    <div id="map-canvas"></div>
+</div>
+
+<?php include 'footer.php'; ?>
