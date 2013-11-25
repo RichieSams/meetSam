@@ -35,7 +35,7 @@
     //Sanatize request
     function clean($value)
     {
-        return htmlspecialchars($purged_str);
+        return htmlspecialchars($value);
     }
     
     //Send to error page
