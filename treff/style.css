@@ -183,3 +183,90 @@ body {
 
 /*--- End Join Treff Section ---*/
 
+/*--- Login/Registration Section ---*/
+
+.signin{
+	float:left;
+	width:250px;
+	/*border-right: solid 1px;*/
+	height: 300px;
+	padding-left: 120px;
+
+}
+
+.or{
+	float:left;
+	width: 150px;
+	height: 300px;
+	text-align: center;
+}
+.or h1{
+	padding-top: 50px;
+	font-size: 50px;
+	vertical-align: middle;
+}
+.userName, .password, .button1, .regUserName, .street, .city,
+ .regPassword1, .regPassword2, .button2, .requirements, .treffName{
+	padding: 0px 0px 5px 60px;
+}
+
+.requirements{
+	font-size: 10px;
+}
+.button{
+	width: 145px;
+	height: 70px;
+	font-size: 20px;
+	background: linear-gradient(-45deg, #F2F2F2 ,#ffa273);
+    border: 1px solid #b3b3b3;
+    color: #000000;
+}
+
+.button:hover {
+    color: #0000ff;
+}
+
+.button:visited {
+    color: #000000;
+}
+
+
+.registration{
+	float:left;
+	/*margin-left: 50px;*/
+	width:320px;
+	padding-left: 40px;
+
+}
+
+.city, .state, .regPassword1{
+	float:left;
+	padding-right: 5px;
+}
+
+.regPassword1, .treffName{
+	clear:left;
+}
+
+.createTreff{
+	float: left;
+	height: 150px;
+	padding: 75px 0px 0px 100px
+}
+
+.information{
+	float: left;
+	height: 200px;
+	padding: 0px 0px 0px 125px
+}
+
+.createButton{
+	width: 200px;
+	height: 100px;
+	font-size: 20px;
+	background: linear-gradient(-45deg, #F2F2F2 ,#ffa273);
+    border: 1px solid #b3b3b3;
+    color: #000000;
+}
+
+/*--- End of CLogin/Registration Section ---*/
