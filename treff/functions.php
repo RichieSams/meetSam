@@ -35,7 +35,6 @@
     //Sanatize request
     function clean($value)
     {
-        $purged_str = preg_replace("/\W[^@\.]/", "", $value);
         return htmlspecialchars($purged_str);
     }
     
@@ -62,6 +61,6 @@
     //Get the name of the Treff
     function getName($id)
     {
-        
+        return 'Craig\'s list meeting';
     }
 ?>
