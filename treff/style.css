@@ -171,3 +171,15 @@ body {
 }
 
 /*--- End of Contact and Description Section ---*/
+
+/*--- Join Treff Section ---*/
+.infoJoin {
+    width: 900px;
+    margin-top: auto;
+	margin-bottom: auto;
+    margin-right: 116px;
+    float: left;
+}
+
+/*--- End Join Treff Section ---*/
+
