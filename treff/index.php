@@ -13,7 +13,7 @@
 
 	<div class="login">
 		<div class="create">
-			<a href="dummy.php">Create a Treff</a>
+			<a href="create1.php">Create a Treff</a>
 		</div>
 		<div class="join">
 			<a href="dummy.php">Join a Treff</a>
