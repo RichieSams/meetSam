@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <td>Meeting Id:</td>
-                    <td><input type="text" name="meetingId"></td>
+                    <td><input type="text" name="meetingId" value="<?php echo $treffId?>"></td>
                 </tr>
                 <tr>
                     <td>Address:</td>
