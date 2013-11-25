@@ -48,6 +48,18 @@
     </script>
     </head>
 <body>
-<div id="map-canvas"/>
+<div class="header">
+    <div class="title"><a href="index.php"><img src="treff_medium.png" /></a></div>
+    <div class="title_text">Meetings made easy</div>
+</div>
+<nav class="nav_bar">
+    <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="description.php">What is Treff?</a></li>
+    </ul>
+</nav>
+<div class="main_body">
+    <div id="map-canvas"/>
+<div>
 </body>
 </html>
