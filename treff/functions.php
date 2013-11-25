@@ -11,6 +11,10 @@
         {
             echo errorPage();
         }
+        else
+        {
+            return true;
+        }
     }
     
     //Check if Email is attached to treff.
