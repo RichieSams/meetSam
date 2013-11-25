@@ -17,7 +17,7 @@
                  echo 'Joining ' . getName(clean($eInfo["id"])) . '!';
             ?>
             </h1>
-	</div>
+	</div> <!--// End of infoJoin -->
     <div class="jointreff">
          <form action="" method="post">
             <table>
@@ -43,7 +43,7 @@
                 </tr>
             </table>
         </form>
-    </div>
-</div> <!-- End of main_body -->
+    </div><!--// End of jointreff -->
+</div> <!--// End of main_body -->
 
 <?php include 'footer.php'; ?>
