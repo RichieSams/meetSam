@@ -35,7 +35,8 @@
     //Sanatize request
     function clean($value)
     {
-        return htmlspecialchars($value);
+        $purged_str = preg_replace("/\W[^@\.]/", "", $value);
+        return htmlspecialchars($purged_str);
     }
     
     //Send to error page
