@@ -1,7 +1,9 @@
 <?php
-    if(isset($_GET["id"]))
+    //Check if Treff ID is found in db
+    function checkId(id)
+    if(findID(id))
     {
-        echo 'Joining ' . htmlspecialchars($_GET["id"]) . '!';
+        return true;
 
     }
 ?>
