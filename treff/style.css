@@ -183,6 +183,42 @@ body {
 
 /*--- End Join Treff Section ---*/
 
+/*--- Treff Section ---*/
+.infoTreff {
+    width: 480px;
+    margin-top: auto;
+	margin-bottom: auto;
+    float: left;
+}
+
+#map-canvas {
+    width: 420px;
+    height: 420px;
+    float: left;
+
+}
+
+.status {
+    display: inline;
+    width: 480px;
+}
+
+.status h1{
+    display: inline;
+    width: 110px;
+    margin: 0;
+    font-size: 2em;
+}
+
+.status h2{
+    display: inline;
+    width: 100%;
+    font-size: 2em;
+    color: #72d454;
+}
+
+/*--- End Treff Section ---*/
+
 /*--- Login/Registration Section ---*/
 
 .signin{

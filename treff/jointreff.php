@@ -1,6 +1,12 @@
 <?php
     include 'functions.php';
-    htmlspecialchars($_GET["id"]) . '!';
+    $eInfo = $_GET;
+    
+    if(checkId(clean($eInfo["id"])) && checkEmail(clean($eInfo["email"],clean($eInfo["id"])))
+    {
+        $email = clean($eInfo["email"]);
+        $treffId = clean($eInfo["id"]);
+    }
 ?>
 
 <?php include 'header.php'; ?>
@@ -8,11 +14,7 @@
 <div class="main_body">
 	<div class="infoJoin">
 		<h1><?php
-                if(isset($_GET["id"]))
-                {
-                    echo 'Joining ' . htmlspecialchars($_GET["id"]) . '!';
-
-                }
+                 echo 'Joining ' . getName(clean($eInfo["id"])) . '!';
             ?>
             </h1>
 	</div>
@@ -20,20 +22,24 @@
          <form action="" method="post">
             <table>
                 <tr>
-                    <td>First Name:</td>
-                    <td><input type="text" name="email"></td>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="<?php echo $email?>"></td>
                 </tr>
                 <tr>
-                    <td>Last Name:</td>
-                    <td><input type="text" name="lname"></td>
+                    <td>Meeting Id:</td>
+                    <td><input type="text" name="meetingId"></td>
                 </tr>
                 <tr>
                     <td>Address:</td>
-                    <td><input type="text" name="strtaddress"></td>
+                    <td><input type="text" name="address"></td>
                 </tr>
                 <tr>
-                    <td>City:</td>
-                    <td><input type="text" name="city"></td>
+                    <td>Zip:</td>
+                    <td><input type="text" name="zip"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit" value="" name="" onclick="return validator();">Submit</button></td>
+                    <td><button type="reset" value="Reset">Reset</button></td>
                 </tr>
             </table>
         </form>
