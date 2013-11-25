@@ -123,7 +123,12 @@ function displayTreff($email = ''){
                       <input type=\"text\" name=\"userName\" maxlength=\"50\" value=\"$user\" 
 					   placeholder=\"Email Address\"/>
 				  </div>
-			
+				  
+				  <div class=\"treffMate\">
+                      <input type=\"text\" name=\"treffMate\" maxlength=\"50\" 
+					   placeholder=\"Treff Mate's Email\"/>
+				  </div>
+
 				  <div class=\"street\">
                       <input type=\"text\" name=\"street\" maxlength=\"50\" size=\"37\" value=\"$street\"
 					   placeholder=\"Street Adress\"/>
