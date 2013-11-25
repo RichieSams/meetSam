@@ -6,6 +6,7 @@ echo '
 <head>
     <title>Treff</title>
     <link rel="stylesheet" type="text/css" href="style.css" media="all" />
+	<script type ="text/javascript" src = "validate.js"></script>
     <link rel="icon" href="favicon.ico" />
     <link rel="shortcut icon" href="http://example.com/favicon.ico" />
 </head>

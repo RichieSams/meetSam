@@ -1,4 +1,6 @@
+<?php include 'functions.php'; ?>
 <?php include 'header.php'; ?>
+
 
 <div class="main_body">
 
@@ -23,17 +25,7 @@ function checkLogin(){
 	$email = $_POST["name"];
 	$pass = $_POST["pass"];
 
-	$host = "z.cs.utexas.edu";
-	$user = "db_prod-treff";
-	$pwd = "6%43z_fDs6fr4";
-	$dbs = "dbotreff";
-	$port = "3306";
-
-	$connect = mysqli_connect ($host, $user, $pwd, $dbs, $port);
-
-	if (empty($connect)){
-		die("mysqli_connect failed: " . mysqli_connect_error());
-	}
+	$connect = connectMySql();
 
 	$result = mysqli_query($connect, "SELECT password FROM Users WHERE email = '$email'");
 
@@ -56,19 +48,7 @@ function addUser(){
 	$zip = $_POST["zip"];
 	$pass1 = $_POST["pass1"];
 
-	// Connect to the MySQL database
-	$host = "z.cs.utexas.edu";
-	$user = "smf2256";
-	$pwd = "1+H05NosBT";
-	$dbs = "cs329e_sam";
-	$port = "3306";
-
-	$connect = mysqli_connect ($host, $user, $pwd, $dbs, $port);
-
-	if (empty($connect))
-	{
-		die("mysqli_connect failed: " . mysqli_connect_error());
-	}
+	$connect = connectMySql();
 
 	// Add user to table
 	mysqli_query($connect, "INSERT INTO Users (email, password, street, city, 
@@ -89,17 +69,7 @@ function displayTreff($email = ''){
 
 	if($email != ''){
 
-		$host = "z.cs.utexas.edu";
-		$user = "smf2256";
-		$pwd = "1+H05NosBT";
-		$dbs = "cs329e_sam";
-		$port = "3306";
-
-		$connect = mysqli_connect ($host, $user, $pwd, $dbs, $port);
-
-		if (empty($connect)){
-			die("mysqli_connect failed: " . mysqli_connect_error());
-		}
+		$connect = connectMySql();
 
 		$result = mysqli_query($connect, "SELECT * FROM Users WHERE email = '$email'");
 
