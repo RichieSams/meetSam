@@ -11,6 +11,8 @@
 
     <script type ="text/javascript" src = "jsfunctions.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" media="all" />
+    <link rel="icon" href="favicon.ico" />
+
 
 <!--//-----Start Google Maps API ------>
     <script type="text/javascript" src=<?php echo "https://maps.googleapis.com/maps/api/js?key=".$goKey."&sensor=true" ?>>
@@ -30,22 +32,6 @@
                                           mapOptions);
         }
 
-        function codeAddress() {
-            geocoder.geocode( { 'address': centerAdd}, function(results, status) {
-                             if (status == google.maps.GeocoderStatus.OK)
-                             {
-                                 map.setCenter(results[0].geometry.location);
-                                 var marker = new google.maps.Marker({
-                                                                         map: map,
-                                                                         position: results[0].geometry.location
-                                                                     });
-                             }
-                             else
-                             {
-                                 alert('Geocode was not successful for the following reason: ' + status);
-                             }
-                             });
-        }
         google.maps.event.addDomListener(window, 'load', initialize);
         codeAddress();
     </script>
@@ -68,13 +54,12 @@
         <div class="status">
             <h1>Status:</h1> <?php echo checkStat($id); ?>
         </div>
-		<p> Treff is a service for creating meeting points for people.<br /><br />
-            Treff will ask for your location and the phone numbers or emails of the people
-            you would like to meet up with. Then it will find a meeting point and automatically
-            send out personalized directions to everyone.
+		<p> All atendees have subited a confirmation. 
 	    </p>
-        <h1>Send Reminder Email</h1>
-        <p>	    </p>
+        <button type="button" onclick="getDirects(<?php echo getAddress() ?>);"><h1>Get Directions</h1></button>
+
+        <button type="button" onclick="alert('Email Sent');"><h1>Send Reminder Email</h1></button>
+        <p style="directions">	    </p>
 
 
 	</div>
