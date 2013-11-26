@@ -5,7 +5,7 @@ function getDirects(address)
     document.getElementById("directions").innerHTML="The directions to the Treff will be placed here.";
 }
 
-
+//Goggle API for geocoding.
 function codeAddress() {
     geocoder.geocode( { 'address': centerAdd}, function(results, status) {
                      if (status == google.maps.GeocoderStatus.OK)
