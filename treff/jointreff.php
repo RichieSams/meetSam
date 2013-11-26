@@ -2,10 +2,17 @@
     include 'functions.php';
     $eInfo = $_GET;
     
-    if(checkId(clean($eInfo["id"])) && checkEmail(clean($eInfo["email"]),clean($eInfo["id"])))
+    if(isset($eInfo["id"]) && checkId(clean($eInfo["id"])) && checkEmail(clean($eInfo["email"]),clean($eInfo["id"])))
     {
         $email = clean($eInfo["email"]);
         $treffId = clean($eInfo["id"]);
+        $treffName = getName(clean($eInfo["id"]));
+    }
+    else
+    {
+        $email = "";
+        $treffId = "";
+        $treffName = " a Treff. How Exciting";
     }
 ?>
 
@@ -14,12 +21,12 @@
 <div class="main_body">
 	<div class="infoJoin">
 		<h1><?php
-                 echo 'Joining ' . getName(clean($eInfo["id"])) . '!';
+                 echo 'Joining'.$treffName.'!';
             ?>
-            </h1>
+        </h1>
 	</div> <!--// End of infoJoin -->
     <div class="jointreff">
-         <form action="" method="post">
+         <form action="treff.php" method="post">
             <table>
                 <tr>
                     <td>Email:</td>
@@ -38,11 +45,16 @@
                     <td><input type="text" name="zip"></td>
                 </tr>
                 <tr>
-                    <td><button type="submit" value="" name="" onclick="return validator();">Submit</button></td>
+                    <td><button type="submit" value="Submit" onclick="return validate();">Submit</button></td>
                     <td><button type="reset" value="Reset">Reset</button></td>
                 </tr>
             </table>
         </form>
+        <div class="joinlogin">
+            <div class="register">
+                <a href="login.php">Login or Register</a>
+            </div>
+        </div>
     </div><!--// End of jointreff -->
 </div> <!--// End of main_body -->
 
