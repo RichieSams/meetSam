@@ -1,12 +1,21 @@
-<?php include 'header.php'; ?>
+<?php
 
+session_start();
+
+if (isset($_SESSION['userId']) && $_SESSION['userId'] != 0) {
+    header("Location: " . $_POST["redirectUrl"]);
+}
+
+include 'header.php';
+
+echo '
 <script src="lib/sha3.js"></script>
 
 <div class="main_body">
 	
 	<div class="signin">
 		<h2>Login</h2>
-		<form id = "loginForm" action="loginProcess.php"
+		<formid ="loginForm" action="loginProcess.php"
 				method="POST" onsubmit="return validateLogin();">
 
             <div class="userName">
@@ -21,7 +30,7 @@
               <input class="button" type="submit" value="Login" name="loggedIn" />
             </div>
 
-            <input type="hidden" name="redirectUrl" value="create2.php" />
+            <input type="hidden" name="redirectUrl" value="'. $_POST["redirectUrl"] .'" />
         </form>
 	</div>
 
@@ -70,10 +79,11 @@
               <input class="button" type="submit" value="Register" name="register" />
             </div>
 
-            <input type="hidden" name="redirectUrl" value="create2.php" />
+            <input type="hidden" name="redirectUrl" value="'. $_POST["redirectUrl"] .'" />
 
         </form>
 	</div>
-</div> <!-- End of main_body -->
+</div>'; // End of main body
 
-<?php include 'footer.php'; ?>
+
+include 'footer.php';

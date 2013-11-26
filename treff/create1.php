@@ -1,5 +1,14 @@
-<?php include 'header.php'; ?>
+<?php
 
+session_start();
+
+if (isset($_SESSION['userId']) && $_SESSION['userId'] != 0) {
+    header("Location: create2.php");
+}
+
+include 'header.php';
+
+echo '
 <div class="main_body">
 	
 	<div class="info">
@@ -22,6 +31,6 @@
             <input type="hidden" name="redirectUrl" value="create2.php" />
         </form>
 	</div>
-</div> <!-- End of main_body -->
+</div> <!-- End of main_body -->';
 
-<?php include 'footer.php'; ?>
+include 'footer.php';
