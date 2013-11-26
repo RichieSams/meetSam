@@ -3,7 +3,7 @@
 session_start();
 
 include 'functions.php';
-include 'header.php';
+createHeader(array("style.css"), array());
 
 
 $connect = connectMySql();

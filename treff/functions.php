@@ -1,5 +1,36 @@
 <?php
 
+function createHeader($cssFiles, $javascriptFiles) {
+    echo '
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Treff</title>
+        <link rel="icon" href="favicon.ico" />';
+
+    foreach ($cssFiles as $file) {
+        echo '<link rel="stylesheet" type="text/css" href="' . $file . '" media="all" />';
+    }
+
+    foreach ($javascriptFiles as $file) {
+        echo '<script type ="text/javascript" src = "' . $file . '"></script>';
+    }
+
+    echo '
+    </head>
+    <body>
+    <div class="header">
+        <div class="title"><a href="index.php"><img src="images/treff_medium.png" /></a></div>
+        <div class="title_text">Meetings made easy</div>
+    </div>
+    <nav class="nav_bar">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="description.php">What is Treff?</a></li>
+        </ul>
+    </nav>';
+}
+
 //Please enter MySQL connection HERE.
 function connectMySql(){
     $host = "216.224.181.106";

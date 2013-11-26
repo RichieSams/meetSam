@@ -14,9 +14,11 @@
         $treffId = "";
         $treffName = " a Treff. How Exciting";
     }
-?>
 
-<?php include 'header.php'; ?>
+include 'functions.php';
+createHeader(array("style.css"), array());
+
+?>
 
 <div class="main_body">
 	<div class="infoJoin">

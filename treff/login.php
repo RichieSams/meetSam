@@ -6,7 +6,8 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] != 0) {
     header("Location: " . $_POST["redirectUrl"]);
 }
 
-include 'header.php';
+include 'functions.php';
+createHeader(array("style.css"), array());
 
 echo '
 <script src="lib/sha3.js"></script>

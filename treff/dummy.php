@@ -1,4 +1,9 @@
-<?php include 'header.php'; ?>
+<?php
+
+include 'functions.php';
+createHeader(array("style.css"), array());
+
+?>
 
 <div class="main_body">
 	
