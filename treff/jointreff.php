@@ -15,7 +15,6 @@
         $treffName = " a Treff. How Exciting";
     }
 
-include 'functions.php';
 createHeader(array("style.css"), array());
 
 ?>
