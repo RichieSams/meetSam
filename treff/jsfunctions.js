@@ -1,7 +1,8 @@
 //Get directions using google API
-function getDirections(address)
+function getDirects(address)
 {
-    alert("getting directions for ".address);
+    alert("getting directions for "+address);
+    document.getElementById("directions").innerHTML="The directions to the Treff will be placed here.";
 }
 
 
