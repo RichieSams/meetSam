@@ -18,7 +18,7 @@
 		<div class="join">
 			<a href="jointreff.php">Join a Treff</a>
 		</div>
-	</div>
-</div> <!-- End of main_body -->
+	</div> <!--// End of login -->
+</div> <!--// End of main_body -->
 
 <?php include 'footer.php'; ?>
