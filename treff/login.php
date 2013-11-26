@@ -7,7 +7,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] != 0) {
 }
 
 include 'functions.php';
-createHeader(array("style.css"), array());
+createHeader(array("style.css"), array("validate.js"));
 
 echo '
 <script src="lib/sha3.js"></script>
