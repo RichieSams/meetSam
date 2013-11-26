@@ -40,7 +40,7 @@
     </head>
 <body>
 <div class="header">
-    <div class="title"><a href="index.php"><img src="treff_medium.png" /></a></div>
+    <div class="title"><a href="index.php"><img src="images/treff_medium.png" /></a></div>
     <div class="title_text">Meetings made easy</div>
 </div>
 <nav class="nav_bar">
