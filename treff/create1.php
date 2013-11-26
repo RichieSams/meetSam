@@ -13,12 +13,14 @@
 	</div>
 
 	<div class="login">
-		<div class="register">
-			<a href="login.php">Login/Register</a>
-		</div>
-		<div class="anon">
-			<a href="create2.php">Register Later</a>
-		</div>
+        <form action="login.php" method="POST">
+            <input class="button" type="submit" value="Login/Register" />
+            <input type="hidden" name="redirectUrl" value="create2.php" />
+        </form>
+        <form action="loginProcess.php" method="POST">
+            <input class="button" type="submit" value="Register Later" name="anonymous" />
+            <input type="hidden" name="redirectUrl" value="create2.php" />
+        </form>
 	</div>
 </div> <!-- End of main_body -->
 

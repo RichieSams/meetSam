@@ -1,7 +1,6 @@
 var regExEmail = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
 
-document.getElementById("loginForm").onsubmit = validateLogin;
-function validateLogin () {
+function validateLogin() {
     var form = document.getElementById("loginForm");
     
     if (form.name.value == "") {
@@ -13,11 +12,12 @@ function validateLogin () {
         return false;
     }
 
+    form.pass = CryptoJS.SHA256(form.name + form.pass);
+
     return true;
 }
 
-document.getElementById("registrationForm").onsubmit = validateRegistation;
-function validateLogin () {
+function validateRegistration() {
     var form = document.getElementById("registrationForm");
     var checkEmail = regExEmail.test(form.name.value)
 	var passDig = /[0-9]/.test(form.pass1.value);
@@ -47,6 +47,9 @@ function validateLogin () {
 		window.alert ("Passwords do not match");
 		return false;
 	}
+
+    form.pass1 = CryptoJS.SHA256(form.name + form.pass1);
+    form.pass2 = CryptoJS.SHA256(form.name + form.pass2);
 
 	return true;
 }
