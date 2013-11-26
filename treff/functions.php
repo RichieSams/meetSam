@@ -7,11 +7,13 @@
 		$dbs = "dbotreff";
 		$port = "3306";
 
-		$connect = mysqli_connect ($host, $user, $pwd, $dbs, $port);
+		$connect = new mysqli($host, $user, $pwd, $dbs, $port);
 
-		if (empty($connect)){
-			die("mysqli_connect failed: " . mysqli_connect_error());
-		}
+        // Check connection
+        if (mysqli_connect_errno())
+        {
+            die("Failed to connect to MySQL: " . mysqli_connect_error());
+        }
 
 		return $connect;
     }
