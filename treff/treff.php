@@ -9,6 +9,7 @@
     <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
+    <script type ="text/javascript" src = "jsfunctions.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" media="all" />
 
 <!--//-----Start Google Maps API ------>
