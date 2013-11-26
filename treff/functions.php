@@ -1,7 +1,21 @@
 <?php
     //Please enter MySQL connection HERE.
-    
-    
+	function connectMySql(){
+		$host = "216.224.181.106";
+		$user = "db_prod-treff";
+		$pwd = "6%43z_fDs6fr4";
+		$dbs = "dbotreff";
+		$port = "3306";
+
+		$connect = mysqli_connect ($host, $user, $pwd, $dbs, $port);
+
+		if (empty($connect)){
+			die("mysqli_connect failed: " . mysqli_connect_error());
+		}
+
+		return $connect;
+    }
+
     //Check if Treff ID is found in db
     function checkId($id)
     {
