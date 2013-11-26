@@ -79,4 +79,10 @@
     {
         return 'Craig\'s list meeting';
     }
+    
+    //Get the Address for $user
+    function getAddress($userId)
+    {
+        return '\'306 E 30th St, Austin, TX 78705\'';
+    }
 ?>
