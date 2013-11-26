@@ -54,7 +54,7 @@
         <div class="status">
             <h1>Status:</h1> <?php echo checkStat($id); ?>
         </div>
-		<p> All atendees have subited a confirmation. 
+		<p> All atendees have submited a confirmation.
 	    </p>
         <button type="button" onclick="getDirects(<?php echo getAddress() ?>);"><h1>Get Directions</h1></button>
 
