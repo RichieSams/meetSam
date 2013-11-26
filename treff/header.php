@@ -8,7 +8,7 @@ echo '
     <link rel="stylesheet" type="text/css" href="style.css" media="all" />
     <link rel="icon" href="favicon.ico" />
     <link rel="shortcut icon" href="http://example.com/favicon.ico" />
-    <script type ="text/javascript" src = "validate.js"></script>
+    <script type ="text/javascript" src = "jsfunctions.js"></script>
 </head>
 <body>
 <div class="header">
