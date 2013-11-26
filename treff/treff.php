@@ -59,7 +59,8 @@
         <button type="button" onclick="getDirects(<?php echo getAddress('id') ?>);"><h1>Get Directions</h1></button>
 
         <button type="button" onclick="alert('Email Sent');"><h1>Send Reminder Email</h1></button>
-        <p style="directions">	    </p>
+        <p id="directions">Click on buttons above for more info.
+        </p>
 
 
 	</div>
