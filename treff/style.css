@@ -124,24 +124,12 @@ body {
 	text-align: center;
 }
 
-.login a{
+.login {
 	display: block;
-	height: 150px;
 	width: 300px;
-	line-height:150px;
+	line-height:120px;
 	font-size: 30px;
-	background: linear-gradient(-45deg, #F2F2F2 ,#ffa273);
-	text-decoration : none;
-    border: 1px solid #b3b3b3;
-    color: #000000;
-}
-
-.login a:hover {
-    color: #0000ff;
-}
-
-.login a:visited {
-    color: #000000;
+    text-align: center;
 }
 
 /*--- End of Main Body Section ---*/
