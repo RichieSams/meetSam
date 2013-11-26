@@ -16,7 +16,7 @@
 			<a href="create1.php">Create a Treff</a>
 		</div>
 		<div class="join">
-			<a href="dummy.php">Join a Treff</a>
+			<a href="jointreff.php">Join a Treff</a>
 		</div>
 	</div>
 </div> <!-- End of main_body -->
