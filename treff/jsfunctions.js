@@ -44,6 +44,7 @@ function codeAddress(centerAdd) {
                      });
 }
 
+//Goggle API for geocoding.
 function calcRoute(start,end) {
     var request = {
     origin:start,
