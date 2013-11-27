@@ -1,24 +1,54 @@
 <?php
 
+session_start();
+
+include 'functions.php';
 require 'lib/vendor/autoload.php';
 use Mailgun\Mailgun;
 
+if (!isset($_SESSION['userId']) || $_SESSION['userId'] == 0 || !isset($_POST['create'])) {
+    header("Location: index.php");
+}
+
+$connect = connectMySql();
+
+// Create entry in Meetings Table
+$connect->query("INSERT INTO Meetings (name)
+                 VALUES ('" . $_POST['treffName'] . "')");
+
+$meetingId = $connect->insert_id;
+
+// Create entries in MeetingUsers table
+$connect->query("INSERT INTO MeetingUsers
+                 VALUES (" . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLon'] . ")");
 
 
+// Send emails
+$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
+$domain = "treffnow.com";
 
 
+# Send confirmation email to creator
+$mg->sendMessage($domain,
+    array('from'    => 'noreply@treffnow.com',
+          'to'      => $_POST['creatorEmail'],
+          'subject' => 'Confirmation for creating the Treff "' . $_POST['treffName'] . '"',
+          'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
+                       "This is a confirmation email for the Treff you created. Below is a link to the meeting main page.\n" .
+                       "http://zweb.cs.utexas.edu/users/cs329e/cs329e_sam/treff/treff.php?meetingId=$meetingId&userId=" . $_SESSION['userId'] . "\n\n" .
+                       "Happy Treffing,\n" .
+                       "The Treff Team"));
+
+# Send confirmation email to mate
+$mg->sendMessage($domain,
+    array('from'    => 'noreply@treffnow.com',
+          'to'      => $_POST['treffMateEmail'],
+          'subject' => 'Invitation to Treff "' . $_POST['treffName'] . '"',
+          'text'    => "Welcome to Treff, a service for creating meeting points between people!\n\n" .
+                       $_POST['creatorEmail'] . " has invited you to their Treff. Below is a link to the meeting main page.\n" .
+                       "http://zweb.cs.utexas.edu/users/cs329e/cs329e_sam/treff/treff.php?meetingId=$meetingId&userId=" . $_SESSION['userId'] . "\n\n" .
+                       "Happy Treffing,\n" .
+                       "The Treff Team"));
 
 
-
-
-
-//$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
-//$domain = "sandbox5733.mailgun.org";
-//
-//# Now, compose and send your message.
-//$mg->sendMessage($domain, array('from'    => 'adastley@gmail.com',
-//    'to'      => 'stevenfranklin2808@yahoo.com',
-//    'subject' => 'I figured out the mailing API',
-//    'text'    => 'As the title says, I got email working. I ended up using Mailgun instead of SendGrid because the php library was easier to set up. lol.
-//
-//    Adrian'));
+header("Location: treff.php?meetingId=$meetingId&userId=" . $_SESSION['userId']);
