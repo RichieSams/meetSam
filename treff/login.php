@@ -16,9 +16,7 @@ echo '
 	
 	<div class="signin">
 		<h2>Login</h2>
-		<formid ="loginForm" action="loginProcess.php"
-				method="POST" onsubmit="return validateLogin();">
-
+		<form id ="loginForm" action="loginProcess.php" method="POST" onsubmit="return validateLogin();">
             <div class="userName">
                   <input type="text" name="name" maxlength="50" placeholder="Email Address"/>
             </div>
