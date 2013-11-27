@@ -1,9 +1,26 @@
+var map;
+var geocoder = new google.maps.Geocoder();
+var centerAdd = '2315 Speedway, Austin, TX  78712-1528';
+
 //Get directions using google API
 function getDirects(address)
 {
     alert("getting directions for "+address);
     document.getElementById("directions").innerHTML="The directions to the Treff will be placed here.";
 }
+
+//-----Start Google Maps API ------>
+
+function initialize() {
+    var mapOptions = {
+    center: new google.maps.LatLng(-34.397, 150.644),
+    zoom: 17
+    };
+    map = new google.maps.Map(document.getElementById("map-canvas"),
+                              mapOptions);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
 
 //Goggle API for geocoding.
 function codeAddress() {
@@ -22,3 +39,5 @@ function codeAddress() {
                      }
                      });
 }
+
+//-----End Google Maps API ------>
