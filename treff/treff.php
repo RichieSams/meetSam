@@ -5,7 +5,7 @@
     createHeader(array("style.css"), $jscriptsLibs);
 ?>
 <script type="text/javascript">
-    codeAddress();
+    codeAddress(centerDefault);
 </script>
 <div class="main_body">
     <div class="infoTreff">
