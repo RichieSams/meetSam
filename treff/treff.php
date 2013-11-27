@@ -1,5 +1,5 @@
 <?php
-    $id = "placeholder for treff ID";
+    $id = $_GET['meetingId'];
     include 'functions.php';
     $jscriptsLibs = array("https://maps.googleapis.com/maps/api/js?key=".$goKey."&sensor=true",'jsfunctions.js');
     createHeader(array("style.css"), $jscriptsLibs);
