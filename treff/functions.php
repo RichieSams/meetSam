@@ -1,4 +1,10 @@
 <?php
+    //----------Global Varieables------------->
+    
+//    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
+$goKey = 'AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ';
+    
+    //------End Global Varieables------------->
 
 function createHeader($cssFiles, $javascriptFiles) {
     echo '
@@ -6,7 +12,8 @@ function createHeader($cssFiles, $javascriptFiles) {
     <html>
     <head>
         <title>Treff</title>
-        <link rel="icon" href="favicon.ico" />';
+        <link rel="icon" href="favicon.ico" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />';
 
     foreach ($cssFiles as $file) {
         echo '<link rel="stylesheet" type="text/css" href="' . $file . '" media="all" />';
