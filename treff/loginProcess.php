@@ -66,7 +66,7 @@ function addUser() {
 function addAnonymousUser() {
     $connect = connectMySql();
 
-    $connect->query("INSERT INTO Users () VALUES();");
+    $connect->query("INSERT INTO Users (anonymous) VALUES(TRUE);");
 
     $_SESSION["userId"] = $connect->insert_id;
 
