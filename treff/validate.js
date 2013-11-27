@@ -54,7 +54,6 @@ function validateRegistration() {
 	return true;
 }
 
-document.getElementById("treffForm").onsubmit = validateTreff;
 function validateTreff () {
     var form = document.getElementById("treffForm");
     var checkEmail1 = regExEmail.test(form.userName.value)
