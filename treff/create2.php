@@ -19,15 +19,15 @@ echo '
             <h1>Make a Treff</h1>
 
             <div class="userName">
-                <input type="text" name="userName" maxlength="50" value="'. $row["email"] .'" placeholder="Email Address"/>
+                <input type="text" name="creatorEmail" maxlength="50" value="'. $row["email"] .'" placeholder="Email Address"/>
             </div>
 
             <div class="treffMate">
-                <input type="text" name="treffMate" maxlength="50" placeholder="Treff Mate\'s Email"/>
+                <input type="text" name="treffMateEmail" maxlength="50" placeholder="Treff Mate\'s Email"/>
             </div>
 
             <div class="street">
-                <input type="text" name="street" maxlength="50" size="37" value="'. $row["street"] .'" placeholder="Street Adress"/>
+                <input type="text" name="street" maxlength="50" size="37" value="'. $row["street"] .'" placeholder="Street Address"/>
             </div>
 
             <div class="city">
@@ -43,12 +43,14 @@ echo '
             </div>
 
             <div class="treffName">
-                <input type="text" name="treff" maxlength="100" placeholder="Treff Title"/>
+                <input type="text" name="treffName" maxlength="100" placeholder="Treff Title"/>
             </div>
         </div>
         <div class="createTreff">
             <input class="createButton" type="submit" value="Create Treff!" name="create" />
         </div>
+        <input type="hidden" name="startingLat" value="0.0" />
+        <input type="hidden" name="startingLon" value="0.0" />
     </form>
 </div> <!-- End of main_body -->';
 
