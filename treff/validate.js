@@ -74,7 +74,16 @@ function validateTreff () {
         return false;
     }
 
-	 
+    // Convert the address to Lat and Lon and fill the hidden
+    // inputs with the values.
+    // Optionally, we can disable the address inputs so their
+    // values aren't sent. (Since we only care about Lat/Lon
+
+    // Code here......
+    //
+    //
+    //
+    ///////////////////////////////////////////////////////////////
 
 	return true;
 }
