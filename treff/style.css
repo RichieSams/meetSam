@@ -107,8 +107,10 @@ body {
     color: #000000;
 }
 
-.nav_bar ul li a:hover, .footer ul li a:hover, .loginButton {
+.nav_bar ul li a:hover, .footer ul li a:hover, .loginButton:hover{
     color: #0000ff;
+	cursor: pointer;
+	cursor: hand;
 }
 
 .nav_Bar ul li.selected a, .footer ul li.selected a , .loginButton{
