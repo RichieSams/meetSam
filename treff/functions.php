@@ -37,6 +37,7 @@ function createHeader($cssFiles, $javascriptFiles) {
 		session_destroy();
 		echo '<li><a href="index.php">Log Out</a></li>';
 	}
+
 	else{
 		echo '<li><form action="login.php" method="POST">
 				  <input class="loginButton" type="submit" value="Login" />
