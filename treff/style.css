@@ -341,4 +341,12 @@ body {
     color: #000000;
 }
 
+.createButton:hover {
+    color: #0000ff;
+}
+
+.createButton:visited {
+    color: #000000;
+}
+
 /*--- End of CLogin/Registration Section ---*/
