@@ -7,7 +7,8 @@
     //------End Global Varieables------------->
 
 function createHeader($cssFiles, $javascriptFiles) {
-    echo '
+	    
+	echo '
     <!DOCTYPE html>
     <html>
     <head>
@@ -34,7 +35,7 @@ function createHeader($cssFiles, $javascriptFiles) {
         <ul>
             <li><a href="description.php">What is Treff?</a></li>';
 	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
-		echo '<li><form action="index.php" method="POST">
+		echo '<li><form action="logout.php" method="POST">
 				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
               </form></li>';
 	}

@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 include 'functions.php';
 createHeader(array("style.css"), array("validate.js"));
 

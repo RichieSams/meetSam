@@ -1,10 +1,8 @@
 <?php
-
+session_start();
 include 'functions.php';
 createHeader(array("style.css"), array());
-if(isset($_POST["logOut"])){
-	session_destroy();
-}
+
 
 ?>
 
