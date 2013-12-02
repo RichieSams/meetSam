@@ -75,11 +75,19 @@ body {
     padding: 0px;
 }
 
+.loginButton {
+    background:none;
+     border:none; 
+     padding:0!important;
+    /*border is optional*/ 
+	color: red;
+}
+
 .nav_bar ul li, .footer ul li {
     float: left;
 }
 
-.nav_bar ul li a, .nav_bar ul li div {
+.nav_bar ul li a, .nav_bar ul li div, .loginButton {
     display: block;
     margin: 0px;
     width: 450px;
@@ -99,11 +107,11 @@ body {
     color: #000000;
 }
 
-.nav_bar ul li a:hover, .footer ul li a:hover {
+.nav_bar ul li a:hover, .footer ul li a:hover, .loginButton {
     color: #0000ff;
 }
 
-.nav_Bar ul li.selected a, .footer ul li.selected a {
+.nav_Bar ul li.selected a, .footer ul li.selected a , .loginButton{
     color: #000000;
 }
 

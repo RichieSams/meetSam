@@ -32,9 +32,19 @@ function createHeader($cssFiles, $javascriptFiles) {
     </div>
     <nav class="nav_bar">
         <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="description.php">What is Treff?</a></li>
-        </ul>
+            <li><a href="description.php">What is Treff?</a></li>';
+	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
+		session_destroy();
+		echo '<li><a href="index.php">Log Out</a></li>';
+	}
+	else{
+		echo '<li><form action="login.php" method="POST">
+				  <input class="loginButton" type="submit" value="Login" />
+				  <input type="hidden" name="redirectUrl" value="create2.php" />
+              </form></li>';
+	}
+        
+	echo '</ul>
     </nav>';
 }
 
