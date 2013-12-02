@@ -34,8 +34,9 @@ function createHeader($cssFiles, $javascriptFiles) {
         <ul>
             <li><a href="description.php">What is Treff?</a></li>';
 	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
-		session_destroy();
-		echo '<li><a href="index.php">Log Out</a></li>';
+		echo '<li><form action="index.php" method="POST">
+				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
+              </form></li>';
 	}
 
 	else{
