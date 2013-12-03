@@ -6,7 +6,7 @@ include_once 'functions.php';
 
 if (isset($_POST["loggedIn"])) {
     if (!checkLogin()) {
-        echo "<h1>Incorrect Username or Password</h1>";
+        echo '<script type="text/javascript">alert("Incorrect Username or Password"); </script>';
         include 'login.php';
         exit;
     }

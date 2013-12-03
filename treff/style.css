@@ -202,6 +202,25 @@ body {
 .joinlogin {
 	display: inline;
     float: left;
+	text-align: center;
+}
+
+.joinButton{
+	float: left;
+	width: 145px;
+	height: 70px;
+	font-size: 20px;
+	background: linear-gradient(-45deg, #F2F2F2 ,#ffa273);
+    border: 1px solid #b3b3b3;
+    color: #000000;
+}
+
+.joinButton:hover {
+    color: #0000ff;
+}
+
+.joinButton:visited {
+    color: #000000;
 }
 
 .joinlogin a{

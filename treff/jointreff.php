@@ -1,5 +1,6 @@
 <?php
     include_once 'functions.php';
+	session_start();
     $eInfo = $_GET;
     
     if(isset($eInfo["meetingId"]) && checkId(clean($eInfo["meetingId"])) && checkEmail(clean($eInfo["userId"]),clean($eInfo["meetingId"])))
@@ -53,7 +54,10 @@
         </form>
         <div class="joinlogin">
             <div class="register">
-                <a href="login.php">Login or Register</a>
+                <form action="login.php" method="POST">
+					<input class="joinButton" type="submit" value="Login/Register" />
+					<input type="hidden" name="redirectUrl" value="jointreff.php" />
+				</form>
             </div>
         </div>
     </div><!--// End of jointreff -->
