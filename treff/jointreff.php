@@ -1,5 +1,5 @@
 <?php
-    include 'functions.php';
+    include_once 'functions.php';
     $eInfo = $_GET;
     
     if(isset($eInfo["id"]) && checkId(clean($eInfo["id"])) && checkEmail(clean($eInfo["email"]),clean($eInfo["id"])))

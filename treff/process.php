@@ -2,7 +2,7 @@
 
 session_start();
 
-include 'functions.php';
+include_once 'functions.php';
 require 'lib/vendor/autoload.php';
 use Mailgun\Mailgun;
 

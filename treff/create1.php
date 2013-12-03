@@ -5,7 +5,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] != 0) {
     header("Location: create2.php");
 }
 
-include 'functions.php';
+include_once 'functions.php';
 createHeader(array("style.css"), array());
 
 echo '

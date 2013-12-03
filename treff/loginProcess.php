@@ -2,7 +2,7 @@
 
 session_start();
 
-include 'functions.php';
+include_once 'functions.php';
 
 if (isset($_POST["loggedIn"])) {
     if (!checkLogin()) {
