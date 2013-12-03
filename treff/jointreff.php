@@ -2,11 +2,11 @@
     include_once 'functions.php';
     $eInfo = $_GET;
     
-    if(isset($eInfo["id"]) && checkId(clean($eInfo["id"])) && checkEmail(clean($eInfo["email"]),clean($eInfo["id"])))
+    if(isset($eInfo["meetingId"]) && checkId(clean($eInfo["meetingId"])) && checkEmail(clean($eInfo["userId"]),clean($eInfo["meetingId"])))
     {
-        $email = clean($eInfo["email"]);
-        $treffId = clean($eInfo["id"]);
-        $treffName = getName(clean($eInfo["id"]));
+        $email = clean($eInfo["userId"]);
+        $treffId = clean($eInfo["meetingId"]);
+        $treffName = getName(clean($eInfo["meetingId"]));
     }
     else
     {
