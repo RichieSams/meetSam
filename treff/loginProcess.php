@@ -12,7 +12,7 @@ if (isset($_POST["loggedIn"])) {
     }
 } else if (isset($_POST["register"])) {
     addUser();
-} else if (isset($_GET["anonymous"]) && $_GET["anonymous"] == "1") {
+} else if (isset($_POST["anonymous"])) {
     addAnonymousUser();
 }
 
