@@ -1,0 +1,78 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		84DA4543184DB4DD003C7391 /* daily_texan */ = {isa = PBXFileReference; lastKnownFileType = folder; path = daily_texan; sourceTree = "<group>"; };
+		84DA4544184DB4DD003C7391 /* puzzle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = puzzle; sourceTree = "<group>"; };
+		84DA4545184DB4DD003C7391 /* quiz */ = {isa = PBXFileReference; lastKnownFileType = folder; path = quiz; sourceTree = "<group>"; };
+		84DA4546184DB4DD003C7391 /* treff */ = {isa = PBXFileReference; lastKnownFileType = folder; path = treff; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		84DA453C184DB44D003C7391 = {
+			isa = PBXGroup;
+			children = (
+				84DA4543184DB4DD003C7391 /* daily_texan */,
+				84DA4544184DB4DD003C7391 /* puzzle */,
+				84DA4545184DB4DD003C7391 /* quiz */,
+				84DA4546184DB4DD003C7391 /* treff */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		84DA453D184DB44D003C7391 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = 84DA4540184DB44D003C7391 /* Build configuration list for PBXProject "meetSAM" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 84DA453C184DB44D003C7391;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		84DA4541184DB44D003C7391 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		84DA4542184DB44D003C7391 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84DA4540184DB44D003C7391 /* Build configuration list for PBXProject "meetSAM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84DA4541184DB44D003C7391 /* Debug */,
+				84DA4542184DB44D003C7391 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84DA453D184DB44D003C7391 /* Project object */;
+}
