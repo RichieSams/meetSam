@@ -53,7 +53,7 @@ function createHeader($cssFiles, $javascriptFiles) {
 
 //Please enter MySQL connection HERE.
 function connectMySql(){
-    $host = "216.224.181.106";
+    $host = "192.30.165.140";
     $user = "db_prod-treff";
     $pwd = "6%43z_fDs6fr4";
     $dbs = "dbotreff";
