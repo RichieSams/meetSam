@@ -7,7 +7,7 @@
     {
         $email = clean($eInfo["userId"]);
         $treffId = clean($eInfo["meetingId"]);
-        $treffName = getName(clean($eInfo["meetingId"]));
+        $treffName = getName(clean($eInfo["meetingId"]))["name"];
     }
     else
     {
@@ -23,7 +23,7 @@
 <div class="main_body">
 	<div class="infoJoin">
 		<h1><?php
-                 echo 'Joining'.$treffName.'!';
+                 echo 'Joining '.$treffName.'!';
             ?>
         </h1>
 	</div> <!--// End of infoJoin -->
