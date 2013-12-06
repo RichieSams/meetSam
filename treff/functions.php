@@ -73,7 +73,7 @@ function connectMySql(){
 //Check if Treff ID is found in db
 function checkId($id)
 {
-    $table = "meetings";
+    $table = "Meetings";
     $column = "meetingId";
     if(inDb($table, $column, $id) == false || count($id) > 9)
     {
@@ -86,11 +86,11 @@ function checkId($id)
 }
 
 //Check if Email is attached to treff.
-function checkEmail($email, $id)
+function checkEmail($userId, $id)
 {
-    $table = "meetings";
-    $column = "meetingId";
-    if(inDb($table, $column, $email) == false)
+    $table = "Meetings";
+    $column = "userId";
+    if(inDb($table, $column, $userId) == false)
     {
         echo errorPage();
     }
@@ -117,7 +117,18 @@ function errorPage()
 //Find the info in db
 function inDb($table, $column, $value)
 {
-    return true;
+    $connect = connectMySql();
+    $result = $connect->query("SELECT meetingId FROM $table where $column='$value'");
+    if($result)
+    {
+        $row = $result->fetch_assoc();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    $result->free();
 }
 
 //Check the status of the Treff
@@ -129,7 +140,12 @@ function checkStat($id)
 //Get the name of the Treff
 function getName($id)
 {
-    return 'Craig\'s list meeting';
+    $connect = connectMySql();
+    $result = $connect->query("SELECT * FROM Meetings where meetingId='$id'");
+    $row = $result->fetch_assoc();
+
+    return $row;
+    $result->free();
 }
 
 //Get the Address for $user
