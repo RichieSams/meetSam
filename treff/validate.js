@@ -55,35 +55,41 @@ function validateRegistration() {
 }
 
 function validateTreff () {
+
     var form = document.getElementById("treffForm");
-    var checkEmail1 = regExEmail.test(form.userName.value)
-	var checkEmail2 = regExEmail.test(form.treffMate.value)
 
-    if (form.userName.value == "" || form.treffMate.value == "" || form.street.value == "" || form.city.value == "" ) {
-        window.alert ("Incomplete Treff");
+    if (form.creatorEmail.value == "" || form.treffMateEmail.value == "") {
+        window.alert ("Incomplete email information");
         return false;
     }
 
-	if (form.zip.value == "" || form.state.value == "") {
-        window.alert ("Incomplete Treff");
+	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
+        window.alert ("Incomplete Address");
         return false;
     }
 
-    if (checkEmail1 != true || checkEmail1 != true) {
+    var checkEmail1 = regExEmail.test(form.creatorEmail.value)
+    var checkEmail2 = regExEmail.test(form.treffMateEmail.value)
+    if (!checkEmail1 || !checkEmail2) {
         window.alert ("Invalid Email");
         return false;
     }
 
-    // Convert the address to Lat and Lon and fill the hidden
-    // inputs with the values.
-    // Optionally, we can disable the address inputs so their
-    // values aren't sent. (Since we only care about Lat/Lon
+    // Convert the address to Lat and Lon and fill the hidden inputs with the values.
+    // TODO: Disable the address inputs so their values aren't sent. (Since we only care about Lat/Lon
+    var address = "'" + form.street.value + ", " + form.city.value + ", " + form.state.value + "  " + form.zip.value + "'";
+    getLatLon(address, validateTreffCallback);
 
-    // Code here......
-    //
-    //
-    //
-    ///////////////////////////////////////////////////////////////
+    // We rely on the callback to actually submit the form. If we were to submit here
+    // the lat/lon values from google API would not be set.
+	return false;
+}
 
-	return true;
+function validateTreffCallback(lat, lon) {
+    var form = document.getElementById("treffForm");
+
+    form.startingLat.value = lat;
+    form.startingLon.value = lon;
+
+    form.submit();
 }
