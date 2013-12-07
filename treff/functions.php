@@ -88,9 +88,10 @@ function checkId($id)
 //Check if Email is attached to treff.
 function checkEmail($userId, $id)
 {
-    $table = "Meetings";
+    $table = "MeetingUsers";
     $column = "userId";
-    if(inDb($table, $column, $userId) == false)
+    $column2 = "meetingId";
+    if(checkTwo($table, $column, $column2, $userId, $id) == false)
     {
         echo errorPage();
     }
@@ -114,14 +115,33 @@ function errorPage()
     return header('Location:'.$toError,TRUE);
 }
 
+//Check info $value if in same row as $value2
+function checkTwo($table, $column, $column2, $value, $value2)
+{
+    $connect = connectMySql();
+    $result = $connect->query("SELECT * FROM $table where $column ='$value'
+                              AND
+                              $column2 ='$value2'");
+    echo $row;
+    if($result)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    $result->free();
+}
+    
 //Find the info in db
 function inDb($table, $column, $value)
 {
     $connect = connectMySql();
-    $result = $connect->query("SELECT meetingId FROM $table where $column='$value'");
+    $result = $connect->query("SELECT * FROM $table where $column ='$value'");
+    echo $row;
     if($result)
     {
-        $row = $result->fetch_assoc();
         return true;
     }
     else
