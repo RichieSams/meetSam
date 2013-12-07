@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'functions.php';
-createHeader(array("style.css"), array("validate.js"));
+createHeader(array("style.css"), array("https://maps.googleapis.com/maps/api/js?key=".$goKey."&sensor=true","jsfunctions.js", "validate.js"));
 
 
 $connect = connectMySql();
