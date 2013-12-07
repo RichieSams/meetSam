@@ -34,7 +34,9 @@ function createHeader($cssFiles, $javascriptFiles) {
     <nav class="nav_bar">
         <ul>
             <li><a href="description.php">What is Treff?</a></li>';
-	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
+	$getAnon = getAnon();
+	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 && $getAnon != TRUE){
+		echo "$getAnon hello world";
 		echo '<li><form action="logout.php" method="POST">
 				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
               </form></li>';
@@ -152,4 +154,20 @@ function getName($id)
 function getAddress($userId)
 {
     return '\'306 E 30th St, Austin, TX 78705\'';
+}
+
+function getAnon()
+{
+	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 ){
+		
+		$connect = connectMySql();
+		$result = $connect->query("SELECT * FROM Users where userId='userId'");
+		$row = $result->fetch_assoc();
+		echo $row["userId"];
+		$result->free();
+		echo $row["userId"];
+		return $row["anonymous"];
+	}
+	
+	return true;    
 }

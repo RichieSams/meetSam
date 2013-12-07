@@ -188,7 +188,10 @@ body {
 .jointreff form{
     margin: 0 180px 0 100px;
     width: 300px;
-    float: left;
+}
+
+.joinInfo{
+	float: left;
 }
 
 .infoJoin {
@@ -198,6 +201,7 @@ body {
     margin-right: 116px;
     float: left;
 }
+
 
 .joinlogin {
 	display: inline;
@@ -237,6 +241,9 @@ body {
     
 }
 
+.joinlogin table{
+	margin-top: -45px;
+}
 /*--- End Join Treff Section ---*/
 
 /*--- Treff Section ---*/
@@ -329,6 +336,10 @@ body {
 	width:320px;
 	padding-left: 40px;
 
+}
+
+.registration table{
+	margin-left: 56px;
 }
 
 .city, .state, .regPassword1{

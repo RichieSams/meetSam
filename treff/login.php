@@ -38,40 +38,32 @@ echo '
 
 	<div class="registration">
 		<h2>Register</h2>
-		<form id = "registrationForm" action="loginProcess.php"
-				method="POST" onsubmit="return validateRegistration();">
+		<form id = "registrationForm" action="loginProcess.php"	method="POST" onsubmit="return validateRegistration();">
 
-            <div class="regUserName">
-                  <input type="text" name="name" maxlength="50" placeholder="Email Address"/>
-            </div>
-
-            <div class="street">
-                  <input type="text" name="street" maxlength="50" size="37" placeholder="Street Adress"/>
-            </div>
-
-            <div class="city">
-                  <input type="text" name="city" maxlength="50" placeholder="City"/>
-            </div>
-
-            <div class="state">
-                  <input type="text" name="state" maxlength="2" size="3" placeholder="State"/>
-            </div>
-
-            <div class="zip">
-                  <input type="text" name="zip" maxlength="5" size="5" placeholder="Zip"/>
-            </div>
-
-            <div class="regPassword1">
-                  <input type="password" name="pass1" maxlength="32" placeholder="Password"/>
-            </div>
-
-            <div class="requirements">
-                *6-32 characters with at least one number
-            </div>
-
-            <div class="regPassword2">
-                  <input type="password" name="pass2" maxlength="32" placeholder="Confirm Password"/>
-            </div>
+            <table>
+				<tr>
+					<td><input type="text" name="name" maxlength="50" placeholder="Email Address"/></td>
+				</tr>
+				<tr>
+					<td><input type="text" name="street" maxlength="50" size="37" placeholder="Street Adress"/></td>
+				</tr>
+				<tr>
+					<td>
+					<input type="text" name="city" maxlength="50" placeholder="City"/>
+					<input type="text" name="state" maxlength="2" size="3" placeholder="State"/>
+					<input type="text" name="zip" maxlength="5" size="5" placeholder="Zip"/
+					</td>
+				</tr>
+				<tr>
+					<td><input type="password" name="pass1" maxlength="32" placeholder="Password"/></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="password" name="pass2" maxlength="32" placeholder="Confirm Password"/>
+						<div class="requirements"> *6-32 characters with at least one number</div>
+					</td>
+				</tr>
+			</table>
 
             <div class="button2">
               <input class="button" type="submit" value="Register" name="register" />
