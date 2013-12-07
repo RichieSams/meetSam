@@ -40,9 +40,7 @@ function createHeader($cssFiles, $javascriptFiles) {
 		echo '<li><form action="logout.php" method="POST">
 				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
               </form></li>';
-	}
-
-	else{
+	} else {
 		echo '<li><form action="login.php" method="POST">
 				  <input class="loginButton" type="submit" value="Login" />
 				  <input type="hidden" name="redirectUrl" value="create2.php" />
