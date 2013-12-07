@@ -44,6 +44,17 @@ function codeAddress(centerAdd) {
                      });
 }
 
+function getLatLon(address, callbackFunction) {
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var location = results[0].geometry.location;
+            callbackFunction(location.lat(), location.lng());
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
 //Goggle API for geocoding.
 function calcRoute(start,end) {
     var request = {
