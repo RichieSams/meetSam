@@ -9,7 +9,7 @@
         $treffId = clean($eInfo["meetingId"]);
         $treffName = getName(clean($eInfo["meetingId"]))["name"];
 		
-		$connect = connectMysql();
+		/*$connect = connectMysql();
 		$user = $connect->query("SELECT * FROM Users WHERE email='" . $email . "'");
 		$row = $result->fetch_assoc();
         
@@ -17,8 +17,13 @@
 		$city = $row["city"];
 		$state = $row["state"];
 		$zip = $row["zip"];
-		$anon = $row["anonymous"];
-		
+		$anon = $row["anonymous"];*/
+
+		$street = "";
+		$city = "";
+		$state = "";
+		$zip = "";
+		$anon = true;
     }
     else
     {
@@ -45,7 +50,7 @@
 	</div> <!--// End of infoJoin -->
     <div class="jointreff">
 		 <div class="joinInfo">
-         <form action="treff.php" method="post">
+         <form action="treff.php" method="get">
             <table>
                 <tr>
                     <td><input type="text" name="name" maxlength="50" placeholder="Email Address" value="<?php echo $email?>"/></td>
