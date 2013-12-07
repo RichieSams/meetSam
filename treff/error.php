@@ -7,12 +7,11 @@ createHeader(array("style.css"), array());
 
 <div class="main_body">
 	<div class="info">
-		<h1>Need a half-way meeting point?</h1>
+		<h1>Oops oh no!</h1>
 		<p>
-            Treff is a service for creating meeting points for people.<br /><br />
-            Treff will ask for your location and the phone numbers or emails of the people
-            you would like to meet up with. Then it will find a meeting point and automatically
-            send out personalized directions to everyone.
+            There was an error in the link that was submitted<br /><br />
+            Please register or login to create a Treff.<br />
+            Or ask the Treff creator to resubmit invitation. 
 	    </p>
 	</div>
 
