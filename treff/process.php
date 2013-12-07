@@ -18,10 +18,6 @@ $connect->query("INSERT INTO Meetings (name)
 
 $meetingId = $connect->insert_id;
 
-// Create entry in MeetingUsers table
-$connect->query("INSERT INTO MeetingUsers
-                 VALUES (" . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLon'] . ")");
-
 // Create a userId for the invitee
 // But first, check if their email is already registered
 $result = $connect->query("SELECT userId FROM Users WHERE email='" . $_POST['treffMateEmail'] . "'");
@@ -33,6 +29,11 @@ if ($result->num_rows > 0) {
 
     $mateUserId = $connect->insert_id;
 }
+
+// Create entry in MeetingUsers table
+$connect->query("INSERT INTO MeetingUsers
+                 VALUES (" . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLon'] . "),
+                        (" . $meetingId . ", " . $mateUserId . ", 0.0, 0.0)");
 
 // Send emails
 $mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
