@@ -50,7 +50,7 @@
 	</div> <!--// End of infoJoin -->
     <div class="jointreff">
 		 <div class="joinInfo">
-         <form action="treff.php" method="post">
+         <form action="treff.php" method="get">
             <table>
                 <tr>
                     <td><input type="text" name="name" maxlength="50" placeholder="Email Address" value="<?php echo $email?>"/></td>
