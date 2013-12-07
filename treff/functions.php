@@ -121,7 +121,6 @@ function checkTwo($table, $column, $column2, $value, $value2)
     $result = $connect->query("SELECT * FROM $table where $column ='$value'
                               AND
                               $column2 ='$value2'");
-    echo $row;
     if($result)
     {
         return true;
@@ -138,7 +137,6 @@ function inDb($table, $column, $value)
 {
     $connect = connectMySql();
     $result = $connect->query("SELECT * FROM $table where $column ='$value'");
-    echo $row;
     if($result)
     {
         return true;
