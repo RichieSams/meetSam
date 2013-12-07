@@ -9,7 +9,7 @@
         $treffId = clean($eInfo["meetingId"]);
         $treffName = getName(clean($eInfo["meetingId"]))["name"];
 		
-		$connect = connectMysql();
+		/*$connect = connectMysql();
 		$user = $connect->query("SELECT * FROM Users WHERE email='" . $email . "'");
 		$row = $result->fetch_assoc();
         
@@ -17,8 +17,13 @@
 		$city = $row["city"];
 		$state = $row["state"];
 		$zip = $row["zip"];
-		$anon = $row["anonymous"];
-		
+		$anon = $row["anonymous"];*/
+
+		$street = "";
+		$city = "";
+		$state = "";
+		$zip = "";
+		$anon = true;
     }
     else
     {
