@@ -41,7 +41,7 @@ $domain = "treffnow.com";
 
 # Send confirmation email to creator
 $mg->sendMessage($domain,
-    array('from'    => 'noreply@treffnow.com',
+    array('from'    => 'Treff <noreply@treffnow.com>',
           'to'      => $_POST['creatorEmail'],
           'subject' => 'Confirmation for creating the Treff "' . $_POST['treffName'] . '"',
           'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
@@ -52,7 +52,7 @@ $mg->sendMessage($domain,
 
 # Send confirmation email to mate
 $mg->sendMessage($domain,
-    array('from'    => 'noreply@treffnow.com',
+    array('from'    => 'Treff <noreply@treffnow.com>',
           'to'      => $_POST['treffMateEmail'],
           'subject' => 'Invitation to Treff "' . $_POST['treffName'] . '"',
           'text'    => "Welcome to Treff, a service for creating meeting points between people!\n\n" .
