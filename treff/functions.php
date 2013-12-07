@@ -36,7 +36,6 @@ function createHeader($cssFiles, $javascriptFiles) {
             <li><a href="description.php">What is Treff?</a></li>';
 	$getAnon = getAnon();
 	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 && $getAnon != TRUE){
-		echo "$getAnon hello world";
 		echo '<li><form action="logout.php" method="POST">
 				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
               </form></li>';

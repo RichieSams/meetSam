@@ -10,7 +10,7 @@
         $treffName = getName(clean($eInfo["meetingId"]))["name"];
 		
 		$connect = connectMysql();
-		$user = $connect->query("SELECT * FROM Users WHERE email=" . $email);
+		$user = $connect->query("SELECT * FROM Users WHERE email='" . $email . "'");
 		$row = $result->fetch_assoc();
         
 		$street = $row["street"];

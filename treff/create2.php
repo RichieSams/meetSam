@@ -32,6 +32,9 @@ echo '
 					<input type="text" name="zip" maxlength="5" size="5" value="'. $row["zip"] .'" placeholder="Zip"/>
 					</td>
 				</tr>
+				<tr>
+					<td><input type="text" name="treffName" maxlength="50" placeholder="Treff Name"/></td>
+				</tr>
 			</table>
 			
         </div>
