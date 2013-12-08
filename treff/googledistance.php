@@ -111,7 +111,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         </div>
 		<p> All atendees have submited a confirmation.
 	    </p>
-        <button type="button" onclick="getDirects(secAddress);"><h1>Get Directions</h1></button>
+        <button type="button" onclick="getDirections(secAddress);"><h1>Get Directions</h1></button>
 
         <button type="button" onclick="alert('Email Sent');"><h1>Send Reminder Email</h1></button>
         <div id="directions-panel">Click on buttons above for more info.
