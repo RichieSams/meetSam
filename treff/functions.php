@@ -42,7 +42,7 @@ function createHeader($cssFiles, $javascriptFiles) {
 	} else {
 		echo '<li><form action="login.php" method="POST">
 				  <input class="loginButton" type="submit" value="Login" />
-				  <input type="hidden" name="redirectUrl" value="create2.php" />
+				  <input type="hidden" name="redirectUrl" value="'. $_SERVER['PHP_SELF'] . '" />
               </form></li>';
 	}
         
