@@ -34,10 +34,10 @@ if ($result->num_rows > 0) {
 $creatorIdHash = md5($meetingId . $_SESSION['userId']);
 $mateIdHash = md5($meetingId . $mateUserId);
 
-// Create entry in MeetingUsers table
+// Create entries in MeetingUsers table
 $connect->query("INSERT INTO MeetingUsers
-                 VALUES (" . $creatorIdHash. ", " . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLon'] . "),
-                        (" . $mateIdHash. ", " . $meetingId . ", " . $mateUserId . ", 0.0, 0.0)");
+                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLon'] . "),
+                        ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL)");
 
 // Send emails
 $mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
