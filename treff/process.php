@@ -6,7 +6,7 @@ include_once 'functions.php';
 require 'lib/vendor/autoload.php';
 use Mailgun\Mailgun;
 
-if (!isset($_SESSION['userId']) || $_SESSION['userId'] == 0 || !isset($_POST['create'])) {
+if (!isset($_SESSION['userId']) || $_SESSION['userId'] == 0) {
     header("Location: index.php");
 }
 
