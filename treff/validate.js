@@ -12,7 +12,7 @@ function validateLogin() {
         return false;
     }
 
-    form.pass = CryptoJS.SHA256(form.name + form.pass);
+    form.pass.value = CryptoJS.SHA256(form.name + form.pass);
 
     return true;
 }
@@ -48,8 +48,8 @@ function validateRegistration() {
 		return false;
 	}
 
-    form.pass1 = CryptoJS.SHA256(form.name + form.pass1);
-    form.pass2 = CryptoJS.SHA256(form.name + form.pass2);
+    form.pass1.value = CryptoJS.SHA256(form.name + form.pass1);
+    form.pass2.value = CryptoJS.SHA256(form.name + form.pass2);
 
 	return true;
 }
