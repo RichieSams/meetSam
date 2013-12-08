@@ -4,11 +4,11 @@ function validateLogin() {
     var form = document.getElementById("loginForm");
     
     if (form.name.value == "") {
-        window.alert ("Enter Email");
+        alert("Enter Email");
         return false;
     }
     if (form.pass.value == "") {
-        window.alert ("Enter Password");
+        alert("Enter Password");
         return false;
     }
 
@@ -24,27 +24,27 @@ function validateRegistration() {
 	var passLen = /^[A-Za-z0-9_]{6,10}$/.test(form.pass1.value);
 
     if (form.name.value == "" || form.pass1.value == "" || form.street.value == "" || form.city.value == "" ) {
-        window.alert ("Incomplete Registration");
+        alert("Incomplete Registration");
         return false;
     }
 
 	if (form.zip.value == "" || form.state.value == "") {
-        window.alert ("Incomplete Registration");
+        alert("Incomplete Registration");
         return false;
     }
 
     if (checkEmail != true) {
-        window.alert ("Invalid Email");
+        alert("Invalid Email");
         return false;
     }
 
 	 if (passDig != true || passLen != true) {
-        window.alert ("Invalid Password");
+        alert("Invalid Password");
         return false;
     }
 	
 	if (form.pass1.value != form.pass1.value){
-		window.alert ("Passwords do not match");
+		alert("Passwords do not match");
 		return false;
 	}
 
@@ -59,19 +59,19 @@ function validateTreff () {
     var form = document.getElementById("treffForm");
 
     if (form.creatorEmail.value == "" || form.treffMateEmail.value == "") {
-        window.alert ("Incomplete email information");
+        alert("Incomplete email information");
         return false;
     }
 
 	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
-        window.alert ("Incomplete Address");
+        alert("Incomplete Address");
         return false;
     }
 
     var checkEmail1 = regExEmail.test(form.creatorEmail.value)
     var checkEmail2 = regExEmail.test(form.treffMateEmail.value)
     if (!checkEmail1 || !checkEmail2) {
-        window.alert ("Invalid Email");
+        alert("Invalid Email");
         return false;
     }
 
