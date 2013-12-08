@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'functions.php';
-createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), "googleMapsFunctions.js", "validate.js"));
+createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), "google_map_functions.js", "validate.js"));
 
 
 $connect = connectMySql();
