@@ -148,12 +148,6 @@ function inDb($table, $column, $value)
     $result->free();
 }
 
-//Check the status of the Treff
-function checkStat($id)
-{
-    return '<h2>Active</h2>';
-}
-
 //Get the name of the Treff
 function getName($id)
 {
