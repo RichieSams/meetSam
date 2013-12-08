@@ -15,7 +15,7 @@ echo '
 	
 	<div class="signin">
 		<h2>Login</h2>
-		<form id ="loginForm" action="loginProcess.php" method="POST" onsubmit="return validateLogin();">
+		<form id ="loginForm" action="loginprocess.php" method="POST" onsubmit="return validateLogin();">
             <table>
 				<tr>
                   <td><input type="text" name="name" maxlength="50" placeholder="Email Address"/></td>
@@ -41,7 +41,7 @@ echo '
 
 	<div class="registration">
 		<h2>Register</h2>
-		<form id = "registrationForm" action="loginProcess.php"	method="POST" onsubmit="return validateRegistration();">
+		<form id = "registrationForm" action="loginprocess.php"	method="POST" onsubmit="return validateRegistration();">
 
             <table>
 				<tr>
