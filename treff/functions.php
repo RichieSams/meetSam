@@ -136,8 +136,10 @@ function checkTwo($table, $column, $column2, $value, $value2)
 function inDb($table, $column, $value)
 {
     $connect = connectMySql();
-    $result = $connect->query("SELECT * FROM $table where $column ='$value'");
-    if($result)
+    $query ="SELECT * FROM $table where $column ='$value'";
+    $result = $connect->query($query);
+                              
+    if($result->num_rows != 0)
     {
         return true;
     }
