@@ -1,16 +1,13 @@
 <?php
 include_once 'functions.php';
+require 'lib/vendor/autoload.php';
+use Mailgun\Mailgun;
+
 createHeader(array("style.css"), array("validate.js"));
 
 if (isset($_POST["forgot"])){
 	$email = $_POST["name"];
 	if ( inDb("Users", "email", $email) && getAnonEmail($email) != 1) {
-		echo "asdf";
-		$check = inDb("Users", "userId", 1234);
-		echo $check;
-		$check = getAnonEmail($email);
-		echo $check;
-		echo $email;
 		confirmation($email);
 	}
 	else{
@@ -40,7 +37,7 @@ echo '
 
 function confirmation($email){
 
-/*$pass = getPassword("email", $email);
+$pass = getPassword("email", $email);
 
 // Send emails
 $mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
@@ -54,7 +51,7 @@ $mg->sendMessage($domain,
           'subject' => 'Password Recovery',
           'text'    => "Your password is $pass." .
                        "Happy Treffing,\n" .
-                       "The Treff Team"));*/
+                       "The Treff Team"));
 echo '
 	<div class="main_body">
 		<h2>Your password has been sent to you.</h2>
