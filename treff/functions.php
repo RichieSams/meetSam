@@ -205,11 +205,18 @@ function getAnon()
 function getAnonEmail($email)
 {
 		$connect = connectMySql();
-		$result = $connect->query("SELECT * FROM Users where userId='$email'");
+		$result = $connect->query("SELECT * FROM Users where email='$email'");
 		$row = $result->fetch_assoc();
 		return $row["anonymous"];
-		$result->free();
-	
-	
-	return true;    
+		$result->free();    
+}
+
+//Returns data field from Database
+function getFromDb($table, $column1, $value, $column2)
+{
+		$connect = connectMySql();
+		$result = $connect->query("SELECT * FROM $table where $column1='$value'");
+		$row = $result->fetch_assoc();
+		return $row["$column2"];
+		$result->free();    
 }
