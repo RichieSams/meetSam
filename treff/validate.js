@@ -63,6 +63,11 @@ function validateTreff () {
         return false;
     }
 
+    if (form.creatorEmail.value == form.treffMateEmail.value) {
+        alert("You can not invite yourself to a meeting");
+        return false;
+    }
+
 	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
         alert("Incomplete Address");
         return false;
