@@ -51,7 +51,7 @@ $mg->sendMessage($domain,
           'subject' => 'Confirmation for creating the Treff "' . $_POST['treffName'] . '"',
           'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
                        "This is a confirmation email for the Treff you created. Below is a link to the meeting main page.\n" .
-                       "http://treffnow.com/treff.php?idHash=$creatorIdHash\n\n" .
+                       "http://treffnow.com/treff/$creatorIdHash\n\n" .
                        "Happy Treffing,\n" .
                        "The Treff Team"));
 
@@ -62,7 +62,7 @@ $mg->sendMessage($domain,
           'subject' => 'Invitation to Treff "' . $_POST['treffName'] . '"',
           'text'    => "Welcome to Treff, a service for creating meeting points between people!\n\n" .
                        $_POST['creatorEmail'] . " has invited you to their Treff. Below is a link to the meeting main page.\n" .
-                       "http://treffnow.com/jointreff.php?idHash=$mateIdHash\n\n" .
+                       "http://treffnow.com/join/$mateIdHash\n\n" .
                        "Happy Treffing,\n" .
                        "The Treff Team"));
 
