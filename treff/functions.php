@@ -35,7 +35,7 @@ function createHeader($cssFiles, $javascriptFiles) {
         <ul>
             <li><a href="description.php">What is Treff?</a></li>';
 	$getAnon = getAnon();
-	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 && $getAnon != TRUE){
+	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 /*&& $getAnon != 1*/){
 		echo '<li><form action="logout.php" method="POST">
 				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
               </form></li>';
@@ -171,18 +171,43 @@ function getAddress($userId)
     return '\'306 E 30th St, Austin, TX 78705\'';
 }
 
+//Gets the password of user
+function getPassword($column, $value)
+{
+		$connect = connectMySql();
+		$result = $connect->query("SELECT * FROM Users where $column='$value'");
+		$row = $result->fetch_assoc();
+		return $row["password"];
+		$result->free();
+	
+	
+	return true;    
+}
+
+//Returns if user is anonymous based on session Id. Returns 1 or 0
 function getAnon()
 {
 	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 ){
-		
+		$userId = $_SESSION['userId'];
 		$connect = connectMySql();
-		$result = $connect->query("SELECT * FROM Users where userId='userId'");
+		$result = $connect->query("SELECT * FROM Users where userId='$userId'");
 		$row = $result->fetch_assoc();
-		echo $row["userId"];
-		$result->free();
-		echo $row["userId"];
 		return $row["anonymous"];
+		$result->free();
 	}
+	
+	return true;    
+}
+
+//Returns if user is anonymous based on email. Returns 1 or 0
+function getAnonEmail($email)
+{
+		$connect = connectMySql();
+		$result = $connect->query("SELECT * FROM Users where userId='$email'");
+		$row = $result->fetch_assoc();
+		return $row["anonymous"];
+		$result->free();
+	
 	
 	return true;    
 }

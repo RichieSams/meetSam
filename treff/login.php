@@ -6,7 +6,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] != 0) {
 }
 
 include_once 'functions.php';
-createHeader(array("style.css"), array("validate.js"));
+createHeader(array("style.css"), array("validate.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js#sthash.J5zZTqH1.dpuf"));
 
 echo '
 <script src="lib/sha3.js"></script>
@@ -16,14 +16,17 @@ echo '
 	<div class="signin">
 		<h2>Login</h2>
 		<form id ="loginForm" action="loginProcess.php" method="POST" onsubmit="return validateLogin();">
-            <div class="userName">
-                  <input type="text" name="name" maxlength="50" placeholder="Email Address"/>
-            </div>
-
-            <div class="password">
-                  <input type="password" name="pass" maxlength="32" placeholder="Password"/>
-            </div>
-
+            <table>
+				<tr>
+                  <td><input type="text" name="name" maxlength="50" placeholder="Email Address"/></td>
+				</tr>
+				<tr>
+                  <td><input type="password" name="pass" maxlength="32" placeholder="Password"/></td>
+				</tr>
+				<tr>
+				  <td><a href="forgotPass.php">Forgot Your Password?</a></td>
+				</tr>
+			</table>
             <div class="button1">
               <input class="button" type="submit" value="Login" name="loggedIn" />
             </div>
