@@ -1,10 +1,8 @@
 <?php
-    //----------Global Varieables------------->
-    
-    //    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
-    $goKey = 'AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ';
-    
-    //------End Global Varieables------------->
+
+function getGoogleMapsJSFilePath() {
+    return "https://maps.googleapis.com/maps/api/js?key=AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ&sensor=true";
+}
 
 function createHeader($cssFiles, $javascriptFiles) {
 	    
