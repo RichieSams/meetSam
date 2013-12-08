@@ -338,8 +338,8 @@ body {
 
 }
 
-.registration table{
-	margin-left: 56px;
+.registration table, .signin table{
+	margin-left:  60px;
 }
 
 .city, .state, .regPassword1{
