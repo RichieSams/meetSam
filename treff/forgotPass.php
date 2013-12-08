@@ -7,22 +7,25 @@ createHeader(array("style.css"), array("validate.js"));
 
 if (isset($_POST["forgot"])){
 	$email = $_POST["name"];
-	if ( inDb("Users", "email", $email) && getAnonEmail($email) != 1) {
+	if ( inDb("Users", "email", $email) && getFromDb("Users", "email", $email, "anonymous") != 1) {
 		confirmation($email);
 	}
 	else{
-		Echo '<h2>Email does not exist in database.</h2>';
-		initiate();
+		initiate(true);
 	}
 }
 
 else{
-	initiate();
+	initiate(false);
 }
 
-function initiate(){
-echo '
-	<div class="main_body">
+function initiate($failed){
+echo '<div class="main_body">';
+if ($failed){
+	echo '<h2>Email does not exist in database.</h2>';
+}
+	
+echo'
 		<h2>Please insert your email so we can send you your password.</h2>
 		<form id ="forgotForm" action="' . $_SERVER['PHP_SELF'] . '" method="POST" onsubmit="return validateForgot();">
             <table>
@@ -40,21 +43,21 @@ function confirmation($email){
 $pass = getPassword("email", $email);
 
 // Send emails
-$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
-$domain = "treffnow.com";
+//$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
+//$domain = "treffnow.com";
 
 
 # Send confirmation email to creator
-$mg->sendMessage($domain,
+/*$mg->sendMessage($domain,
     array('from'    => 'Treff <noreply@treffnow.com>',
           'to'      => $email,
           'subject' => 'Password Recovery',
           'text'    => "Your password is $pass." .
                        "Happy Treffing,\n" .
-                       "The Treff Team"));
+                       "The Treff Team"));*/
 echo '
 	<div class="main_body">
-		<h2>Your password has been sent to you.</h2>
+		<h2>Your password has been sent to you. password:'. $pass .'</h2>
 	</div>';
 }
 
