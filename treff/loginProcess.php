@@ -55,10 +55,19 @@ function addUser() {
     $connect = connectMySql();
 
     // Add user to table
-    $connect->query("INSERT INTO Users (email, password, street, city, state, zip)
-                     VALUES ('$email', '$pass1', '$street', '$city', '$state', '$zip')");
+	if ( inDb("Users", "email", $email) && getFromDb("Users", "email", $email, "anonymous") == 1) {
+		$connect->query("UPDATE Users SET street = '$street', city = '$city', 
+						state = '$state', zip = '$zip', password = '$pass1', anonymous = 0
+						WHERE email = '$email'");
+		$_SESSION["userId"] = getFromDb("Users", "email", $email, "userId");
+	}
+	
+	else{
+		$connect->query("INSERT INTO Users (email, password, street, city, state, zip)
+						VALUES ('$email', '$pass1', '$street', '$city', '$state', '$zip')");
 
-    $_SESSION["userId"] = $connect->insert_id;
+		$_SESSION["userId"] = $connect->insert_id;
+	}
 
     mysqli_close($connect);
 }
