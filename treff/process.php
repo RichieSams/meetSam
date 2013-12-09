@@ -6,7 +6,7 @@ include_once 'functions.php';
 require 'lib/vendor/autoload.php';
 use Mailgun\Mailgun;
 
-if (!isset($_SESSION['userId']) || $_SESSION['userId'] == 0 || !isset($_POST['create'])) {
+if (!isset($_SESSION['userId']) || $_SESSION['userId'] == 0) {
     header("Location: index.php");
 }
 
@@ -30,10 +30,14 @@ if ($result->num_rows > 0) {
     $mateUserId = $connect->insert_id;
 }
 
-// Create entry in MeetingUsers table
+// Create the idHashes
+$creatorIdHash = md5($meetingId . $_SESSION['userId']);
+$mateIdHash = md5($meetingId . $mateUserId);
+
+// Create entries in MeetingUsers table
 $connect->query("INSERT INTO MeetingUsers
-                 VALUES (" . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLon'] . "),
-                        (" . $meetingId . ", " . $mateUserId . ", 0.0, 0.0)");
+                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLng'] . "),
+                        ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL)");
 
 // Send emails
 $mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
@@ -47,7 +51,7 @@ $mg->sendMessage($domain,
           'subject' => 'Confirmation for creating the Treff "' . $_POST['treffName'] . '"',
           'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
                        "This is a confirmation email for the Treff you created. Below is a link to the meeting main page.\n" .
-                       "http://treffnow.com/treff.php?meetingId=$meetingId&userId=" . $_SESSION['userId'] . "\n\n" .
+                       "http://treffnow.com/treff/$creatorIdHash\n\n" .
                        "Happy Treffing,\n" .
                        "The Treff Team"));
 
@@ -58,9 +62,9 @@ $mg->sendMessage($domain,
           'subject' => 'Invitation to Treff "' . $_POST['treffName'] . '"',
           'text'    => "Welcome to Treff, a service for creating meeting points between people!\n\n" .
                        $_POST['creatorEmail'] . " has invited you to their Treff. Below is a link to the meeting main page.\n" .
-                       "http://treffnow.com/jointreff.php?meetingId=$meetingId&userId=" . $mateUserId . "\n\n" .
+                       "http://treffnow.com/join/$mateIdHash\n\n" .
                        "Happy Treffing,\n" .
                        "The Treff Team"));
 
 
-header("Location: treff.php?meetingId=$meetingId&userId=" . $_SESSION['userId']);
+header("Location: treff.php?idHash=$creatorIdHash");

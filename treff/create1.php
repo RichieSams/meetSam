@@ -26,7 +26,7 @@ echo '
             <input class="button" type="submit" value="Login/Register" />
             <input type="hidden" name="redirectUrl" value="create2.php" />
         </form>
-        <form action="loginProcess.php" method="POST">
+        <form action="loginprocess.php" method="POST">
             <input class="button" type="submit" value="Register Later" name="anonymous" />
             <input type="hidden" name="redirectUrl" value="create2.php" />
         </form>

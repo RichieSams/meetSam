@@ -4,15 +4,15 @@ function validateLogin() {
     var form = document.getElementById("loginForm");
     
     if (form.name.value == "") {
-        window.alert ("Enter Email");
+        alert("Enter Email");
         return false;
     }
     if (form.pass.value == "") {
-        window.alert ("Enter Password");
+        alert("Enter Password");
         return false;
     }
 
-    form.pass = CryptoJS.SHA256(form.name + form.pass);
+    form.pass.value = CryptoJS.SHA256(form.name + form.pass);
 
     return true;
 }
@@ -24,32 +24,32 @@ function validateRegistration() {
 	var passLen = /^[A-Za-z0-9_]{6,10}$/.test(form.pass1.value);
 
     if (form.name.value == "" || form.pass1.value == "" || form.street.value == "" || form.city.value == "" ) {
-        window.alert ("Incomplete Registration");
+        alert("Incomplete Registration");
         return false;
     }
 
 	if (form.zip.value == "" || form.state.value == "") {
-        window.alert ("Incomplete Registration");
+        alert("Incomplete Registration");
         return false;
     }
 
     if (checkEmail != true) {
-        window.alert ("Invalid Email");
+        alert("Invalid Email");
         return false;
     }
 
 	 if (passDig != true || passLen != true) {
-        window.alert ("Invalid Password");
+        alert("Invalid Password");
         return false;
     }
 	
 	if (form.pass1.value != form.pass1.value){
-		window.alert ("Passwords do not match");
+		alert("Passwords do not match");
 		return false;
 	}
 
-    form.pass1 = CryptoJS.SHA256(form.name + form.pass1);
-    form.pass2 = CryptoJS.SHA256(form.name + form.pass2);
+    form.pass1.value = CryptoJS.SHA256(form.name + form.pass1);
+    form.pass2.value = CryptoJS.SHA256(form.name + form.pass2);
 
 	return true;
 }
@@ -59,37 +59,42 @@ function validateTreff () {
     var form = document.getElementById("treffForm");
 
     if (form.creatorEmail.value == "" || form.treffMateEmail.value == "") {
-        window.alert ("Incomplete email information");
+        alert("Incomplete email information");
+        return false;
+    }
+
+    if (form.creatorEmail.value == form.treffMateEmail.value) {
+        alert("You can not invite yourself to a meeting");
         return false;
     }
 
 	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
-        window.alert ("Incomplete Address");
+        alert("Incomplete Address");
         return false;
     }
 
     var checkEmail1 = regExEmail.test(form.creatorEmail.value)
     var checkEmail2 = regExEmail.test(form.treffMateEmail.value)
     if (!checkEmail1 || !checkEmail2) {
-        window.alert ("Invalid Email");
+        alert("Invalid Email");
         return false;
     }
 
-    // Convert the address to Lat and Lon and fill the hidden inputs with the values.
-    // TODO: Disable the address inputs so their values aren't sent. (Since we only care about Lat/Lon
+    // Convert the address to Lat and Lng and fill the hidden inputs with the values.
+    // TODO: Disable the address inputs so their values aren't sent. (Since we only care about Lat/Lng
     var address = "'" + form.street.value + ", " + form.city.value + ", " + form.state.value + "  " + form.zip.value + "'";
-    getLatLon(address, validateTreffCallback);
+    getLatLng(address, validateTreffCallback);
 
     // We rely on the callback to actually submit the form. If we were to submit here
-    // the lat/lon values from google API would not be set.
+    // the lat/Lng values from google API would not be set.
 	return false;
 }
 
-function validateTreffCallback(lat, lon) {
+function validateTreffCallback(lat, lng) {
     var form = document.getElementById("treffForm");
 
     form.startingLat.value = lat;
-    form.startingLon.value = lon;
+    form.startingLng.value = lng;
 
     form.submit();
 }

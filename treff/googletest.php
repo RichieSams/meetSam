@@ -57,7 +57,7 @@ function codeAddress(centerAdd) {
                      });
 }
 
-function getLatLon(address, callbackFunction) {
+function getLatlng(address, callbackFunction) {
     geocoder.geocode( { 'address': address}, function(results, status) {
                      if (status == google.maps.GeocoderStatus.OK) {
                      var location = results[0].geometry.location;

@@ -1,10 +1,8 @@
 <?php
-    //----------Global Varieables------------->
-    
-    //    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
-    $goKey = 'AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ';
-    
-    //------End Global Varieables------------->
+
+function getGoogleMapsJSFilePath() {
+    return "https://maps.googleapis.com/maps/api/js?key=AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ&sensor=true";
+}
 
 function createHeader($cssFiles, $javascriptFiles) {
 	    
@@ -42,7 +40,7 @@ function createHeader($cssFiles, $javascriptFiles) {
 	} else {
 		echo '<li><form action="login.php" method="POST">
 				  <input class="loginButton" type="submit" value="Login" />
-				  <input type="hidden" name="redirectUrl" value="create2.php" />
+				  <input type="hidden" name="redirectUrl" value="'. $_SERVER['PHP_SELF'] . '" />
               </form></li>';
 	}
         
@@ -150,12 +148,6 @@ function inDb($table, $column, $value)
     $result->free();
 }
 
-//Check the status of the Treff
-function checkStat($id)
-{
-    return '<h2>Active</h2>';
-}
-
 //Get the name of the Treff
 function getName($id)
 {
@@ -205,11 +197,18 @@ function getAnon()
 function getAnonEmail($email)
 {
 		$connect = connectMySql();
-		$result = $connect->query("SELECT * FROM Users where userId='$email'");
+		$result = $connect->query("SELECT * FROM Users where email='$email'");
 		$row = $result->fetch_assoc();
 		return $row["anonymous"];
-		$result->free();
-	
-	
-	return true;    
+		$result->free();    
+}
+
+//Returns data field from Database
+function getFromDb($table, $column1, $value, $column2)
+{
+		$connect = connectMySql();
+		$result = $connect->query("SELECT * FROM $table where $column1='$value'");
+		$row = $result->fetch_assoc();
+		return $row["$column2"];
+		$result->free();    
 }
