@@ -1,4 +1,4 @@
-var regExEmail = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+var regExEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-z]{2,4})$/;
 
 function validateLogin() {
     var form = document.getElementById("loginForm");
@@ -80,5 +80,53 @@ function validateTreff () {
         return false;
     }
 
+
+    // Convert the address to Lat and Lon and fill the hidden inputs with the values.
+    // TODO: Disable the address inputs so their values aren't sent. (Since we only care about Lat/Lon
+    var address = "'" + form.street.value + ", " + form.city.value + ", " + form.state.value + "  " + form.zip.value + "'";
+    getLatLon(address, validateTreffCallback);
+
+    // We rely on the callback to actually submit the form. If we were to submit here
+    // the lat/lon values from google API would not be set.
+	return false;
+}
+
+function validateTreffCallback(lat, lon) {
+    var form = document.getElementById("treffForm");
+
+    form.startingLat.value = lat;
+    form.startingLon.value = lon;
+
+    form.submit();
+}
+
+function validateJoin() {
+    var form = document.getElementById("joinForm");
+    var checkEmail = regExEmail.test(form.name.value);
+
+    if (form.name.value == "") {
+        alert("Enter Email");
+        return false;
+    }
+
+	if (checkEmail != true) {
+        alert("Invalid Email");
+        return false;
+    }
+
+	if (checkEmail != true) {
+        alert("Invalid Email");
+        return false;
+    }
+
+    if (form.meetingId.value == "") {
+        alert("Enter Meeting Id");
+        return false;
+    }
+	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
+        alert("Incomplete Address");
+        return false;
+    }
+	
 	return true;
 }

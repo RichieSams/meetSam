@@ -37,7 +37,7 @@
 		$anon = true;
     }
 
-    createHeader(array("style.css"), array());
+    createHeader(array("style.css"), array("validate.js"));
 
 ?>
 
@@ -50,7 +50,7 @@
 	</div> <!--// End of infoJoin -->
     <div class="jointreff">
 		 <div class="joinInfo">
-         <form action="treff.php" method="get">
+         <form id="joinForm" action="treff.php" method="GET" onsubmit="return validateJoin();">
             <table>
                 <tr>
                     <td><input type="text" name="name" maxlength="50" placeholder="Email Address" value="<?php echo $email?>"/></td>
@@ -75,7 +75,7 @@
             <div class="register">
 				<table>
 					<tr>
-					  <td><button class="joinButton" type="submit" value="Submit" onclick="return validate();">Submit</button></td>
+					  <td><input class="joinButton" type="submit" value="Submit"/></td>
 					</tr>
 				</form>
                 <form action="login.php" method="POST">
