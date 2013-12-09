@@ -1,4 +1,5 @@
 <?php
+
 include_once 'functions.php';
 require 'lib/vendor/autoload.php';
 use Mailgun\Mailgun;
@@ -7,17 +8,30 @@ createHeader(array("style.css"), array("validate.js"));
 
 if (isset($_POST["forgot"])){
 	$email = $_POST["name"];
-	if ( inDb("Users", "email", $email) && getFromDb("Users", "email", $email, "anonymous") != 1) {
-		confirmation($email);
+
+    $connection = connectMySql();
+
+    $result = $connection->query("SELECT anonymous
+                                  FROM Users
+                                  WHERE email='$email'");
+
+	if ($result->num_rows > 0 && $result->fetch_assoc()['anonymous'] != "1") {
+		confirmation($connection, $email);
 	}
 	else{
 		initiate(true);
 	}
-}
 
-else{
+    $result->free();
+    $connection->close();
+} else {
 	initiate(false);
 }
+
+include 'footer.php';
+
+
+
 
 function initiate($failed){
 echo '<div class="main_body">';
@@ -38,27 +52,27 @@ echo'
 	</div>';
 }
 
-function confirmation($email){
+function confirmation($connection, $email) {
+    // Create entry in sql table
+	$timeOut = date("Y-m-d H:i:s", time() + 3600);
+	$hash = md5($email . time());
 
-$pass = getPassword("email", $email);
+	$connection->query("INSERT INTO ForgotPassword (hash, email, timeOut)
+				VALUES ('$hash', '$email', '$timeOut')");
 
-// Send emails
-//$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
-//$domain = "treffnow.com";
+	// Send emails
+	$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
+	$domain = "treffnow.com";
 
-
-# Send confirmation email to creator
-/*$mg->sendMessage($domain,
-    array('from'    => 'Treff <noreply@treffnow.com>',
-          'to'      => $email,
-          'subject' => 'Password Recovery',
-          'text'    => "Your password is $pass." .
-                       "Happy Treffing,\n" .
-                       "The Treff Team"));*/
+	$mg->sendMessage($domain,
+		array('from'    => 'Treff <noreply@treffnow.com>',
+			'to'      => $email,
+			'subject' => 'Password Recovery',
+			'text'    => "To reset your password go to http://treffnow.com/recover/$hash\n\n" .
+						"Happy Treffing,\n" .
+						"The Treff Team"));
 echo '
 	<div class="main_body">
-		<h2>Your password has been sent to you. password:'. $pass .'</h2>
+		<h2>A password reset email has been sent to you. Check your email.</h2>
 	</div>';
 }
-
-include 'footer.php';

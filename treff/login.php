@@ -61,10 +61,10 @@ echo '
 					<td><input type="password" name="pass1" maxlength="32" placeholder="Password"/></td>
 				</tr>
 				<tr>
-					<td>
-						<input type="password" name="pass2" maxlength="32" placeholder="Confirm Password"/>
-						<div class="requirements"> *6-32 characters with at least one number</div>
-					</td>
+					<td><input type="password" name="pass2" maxlength="32" placeholder="Confirm Password"/></td>
+				</tr>
+				<tr>
+					<td><div class="requirements">*6-32 characters with at least one number(!, _, - Allowed)</div></td>
 				</tr>
 			</table>
 
