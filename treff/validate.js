@@ -21,7 +21,7 @@ function validateRegistration() {
     var form = document.getElementById("registrationForm");
     var checkEmail = regExEmail.test(form.name.value)
 	var passDig = /[0-9]/.test(form.pass1.value);
-	var passLen = /^[A-Za-z0-9_]{6,10}$/.test(form.pass1.value);
+	var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
 
     if (form.name.value == "" || form.pass1.value == "" || form.street.value == "" || form.city.value == "" ) {
         alert("Incomplete Registration");
