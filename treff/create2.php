@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'functions.php';
-createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), "google_map_functions.js", "validate.js"));
+createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), "validate.js"));
 
 
 $connect = connectMySql();
@@ -42,8 +42,6 @@ echo '
         <div class="createTreff">
             <input class="createButton" type="submit" value="Create Treff!" name="create" />
         </div>
-        <input type="hidden" name="startingLat" value="0.0" />
-        <input type="hidden" name="startingLng" value="0.0" />
     </form>
 </div> <!-- End of main_body -->';
 

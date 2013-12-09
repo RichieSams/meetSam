@@ -9,26 +9,25 @@ createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), 'google_map_fu
 
 $connection = connectMySql();
 
-$result = $connection->query("SELECT meetingId, userId FROM MeetingUsers WHERE idHash='$id'");
+$result = $connection->query("SELECT meetingId, userId, startingStreet, startingCity, startingState, startingZip, startingCountry FROM MeetingUsers WHERE idHash='$id'");
 
 $row = $result->fetch_assoc();
 $meetingId = $row['meetingId'];
 $userId = $row['userId'];
+$startingAddress = $row['startingStreet'] . ", " . $row['startingCity'] . ", " . $row['startingState'] . " " . $row['startingZip'] . ", " . $row['startingCountry'];
 $result->free();
 
-$result = $connection->query("SELECT midpointLat, midpointLng
+$result = $connection->query("SELECT midpointStreet, midpointCity, midpointState, midpointZip, midpointCountry
                               FROM Meetings
                               WHERE meetingId=$meetingId");
 
 $row = $result->fetch_assoc();
-$midpointLat = $row['midpointLat'];
-$midpointLng = $row['midpointLng'];
+$midpointAddress = $row['midpointStreet'] . ", " . $row['midpointCity'] . ", " . $row['midpointState'] . " " . $row['midpointZip'] . ", " . $row['midpointCountry'];
 $result->free();
 
 echo '
 <script type="text/javascript">
-    var latLng = new google.maps.LatLng(' . $midpointLat . ', ' . $midpointLng .');
-    setMapCenterFromLatLng(latLng)
+    setMapCenterAndMarkerFromAddress(\'' . $midpointAddress . '\')
 </script>';
 
 
@@ -44,7 +43,7 @@ echo '
                     <th>Reminder</th>
                 </tr>';
 
-$result = $connection->query("SELECT Users.email, (MeetingUsers.startingLat IS NOT NULL AND MeetingUsers.startingLng IS NOT NULL) AS hasConfirmed
+$result = $connection->query("SELECT Users.email, (MeetingUsers.startingStreet IS NOT NULL AND MeetingUsers.startingCity IS NOT NULL AND MeetingUsers.startingState IS NOT NULL AND MeetingUsers.startingZip IS NOT NULL AND MeetingUsers.startingCountry IS NOT NULL) AS hasConfirmed
                               FROM MeetingUsers
                               INNER JOIN Users
                               ON Users.userId = MeetingUsers.userId
