@@ -154,11 +154,12 @@ function routeDistance(stepsArray) {
     directionsService.route(request, function(response, status) {
                             if (status == google.maps.DirectionsStatus.OK)
                             {
-                                alert(stepsArray[0].distance.value);
+                                alert(stepsArray[0].distance.value+"alert1");
 
                                 totStepd += stepsArray[0].distance.value;
+                                var inRange = checkRange(totStepd);
                             
-                                if(checkRange(totStepd) == "low")
+                                if(inRange == "low")
                                 {
                                     counter++;
             
@@ -167,18 +168,18 @@ function routeDistance(stepsArray) {
                                     stepsArray.reverse().pop();
                                     stepsArray.reverse()
                                     //End Drop first step in steps
-                                    alert(stepsArray.reverse().toString());
+                                    alert(stepsArray.reverse().toString()+"alert2");
                             
                                     if(stepsArray != "")
                                     {
                                         routeDistance(stepsArray);
                                     }
                                 }
-                                else if (checkRange(totStepd) == "good")
+                                else if (inRange == "good")
                                 {
                                     alert(halfDist+" "+totStepd+" "+counter+" "+stepsArray[0].distance.value+" "+ lastStep);
                                 }
-                                else if (checkRange(totStepd) == "high")
+                                else if (inRange == "high")
                                 {
                                     alert("Error");
                                 }
