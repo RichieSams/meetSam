@@ -20,12 +20,12 @@ var markersArray = [];
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 
-var origin1 = '303 W 35th St, Austin, TX';
+var origin1 = '8766 Iglesia, el paso, TX';
 var destinationA = '2330 Guadalupe St, Austin, TX';
 
 var halfDist;
 var totStepd = 0;
-var lastStepS, lastStepE;
+var firstStep, lastStepS, lastStepE, endPoint;
 
 //Markers red D and Yellow O
 var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
@@ -136,6 +136,7 @@ function calcRoute(start,end) {
                                 var gSteps = response.routes[0].legs[0].steps;
                                 directionsDisplay.setDirections(response);
                                 routeDistance(gSteps);
+                                endPoint = response.routes[0].legs[0].end_location;
                             }
                             //alert(response.routes[0].legs[0].steps[0].distance.value);
                             });
@@ -155,7 +156,14 @@ function routeDistance(stepsArray) {
                             if (status == google.maps.DirectionsStatus.OK)
                             {
                                 totStepd += stepsArray[0].distance.value;
+                            
+                                //Get the Start Lat and Lon
+                                if(numberofSteps == 0)
+                                {
+                                    firstStep = stepsArray[0].start_location;
+                                }
                                 ++numberofSteps;
+                            
                                 var inRange = checkRange(totStepd);
                             
                                 if(inRange == "low")
@@ -175,14 +183,14 @@ function routeDistance(stepsArray) {
                                 }
                                 else if (inRange == "good")
                                 {
-                                    lastStep = stepsArray[0].end_location;
-                                    alert(lastStep);
+                                    lastStepE = stepsArray[0].end_location;
+                                    getPlace(lastStepE);
+                                    //alert(lastStep);
                                 }
                                 else if (inRange == "high")
                                 {
-                                    addMarker(lastStepE.toString());
-                                    getPlace(lastStepE);
-                                    alert("Error");
+                                    addMarker(archDist(lastStepE, endPoint).toString());
+                                    getPlace(archDist(lastStepE, endPoint));
                                 }
                             }
                             else
@@ -225,24 +233,48 @@ function createMarker(place) {
     google.maps.event.addListener(marker, 'click', function() {
                                   infowindow.setContent(place.name);
                                   infowindow.open(map, this);
+
                                   });
 }
 
 //Get arch distance petween two points via lat and lon.
-function distance (latLng1, latLng2)
+function archDist(latLng1, latLng2)
 {
-    var lat1 = latLng1.lat();
-    var lat2 = latLng2.lat();
+    if (typeof(Number.prototype.toRad) === "undefined") {
+        Number.prototype.toRad = function() {
+            return this * Math.PI / 180;
+        }
+    }
+
+    //Get the relation of two points
+    var lat1 = latLng1.lat().toRad();
+    var lon1 = latLng1.lng().toRad();
+    var lat2 = latLng2.lat().toRad();
+    var lon2 = latLng2.lng().toRad();
     var R = 6371009; // metres
-    var dLat = (lat2-lat1).toRad();
-    var dLon = (lon2-lon1).toRad();
-    var lat1 = lat1.toRad();
-    var lat2 = lat2.toRad();
+    var dLat = (lat2-lat1);
+    var dLon = (lon2-lon1);
     
     var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
     Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
+    
+    //Get the mid point as the crow flies
+    var Bx = Math.cos(lat2) * Math.cos(dLon);
+    var By = Math.cos(lat2) * Math.sin(dLon);
+    var lat3 = Math.atan2(Math.sin(lat1)+Math.sin(lat2),
+                          Math.sqrt( (Math.cos(lat1)+Bx)*(Math.cos(lat1)+Bx) + By*By ) );
+    var lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+    
+    //Convert back to dgrees
+    lat3 = lat3 * (180/Math.PI);
+    lon3 = lon3 * (180/Math.PI);
+    
+    //Create and return Goggle latlng object
+    var middlePoint = new google.maps.LatLng(lat3, lon3);
+
+    return middlePoint;
 }
 
 
@@ -254,18 +286,18 @@ function checkRange(midDistance)
     {
         if(percentCalc >= .95)
         {
-            alert("good"+percentCalc);
+            //alert("good"+percentCalc);
             return "good";
         }
         else
         {
-            alert("low"+percentCalc);
+            //alert("low"+percentCalc);
             return "low";
         }
     }
     else
     {
-        alert("high"+percentCalc);
+        //alert("high"+percentCalc);
         return "high";
     }
 }
@@ -285,7 +317,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	    </p>
         <button type="button" onclick="calculateDistances(origin1, destinationA);"><h1>Get Distance</h1></button>
 
-        <button type="button" onclick="alert('Email Sent');"><h1>Find Midpoint</h1></button>
+        <button type="button" onclick="alert('Oh Yeah!');"><h1>Find Midpoint</h1></button>
         <div id="directions-panel">Click on buttons above for more info.
         </div>
 
