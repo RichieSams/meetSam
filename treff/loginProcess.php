@@ -27,9 +27,9 @@ function checkLogin() {
     $pass = $_POST["pass"];
     unset($_POST["pass"]);
 
-    $connect = connectMySql();
+    $connection = connectMySql();
 
-    $result = $connect->query("SELECT userId, password FROM Users WHERE email = '$email'");
+    $result = $connection->query("SELECT userId, password FROM Users WHERE email = '$email'");
 
     $row = $result->fetch_assoc();
     $result->free();
@@ -39,6 +39,8 @@ function checkLogin() {
     if ($success) {
         $_SESSION["userId"] = $row['userId'];
     }
+
+    $connection->close();
 
     return $success;
 }
@@ -76,11 +78,11 @@ function addUser() {
 }
 
 function addAnonymousUser() {
-    $connect = connectMySql();
+    $connection = connectMySql();
 
-    $connect->query("INSERT INTO Users (anonymous) VALUES(TRUE);");
+    $connection->query("INSERT INTO Users (anonymous) VALUES(TRUE);");
 
-    $_SESSION["userId"] = $connect->insert_id;
+    $_SESSION["userId"] = $connection->insert_id;
 
-    mysqli_close($connect);
+    $connection->close();
 }
