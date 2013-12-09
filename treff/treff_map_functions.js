@@ -18,28 +18,24 @@ function initialize() {
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
 }
 
-function setMapCenterAndMarkerFromAddress(address) {
+function setMapCenterFromAddress(address, setMarker) {
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-            setMapCenterFromLocation(results[0].geometry.location);
-            centerpointMarker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
+            map.setCenter(results[0].geometry.location);
+            if (setMarker) {
+                centerpointMarker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            }
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 }
 
-function setMapCenterFromLocation(location) {
-    map.setCenter(location);
-}
-
 //Get directions using google API
 function getDirections(start, end) {
-    document.getElementById("directions-panel").innerHTML="";
-
     centerpointMarker.setVisible(false);
 
     var request = {

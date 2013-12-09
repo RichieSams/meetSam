@@ -26,9 +26,9 @@ $midpointAddress = $row['midpointStreet'] . ", " . $row['midpointCity'] . ", " .
 $result->free();
 
 echo '
-<script type="text/javascript">
-    setMapCenterAndMarkerFromAddress(\'' . $midpointAddress . '\')
-</script>';
+    <script type="text/javascript">
+        setMapCenterFromAddress(\'' . $midpointAddress . '\', true);
+    </script>';
 
 
 echo '
