@@ -37,12 +37,12 @@ echo '
 					<td><input type="text" name="treffName" maxlength="50" placeholder="Treff Name"/></td>
 				</tr>
 			</table>
-			
-        </div>
-        <div class="createTreff">
-            <input class="createButton" type="submit" value="Create Treff!" name="create" />
-        </div>
-    </form>
+        </form>
+    </div>
+    <div class="createTreff">
+        <input class="createButton" type="submit" value="Create Treff!" name="create" />
+    </div>
+
 </div> <!-- End of main_body -->';
 
 $result->free();
