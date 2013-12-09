@@ -17,25 +17,33 @@ $userId = $row['userId'];
 $startingAddress = $row['startingStreet'] . ", " . $row['startingCity'] . ", " . $row['startingState'] . " " . $row['startingZip'] . ", " . $row['startingCountry'];
 $result->free();
 
-$result = $connection->query("SELECT midpointStreet, midpointCity, midpointState, midpointZip, midpointCountry
+$result = $connection->query("SELECT midpointStreet, midpointCity, midpointState, midpointZip, midpointCountry, status
                               FROM Meetings
                               WHERE meetingId=$meetingId");
 
 $row = $result->fetch_assoc();
 $midpointAddress = $row['midpointStreet'] . ", " . $row['midpointCity'] . ", " . $row['midpointState'] . " " . $row['midpointZip'] . ", " . $row['midpointCountry'];
+$status = $row['status'];
 $result->free();
 
-echo '
+if ($status == 'Ready') {
+    echo '
     <script type="text/javascript">
         setMapCenterFromAddress(\'' . $midpointAddress . '\', true);
     </script>';
+} else {
+    echo '
+    <script type="text/javascript">
+        setMapCenterFromAddress(\'2315 Speedway, Austin, TX 78712-1512, United States\', false);
+    </script>';
+}
 
 
 echo '
 <div class="main_body">
     <div class="infoTreff">
         <div class="status">
-            <h1>Status:</h1>
+            <h1>Status: ' . $status . '</h1>
             <table>
                 <tr>
                     <th>User</th>
@@ -66,10 +74,15 @@ while($row = $result->fetch_assoc()) {
 $result->free();
 
 echo '      </table>
-        </div>
-        <button type="button" onclick="getDirections(\'' . $startingAddress . '\', \'' . $midpointAddress . '\');"><h1>Get Directions</h1></button>
+        </div>';
 
-        <div id="directions-panel">Click on buttons above for more info.</div>
+if ($status == 'Ready') {
+    echo '
+        <button type="button" onclick="getDirections(\'' . $startingAddress . '\', \'' . $midpointAddress . '\');"><h1>Get Directions</h1></button>
+        <div id="directions-panel"></div>';
+}
+
+echo '
 	</div>
     <div id="map-canvas"></div>
 </div>';
