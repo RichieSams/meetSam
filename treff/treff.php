@@ -5,7 +5,7 @@ session_start();
 $id = $_GET['idHash'];
 include_once 'functions.php';
 
-createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), 'google_map_functions.js', 'treff_map.js'));
+createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), 'treff_map_functions.js'));
 
 $connection = connectMySql();
 
@@ -67,10 +67,9 @@ $result->free();
 
 echo '      </table>
         </div>
-        <button type="button" onclick="getDirections(' . getAddress('id') .');"><h1>Get Directions</h1></button>
+        <button type="button" onclick="getDirections(\'' . $startingAddress . '\', \'' . $midpointAddress . '\');"><h1>Get Directions</h1></button>
 
-        <div id="directions-panel">Click on buttons above for more info.
-        </div>
+        <div id="directions-panel">Click on buttons above for more info.</div>
 	</div>
     <div id="map-canvas"></div>
 </div>';
