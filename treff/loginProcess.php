@@ -52,24 +52,27 @@ function addUser() {
     $pass1 = crypt($_POST["pass1"]);
     unset($_POST["pass1"]);
 
-    $connect = connectMySql();
+    $connection = connectMySql();
+
+    $result = $connection->query("SELECT userId, anonymous
+                                  FROM Users
+                                  WHERE email=$email");
 
     // Add user to table
-	if ( inDb("Users", "email", $email) && getFromDb("Users", "email", $email, "anonymous") == 1) {
-		$connect->query("UPDATE Users SET street = '$street', city = '$city', 
-						state = '$state', zip = '$zip', password = '$pass1', anonymous = 0
-						WHERE email = '$email'");
-		$_SESSION["userId"] = getFromDb("Users", "email", $email, "userId");
-	}
-	
-	else{
-		$connect->query("INSERT INTO Users (email, password, street, city, state, zip)
-						VALUES ('$email', '$pass1', '$street', '$city', '$state', '$zip')");
+	if ($result->num_rows > 0 && $result->fetch_assoc()['anonymous'] == '1') {
+		$connection->query("UPDATE Users
+                            SET street = '$street', city = '$city', state = '$state', zip = '$zip', password = '$pass1', anonymous = 0
+						    WHERE email = '$email'");
+		$_SESSION["userId"] = $result['userId'];
+	} else{
+		$connection->query("INSERT INTO Users (email, password, street, city, state, zip)
+						    VALUES ('$email', '$pass1', '$street', '$city', '$state', '$zip')");
 
-		$_SESSION["userId"] = $connect->insert_id;
+		$_SESSION["userId"] = $connection->insert_id;
 	}
 
-    mysqli_close($connect);
+    $result->free();
+    $connection->close();
 }
 
 function addAnonymousUser() {
