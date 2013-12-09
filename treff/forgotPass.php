@@ -39,25 +39,28 @@ echo'
 }
 
 function confirmation($email){
+	$time = date("Y-m-d H:i:s");
+	$timeOut = date("Y-m-d H:i:s", time()+3600);
+	$hash = md5($email . $time);
+	$connect->query("INSERT INTO ForgotPassword (hash, email, timeOut)
+				VALUES ('$hash', '$email', '$timeOut')");
 
-$pass = getPassword("email", $email);
-
-// Send emails
-//$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
-//$domain = "treffnow.com";
+	Send emails
+	$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
+	$domain = "treffnow.com";
 
 
-# Send confirmation email to creator
-/*$mg->sendMessage($domain,
-    array('from'    => 'Treff <noreply@treffnow.com>',
-          'to'      => $email,
-          'subject' => 'Password Recovery',
-          'text'    => "Your password is $pass." .
-                       "Happy Treffing,\n" .
-                       "The Treff Team"));*/
+	# Send confirmation email to creator
+	$mg->sendMessage($domain,
+		array('from'    => 'Treff <noreply@treffnow.com>',
+			'to'      => $email,
+			'subject' => 'Password Recovery',
+			'text'    => "To reset your password go to http://treffnow.com/treff/$hash\n\n" .
+						"Happy Treffing,\n" .
+						"The Treff Team"));*/
 echo '
 	<div class="main_body">
-		<h2>Your password has been sent to you. password:'. $pass .'</h2>
+		<h2>Your password has been sent to you. hash:'. $hash .'$time:'.$time.'timeout:'.$timeOut.'</h2>
 	</div>';
 }
 
