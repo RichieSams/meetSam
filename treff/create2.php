@@ -30,6 +30,7 @@ echo '
 					<input type="text" name="city" maxlength="50" value="'. $row["city"] .'" placeholder="City"/>
 					<input type="text" name="state" maxlength="2" size="3" value="'. $row["state"] .'" placeholder="State"/>
 					<input type="text" name="zip" maxlength="5" size="5" value="'. $row["zip"] .'" placeholder="Zip"/>
+					<input type="hidden" name="country" value="United States" />
 					</td>
 				</tr>
 				<tr>
