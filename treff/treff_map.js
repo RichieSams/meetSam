@@ -26,6 +26,16 @@ function setMapCenterFromAddress(address) {
     });
 }
 
+function setMapCenterFromLatLng(latLng) {
+    geocoder.geocode({'latLng': latLng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            setMapCenterFromLocation(results[0].geometry.location);
+        } else {
+            alert("Geocoder failed due to: " + status);
+        }
+    });
+}
+
 function setMapCenterFromLocation(location) {
     map.setCenter(location);
 }
