@@ -42,7 +42,7 @@ echo '
             <input class="createButton" type="submit" value="Create Treff!" name="create" />
         </div>
         <input type="hidden" name="startingLat" value="0.0" />
-        <input type="hidden" name="startingLon" value="0.0" />
+        <input type="hidden" name="startingLng" value="0.0" />
     </form>
 </div> <!-- End of main_body -->';
 

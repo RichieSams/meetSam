@@ -36,7 +36,7 @@ $mateIdHash = md5($meetingId . $mateUserId);
 
 // Create entries in MeetingUsers table
 $connect->query("INSERT INTO MeetingUsers
-                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLon'] . "),
+                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", " . $_POST['startingLat'] . ", " . $_POST['startingLng'] . "),
                         ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL)");
 
 // Send emails

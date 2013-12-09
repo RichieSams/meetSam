@@ -1,7 +1,7 @@
 var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
 
-function getLatLon(address, callbackFunction) {
+function getLatLng(address, callbackFunction) {
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             var location = results[0].geometry.location;
