@@ -5,7 +5,6 @@ function getGoogleMapsJSFilePath() {
 }
 
 function createHeader($cssFiles, $javascriptFiles) {
-	    
 	echo '
     <!DOCTYPE html>
     <html>
@@ -32,8 +31,8 @@ function createHeader($cssFiles, $javascriptFiles) {
     <nav class="nav_bar">
         <ul>
             <li><a href="description.php">What is Treff?</a></li>';
-	$getAnon = getAnon();
-	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 /*&& $getAnon != 1*/){
+
+	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
 		echo '<li><form action="logout.php" method="POST">
 				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
               </form></li>';
@@ -67,37 +66,6 @@ function connectMySql(){
     return $connect;
 }
 
-//Check if Treff ID is found in db
-function checkId($id)
-{
-    $table = "Meetings";
-    $column = "meetingId";
-    if(inDb($table, $column, $id) == false || count($id) > 9)
-    {
-        echo errorPage();
-    }
-    else
-    {
-        return true;
-    }
-}
-
-//Check if Email is attached to treff.
-function checkEmail($userId, $id)
-{
-    $table = "MeetingUsers";
-    $column = "userId";
-    $column2 = "meetingId";
-    if(checkTwo($table, $column, $column2, $userId, $id) == false)
-    {
-        echo errorPage();
-    }
-    else
-    {
-        return true;
-    }
-}
-
 //Sanatize request
 function clean($value)
 {
@@ -107,102 +75,52 @@ function clean($value)
 //Send to error page
 function errorPage()
 {
-    $toError = 'http://treffnow.com/'."error.php";
-
-    return header('Location:'.$toError,TRUE);
-}
-
-//Check info $value if in same row as $value2
-function checkTwo($table, $column, $column2, $value, $value2)
-{
-    $connect = connectMySql();
-    $result = $connect->query("SELECT * FROM $table where $column ='$value'
-                              AND
-                              $column2 ='$value2'");
-    if($result)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-    $result->free();
-}
-    
-//Find the info in db
-function inDb($table, $column, $value)
-{
-    $connect = connectMySql();
-    $query ="SELECT * FROM $table where $column ='$value'";
-    $result = $connect->query($query);
-                              
-    if($result->num_rows != 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-    $result->free();
+    header('Location: http://treffnow.com/error.php');
 }
 
 //Get the name of the Treff
-function getName($id)
+function getMeetingName($id)
 {
     $connect = connectMySql();
-    $result = $connect->query("SELECT * FROM Meetings where meetingId='$id'");
-    $row = $result->fetch_assoc();
-
-    return $row;
+    $result = $connect->query("SELECT name FROM Meetings where meetingId='$id'");
+    $name = $result->fetch_assoc()['name'];
     $result->free();
+
+    return $name;
 }
 
 //Gets the password of user
 function getPassword($column, $value)
 {
-		$connect = connectMySql();
-		$result = $connect->query("SELECT * FROM Users where $column='$value'");
-		$row = $result->fetch_assoc();
-		return $row["password"];
-		$result->free();
+    $connect = connectMySql();
+
+    $result = $connect->query("SELECT password FROM Users where $column='$value'");
+    $password = $result->fetch_assoc()['password'];
+    $result->free();
 	
-	
-	return true;    
+	return $password;
 }
 
-//Returns if user is anonymous based on session Id. Returns 1 or 0
-function getAnon()
-{
-	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0 ){
-		$userId = $_SESSION['userId'];
-		$connect = connectMySql();
-		$result = $connect->query("SELECT * FROM Users where userId='$userId'");
-		$row = $result->fetch_assoc();
-		return $row["anonymous"];
-		$result->free();
-	}
-	
-	return true;    
+//Returns if user is anonymous based on session Id. Returns true or false
+function isCurrentUserAnonymous($connection) {
+	if(!isset($_SESSION['userId']) || $_SESSION['userId'] == 0 ) {
+        return true;
+    }
+
+    $userId = $_SESSION['userId'];
+    $result = $connection->query("SELECT anonymous FROM Users where userId='$userId'");
+    $anonymous = $result->fetch_assoc()['anonymous'];
+    $result->free();
+
+    return $anonymous == "1";
 }
 
 //Returns if user is anonymous based on email. Returns 1 or 0
-function getAnonEmail($email)
+function isUserAnonymous($connection, $email)
 {
-		$connect = connectMySql();
-		$result = $connect->query("SELECT * FROM Users where email='$email'");
-		$row = $result->fetch_assoc();
-		return $row["anonymous"];
-		$result->free();    
-}
+    $result = $connection->query("SELECT anonymous FROM Users where email='$email'");
+    $anonymous = $result->fetch_assoc()['anonymous'];
+    $result->free();
 
-//Returns data field from Database
-function getFromDb($table, $column1, $value, $column2)
-{
-		$connect = connectMySql();
-		$result = $connect->query("SELECT * FROM $table where $column1='$value'");
-		$row = $result->fetch_assoc();
-		return $row["$column2"];
-		$result->free();    
+    return $anonymous == "1";
 }
