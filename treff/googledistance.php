@@ -8,7 +8,7 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" type="text/css" href="style.css" media="all" />
 <script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ&sensor=true">
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ&sensor=true&libraries=places">
 </script>
 <script type="text/javascript">
 var map;
@@ -25,7 +25,7 @@ var destinationA = '2330 Guadalupe St, Austin, TX';
 
 var halfDist;
 var totStepd = 0;
-var lastStep;
+var lastStepS, lastStepE;
 
 //Markers red D and Yellow O
 var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
@@ -89,16 +89,16 @@ function callback(response, status)
 //Add markers to map
 function addMarker(location, isDestination)
 {
-  var icon;
-  if (isDestination)
-  {
-    icon = destinationIcon;
-  }
-  else
-  {
-    icon = originIcon;
-  }
-  geocoder.geocode({'address': location}, function(results, status) {
+    var icon;
+    if (isDestination)
+    {
+        icon = destinationIcon;
+    }
+    else
+    {
+        icon = originIcon;
+    }
+    geocoder.geocode({'address': location}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       bounds.extend(results[0].geometry.location);
       map.fitBounds(bounds);
@@ -112,7 +112,7 @@ function addMarker(location, isDestination)
       alert('Geocode was not successful for the following reason: '
         + status);
     }
-  });
+    });
 }
 
 //Delete markers
@@ -141,7 +141,7 @@ function calcRoute(start,end) {
                             });
 }
 
-var counter = 0;
+var numberofSteps = 0;
 //Calculate The steps that add up to the mid point.
 function routeDistance(stepsArray) {
     var start= stepsArray[0].start_location;
@@ -154,21 +154,19 @@ function routeDistance(stepsArray) {
     directionsService.route(request, function(response, status) {
                             if (status == google.maps.DirectionsStatus.OK)
                             {
-                                alert(stepsArray[0].distance.value+"alert1");
-
                                 totStepd += stepsArray[0].distance.value;
+                                ++numberofSteps;
                                 var inRange = checkRange(totStepd);
                             
                                 if(inRange == "low")
                                 {
-                                    counter++;
-            
-                                    lastStep = stepsArray[0].start_location;
-                                    //Drop first step in steps
+                                    lastStepS = stepsArray[0].start_location;
+                                    lastStepE = stepsArray[0].end_location;
+                            
+                                    //Drop first step in steps by reversing the array first
                                     stepsArray.reverse().pop();
                                     stepsArray.reverse()
                                     //End Drop first step in steps
-                                    alert(stepsArray.reverse().toString()+"alert2");
                             
                                     if(stepsArray != "")
                                     {
@@ -177,20 +175,39 @@ function routeDistance(stepsArray) {
                                 }
                                 else if (inRange == "good")
                                 {
-                                    alert(halfDist+" "+totStepd+" "+counter+" "+stepsArray[0].distance.value+" "+ lastStep);
+                                    lastStep = stepsArray[0].end_location;
+                                    alert(lastStep);
                                 }
                                 else if (inRange == "high")
                                 {
+                                    addMarker(lastStepE.toString());
+                                    getPlace(lastStepE);
                                     alert("Error");
                                 }
                             }
                             else
                             {
-                                alert('Geocode was not successful for the following reason: ' + status);
+                                alert('Route Distance was not found because ' + status);
                             }
                             //alert(response.routes[0].legs[0].steps[0].distance.value);
                             });
 }
+
+//Get places around a LatLng
+var typePlace = "cafe";
+function getPlace(location)
+{
+    var request = {
+        location: typePlace,
+        radius: 500,
+        types: [typePlace]
+    };
+    infowindow = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
+    
+    service.nearbySearch(request, callback);
+}
+
 
 //Check mid point to see if within range.
 function checkRange(midDistance)
