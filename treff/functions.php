@@ -159,12 +159,6 @@ function getName($id)
     $result->free();
 }
 
-//Get the Address for $user
-function getAddress($userId)
-{
-    return '\'306 E 30th St, Austin, TX 78705\'';
-}
-
 //Gets the password of user
 function getPassword($column, $value)
 {

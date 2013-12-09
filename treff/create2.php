@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'functions.php';
-createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), "google_map_functions.js", "validate.js"));
+createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), "validate.js"));
 
 
 $connect = connectMySql();
@@ -30,6 +30,7 @@ echo '
 					<input type="text" name="city" maxlength="50" value="'. $row["city"] .'" placeholder="City"/>
 					<input type="text" name="state" maxlength="2" size="3" value="'. $row["state"] .'" placeholder="State"/>
 					<input type="text" name="zip" maxlength="5" size="5" value="'. $row["zip"] .'" placeholder="Zip"/>
+					<input type="hidden" name="country" value="United States" />
 					</td>
 				</tr>
 				<tr>
@@ -41,8 +42,6 @@ echo '
         <div class="createTreff">
             <input class="createButton" type="submit" value="Create Treff!" name="create" />
         </div>
-        <input type="hidden" name="startingLat" value="0.0" />
-        <input type="hidden" name="startingLng" value="0.0" />
     </form>
 </div> <!-- End of main_body -->';
 
