@@ -16,11 +16,18 @@ var geocoder;
 var bounds = new google.maps.LatLngBounds();
 var markersArray = [];
 
-var origin1 = new google.maps.LatLng(55.930, -3.118);
-var origin2 = 'Greenwich, England';
-var destinationA = 'Stockholm, Sweden';
-var destinationB = new google.maps.LatLng(50.087, 14.421);
+//Needed for directions piece
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
 
+var origin1 = '303 W 35th St, Austin, TX';
+var destinationA = '2330 Guadalupe St, Austin, TX';
+
+var halfDist;
+var totStepd = 0;
+var lastStep;
+
+//Markers red D and Yellow O
 var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
 var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
 
@@ -31,14 +38,16 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), opts);
   geocoder = new google.maps.Geocoder();
+  
 }
 
-function calculateDistances() {
+//Calculate the distance of two variables set in to arrays.
+function calculateDistances(origin, destination) {
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
-      origins: [origin1, origin2],
-      destinations: [destinationA, destinationB],
+      origins: [origin],
+      destinations: [destination],
       travelMode: google.maps.TravelMode.DRIVING,
       unitSystem: google.maps.UnitSystem.METRIC,
       avoidHighways: false,
@@ -46,34 +55,47 @@ function calculateDistances() {
     }, callback);
 }
 
-function callback(response, status) {
-  if (status != google.maps.DistanceMatrixStatus.OK) {
+//Call back
+function callback(response, status)
+{
+  if (status != google.maps.DistanceMatrixStatus.OK)
+  {
     alert('Error was: ' + status);
-  } else {
+  }
+  else
+  {
     var origins = response.originAddresses;
     var destinations = response.destinationAddresses;
-    var outputDiv = document.getElementById('outputDiv');
+    var outputDiv = document.getElementById('directions-panel');
     outputDiv.innerHTML = '';
     deleteOverlays();
 
-    for (var i = 0; i < origins.length; i++) {
-      var results = response.rows[i].elements;
-      addMarker(origins[i], false);
-      for (var j = 0; j < results.length; j++) {
-        addMarker(destinations[j], true);
-        outputDiv.innerHTML += origins[i] + ' to ' + destinations[j]
-            + ': ' + results[j].distance.text + ' in '
-            + results[j].duration.text + '<br>';
-      }
+    for (var i = 0; i < origins.length; i++)
+    {
+        var results = response.rows[i].elements;
+        addMarker(origins[i], false);
+        addMarker(destinations[i], true);
+        outputDiv.innerHTML += 'The distance is: ' + results[i].distance.text + '<br>';
     }
+      
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      calcRoute(origin1,destinationA);
+      directionsDisplay.setMap(map);
+      
+      halfDist = results[0].distance.value / 2;
   }
 }
 
-function addMarker(location, isDestination) {
+//Add markers to map
+function addMarker(location, isDestination)
+{
   var icon;
-  if (isDestination) {
+  if (isDestination)
+  {
     icon = destinationIcon;
-  } else {
+  }
+  else
+  {
     icon = originIcon;
   }
   geocoder.geocode({'address': location}, function(results, status) {
@@ -93,12 +115,98 @@ function addMarker(location, isDestination) {
   });
 }
 
+//Delete markers
 function deleteOverlays() {
   for (var i = 0; i < markersArray.length; i++) {
     markersArray[i].setMap(null);
   }
   markersArray = [];
 }
+
+//Calculate Route
+function calcRoute(start,end) {
+    var request = {
+    origin:start,
+    destination:end,
+    travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function(response, status) {
+                            if (status == google.maps.DirectionsStatus.OK)
+                            {
+                                var gSteps = response.routes[0].legs[0].steps;
+                                directionsDisplay.setDirections(response);
+                                routeDistance(gSteps);
+                            }
+                            //alert(response.routes[0].legs[0].steps[0].distance.value);
+                            });
+}
+
+var counter = 0;
+//Calculate The steps that add up to the mid point.
+function routeDistance(stepsArray) {
+    var start= stepsArray[0].start_location;
+    var end= stepsArray[0].end_location;
+    var request = {
+    origin:start,
+    destination:end,
+    travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function(response, status) {
+                            if (status == google.maps.DirectionsStatus.OK)
+                            {
+                                if(checkRange(totStepd) == "low")
+                                {
+                                    counter++;
+                                    totStepd += stepsArray[0].distance.value;
+                                    lastStep = stepsArray[0].start_location;
+                                    alert(totStepd);
+                                    //Drop first step in steps
+                                    stepsArray.reverse().pop();
+                                    stepsArray.reverse()
+                                    //End Drop first step in steps
+
+                                    routeDistance(stepsArray);
+                            
+                                }
+                                else if (checkRange(totStepd) == "good")
+                                {
+                                    alert(halfDist+" "+totStepd+" "+counter+" "+stepsArray[0].distance.value+" "+ lastStep);
+                                }
+                                else
+                                {
+                                    alert("done");
+                                }
+                            }
+                            else
+                            {
+                                alert('Geocode was not successful for the following reason: ' + status);
+                            }
+                            //alert(response.routes[0].legs[0].steps[0].distance.value);
+                            });
+}
+
+//Check mid point to see if within range.
+function checkRange(midDistance)
+{
+    var percentCalc = midDistance/halfDist;
+    if(percentCalc <= 1.5)
+    {
+        if(percentCalc >= .95)
+        {
+            return "good";
+        }
+        else
+        {
+            return "low";
+        }
+    }
+    else
+    {
+        return "high";
+    }
+}
+
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
@@ -111,9 +219,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
         </div>
 		<p> All atendees have submited a confirmation.
 	    </p>
-        <button type="button" onclick="getDirects(secAddress);"><h1>Get Directions</h1></button>
+        <button type="button" onclick="calculateDistances(origin1, destinationA);"><h1>Get Distance</h1></button>
 
-        <button type="button" onclick="alert('Email Sent');"><h1>Send Reminder Email</h1></button>
+        <button type="button" onclick="alert('Email Sent');"><h1>Find Midpoint</h1></button>
         <div id="directions-panel">Click on buttons above for more info.
         </div>
 
