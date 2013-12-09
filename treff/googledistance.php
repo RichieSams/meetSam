@@ -195,17 +195,54 @@ function routeDistance(stepsArray) {
 
 //Get places around a LatLng
 var typePlace = "cafe";
+var infowindow;
 function getPlace(location)
 {
     var request = {
-        location: typePlace,
+        location: location,
         radius: 500,
         types: [typePlace]
     };
     infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
     
-    service.nearbySearch(request, callback);
+    service.nearbySearch(request, call);
+}
+
+function call(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        createMarker(results[0]);
+    }
+}
+
+function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+                                        map: map,
+                                        position: place.geometry.location
+                                        });
+    
+    google.maps.event.addListener(marker, 'click', function() {
+                                  infowindow.setContent(place.name);
+                                  infowindow.open(map, this);
+                                  });
+}
+
+//Get arch distance petween two points via lat and lon.
+function distance (latLng1, latLng2)
+{
+    var lat1 = latLng1.lat();
+    var lat2 = latLng2.lat();
+    var R = 6371009; // metres
+    var dLat = (lat2-lat1).toRad();
+    var dLon = (lon2-lon1).toRad();
+    var lat1 = lat1.toRad();
+    var lat2 = lat2.toRad();
+    
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
 }
 
 
