@@ -2,6 +2,7 @@ var map;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
+var centerpointMarker;
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -21,7 +22,7 @@ function setMapCenterAndMarkerFromAddress(address) {
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             setMapCenterFromLocation(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+            centerpointMarker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location
             });
@@ -37,8 +38,9 @@ function setMapCenterFromLocation(location) {
 
 //Get directions using google API
 function getDirections(start, end) {
-    alert("Getting directions");
     document.getElementById("directions-panel").innerHTML="";
+
+    centerpointMarker.setVisible(false);
 
     var request = {
         origin: start,
