@@ -154,27 +154,33 @@ function routeDistance(stepsArray) {
     directionsService.route(request, function(response, status) {
                             if (status == google.maps.DirectionsStatus.OK)
                             {
+                                alert(stepsArray[0].distance.value);
+
+                                totStepd += stepsArray[0].distance.value;
+                            
                                 if(checkRange(totStepd) == "low")
                                 {
                                     counter++;
-                                    totStepd += stepsArray[0].distance.value;
+            
                                     lastStep = stepsArray[0].start_location;
-                                    alert(totStepd);
                                     //Drop first step in steps
                                     stepsArray.reverse().pop();
                                     stepsArray.reverse()
                                     //End Drop first step in steps
-
-                                    routeDistance(stepsArray);
+                                    alert(stepsArray.reverse().toString());
                             
+                                    if(stepsArray != "")
+                                    {
+                                        routeDistance(stepsArray);
+                                    }
                                 }
                                 else if (checkRange(totStepd) == "good")
                                 {
                                     alert(halfDist+" "+totStepd+" "+counter+" "+stepsArray[0].distance.value+" "+ lastStep);
                                 }
-                                else
+                                else if (checkRange(totStepd) == "high")
                                 {
-                                    alert("done");
+                                    alert("Error");
                                 }
                             }
                             else
@@ -193,15 +199,18 @@ function checkRange(midDistance)
     {
         if(percentCalc >= .95)
         {
+            alert("good"+percentCalc);
             return "good";
         }
         else
         {
+            alert("low"+percentCalc);
             return "low";
         }
     }
     else
     {
+        alert("high"+percentCalc);
         return "high";
     }
 }
