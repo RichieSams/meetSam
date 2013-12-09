@@ -57,7 +57,7 @@ function confirmation($connection, $email) {
 	$timeOut = date("Y-m-d H:i:s", time() + 3600);
 	$hash = md5($email . time());
 
-	$connection->query("INSERT INTO ForgotPassword (hash, email, timeOut)
+	$connection->query("INSERT INTO ForgottenPassword (hash, email, timeOut)
 				VALUES ('$hash', '$email', '$timeOut')");
 
 	// Send emails
@@ -68,7 +68,7 @@ function confirmation($connection, $email) {
 		array('from'    => 'Treff <noreply@treffnow.com>',
 			'to'      => $email,
 			'subject' => 'Password Recovery',
-			'text'    => "To reset your password go to http://treffnow.com/recover/$hash\n\n" .
+			'text'    => "To reset your password go to http://treffnow.com/recover.php?idHash=$hash\n\n" .
 						"Happy Treffing,\n" .
 						"The Treff Team"));
 echo '
