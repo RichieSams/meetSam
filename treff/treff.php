@@ -8,7 +8,7 @@ include_once 'functions.php';
 createHeader(array("style.css"), array(getGoogleMapsJSFilePath(), 'treff_map_functions.js'));
 
 $connection = connectMySql();
-
+//var_dump("SELECT meetingId, userId, startingStreet, startingCity, startingState, startingZip, startingCountry FROM MeetingUsers WHERE idHash='$id'");
 $result = $connection->query("SELECT meetingId, userId, startingStreet, startingCity, startingState, startingZip, startingCountry FROM MeetingUsers WHERE idHash='$id'");
 
 $row = $result->fetch_assoc();

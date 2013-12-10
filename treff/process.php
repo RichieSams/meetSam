@@ -34,14 +34,10 @@ if ($result->num_rows > 0) {
 $creatorIdHash = md5($meetingId . $_SESSION['userId']);
 $mateIdHash = md5($meetingId . $mateUserId);
 
-var_dump("INSERT INTO MeetingUsers
-                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", '" . $_POST['street'] . "', '" . $_POST['city'] . "', '" . $_POST['state'] . "', '" . $_POST['zip'] . "', '" . $_POST['country'] . "'),
-                        ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL, NULL, NULL, NULL)");
-
 // Create entries in MeetingUsers table
-$connect->query("INSERT INTO MeetingUsers
-                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", '" . $_POST['street'] . "', '" . $_POST['city'] . "', '" . $_POST['state'] . "', '" . $_POST['zip'] . "', '" . $_POST['country'] . "'),
-                        ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL, NULL, NULL, NULL)");
+$connect->query("INSERT INTO MeetingUsers (idHash, meetingId, userId, startingStreet, startingCity, startingState, startingZip, startingCountry, confirmed)
+                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", '" . $_POST['street'] . "', '" . $_POST['city'] . "', '" . $_POST['state'] . "', '" . $_POST['zip'] . "', '" . $_POST['country'] . "', 1),
+                        ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL, NULL, NULL, NULL, 0)");
 
 // Send emails
 $mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
