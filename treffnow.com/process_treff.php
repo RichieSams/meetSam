@@ -142,7 +142,7 @@ for ($i = 0; $i < count($emails); $i++) {
             'subject' => 'Your Treff "' . $meetingName . '" is Ready',
             'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
                 "This is a notification that everyone in your Treff has confirmed and the meeting point has been determined. Below is a link to the meeting main page.\n" .
-                "http://treffnow.com/treff/" . $idHashes[$i] . "\n\n" .
+                "http://treffnow.com/treff.php?idHash=" . $idHashes[$i] . "\n\n" .
                 "Happy Treffing,\n" .
                 "The Treff Team"));
 }
