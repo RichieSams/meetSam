@@ -116,8 +116,7 @@ function isCurrentUserAnonymous($connection) {
 }
 
 //Returns if user is anonymous based on email. Returns 1 or 0
-function isUserAnonymous($connection, $email)
-{
+function isUserAnonymous($connection, $email) {
     $result = $connection->query("SELECT anonymous FROM Users where email='$email'");
     $anonymous = $result->fetch_assoc()['anonymous'];
     $result->free();
