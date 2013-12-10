@@ -19,8 +19,12 @@ $connect = connectMySql();
 $result = $connect->query("SELECT userId, meetingId FROM MeetingUsers WHERE idHash='" . $formData['idHash'] . "'");
 
 if ($result->num_rows == 1) {
-    $mateUserId = $result->fetch_assoc()['userId'];
-    $meetingId = $result->fetch_assoc()['meetingId'];
+    $row = $result->fetch_assoc();
+
+    $mateUserId = $row['userId'];
+    $meetingId = $row['meetingId'];
+
+    $result->free();
 } else {
     // Redirect
     errorPage();
@@ -39,8 +43,8 @@ $result = $connect->query("UPDATE MeetingUsers
 if($result) {
     // Update status of Meetings
     $connect->query("UPDATE Meetings
-                        SET status = 'Processing',
-                        WHERE idHash = '" . $meetingId . "'");
+                     SET status = 'Processing',
+                     WHERE idHash = '" . $meetingId . "'");
 } else {
     // Redirect
     errorPage();
