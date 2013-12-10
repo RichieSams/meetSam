@@ -10,7 +10,7 @@
 		84DA4543184DB4DD003C7391 /* daily_texan */ = {isa = PBXFileReference; lastKnownFileType = folder; path = daily_texan; sourceTree = "<group>"; };
 		84DA4544184DB4DD003C7391 /* puzzle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = puzzle; sourceTree = "<group>"; };
 		84DA4545184DB4DD003C7391 /* quiz */ = {isa = PBXFileReference; lastKnownFileType = folder; path = quiz; sourceTree = "<group>"; };
-		84DA4546184DB4DD003C7391 /* treff */ = {isa = PBXFileReference; lastKnownFileType = folder; path = treff; sourceTree = "<group>"; };
+		84DA4546184DB4DD003C7391 /* treffnow.com */ = {isa = PBXFileReference; lastKnownFileType = folder; path = treffnow.com; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -20,7 +20,7 @@
 				84DA4543184DB4DD003C7391 /* daily_texan */,
 				84DA4544184DB4DD003C7391 /* puzzle */,
 				84DA4545184DB4DD003C7391 /* quiz */,
-				84DA4546184DB4DD003C7391 /* treff */,
+				84DA4546184DB4DD003C7391 /* treffnow.com */,
 			);
 			sourceTree = "<group>";
 		};
