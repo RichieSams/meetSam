@@ -1,101 +1,37 @@
 <?php
-    include_once 'functions.php';
-	session_start();
-    $eInfo = $_GET;
-    
-    if(isset($eInfo["meetingId"]) && checkId(clean($eInfo["meetingId"])) && checkEmail(clean($eInfo["userId"]),clean($eInfo["meetingId"])))
-    {
-		$email = clean($eInfo["userId"]);
-        $treffId = clean($eInfo["meetingId"]);
-        $treffName = getName(clean($eInfo["meetingId"]))["name"];
-		
-		/*$connect = connectMysql();
-		$user = $connect->query("SELECT * FROM Users WHERE email='" . $email . "'");
-		$row = $result->fetch_assoc();
-        
-		$street = $row["street"];
-		$city = $row["city"];
-		$state = $row["state"];
-		$zip = $row["zip"];
-		$anon = $row["anonymous"];*/
 
-		$street = "";
-		$city = "";
-		$state = "";
-		$zip = "";
-		$anon = true;
-    }
-    else
-    {
-        $email = "";
-        $treffId = "";
-        $treffName = " a Treff. How Exciting";
-		$street = "";
-		$city = "";
-		$state = "";
-		$zip = "";
-		$anon = true;
-    }
+session_start();
 
-    createHeader(array("style.css"), array("validate.js"));
+include_once 'functions.php';
+createHeader(array("style.css"), array("validate.js"));
 
-?>
-
+echo '
 <div class="main_body">
-	<div class="infoJoin">
-		<h1><?php
-                 echo 'Joining '.$treffName.'!';
-            ?>
-        </h1>
-	</div> <!--// End of infoJoin -->
-    <div class="jointreff">
-		 <div class="joinInfo">
-         <form id="joinForm" action="process_treff.php" method="POST" onsubmit="return validateJoin();">
+    <div class="information">
+        <h1>Make a Treff</h1>
+        <form id="treffForm" value="'. $_SERVER['PHP_SELF'] . '" method="POST" onsubmit="return validateJoin();">
+            <input type="hidden" name="idHash" value="' . $_POST['idHash'] . '" />
             <table>
                 <tr>
-                    <td><input type="text" name="email" maxlength="50" placeholder="Email Address" value="<?php echo $email?>"/></td>
+                    <td><input type="text" name="email" maxlength="50" placeholder="Email Address"/></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="meetingId" placeholder="Meeting Id" value="<?php echo $treffId?>"/></td>
+                    <td><input type="text" name="street" maxlength="50" size="37" placeholder="Street Address"/></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="street" maxlength="50" size="37" placeholder="Street Address" value="<?php echo $street?>"/></td>
-                </tr>
-				<tr>
                     <td>
-						<input type="text" name="city" maxlength="50" placeholder="City" value="<?php echo $city?>"/>
-						<input type="text" name="state" maxlength="2" size="3" placeholder="State" value="<?php echo $state?>"/>
-						<input type="text" name="zip" maxlength="5" size="5" placeholder="Zip" value="<?php echo $zip?>"/>
-				    </td>
+                    <input type="text" name="city" maxlength="50" placeholder="City"/>
+                    <input type="text" name="state" maxlength="2" size="3" placeholder="State"/>
+                    <input type="text" name="zip" maxlength="5" size="5" placeholder="Zip"/>
+                    <input type="hidden" name="country" value="United States" />
+                    </td>
                 </tr>
-				</table>
-			</div>
-            
-        <div class="joinlogin">
-            <div class="register">
-				<table>
-					<tr>
-					  <td><input class="joinButton" type="submit" value="Submit"/></td>
-					</tr>
-				</form>
-                <form action="login.php" method="POST">
-					<?php
-						if ($anon) {
-					echo
-					'<tr>
-						<td>
-						<input class="joinButton" type="submit" value="Login/Register" />
-						<input type="hidden" name="redirectUrl" value="jointreff.php" />
-						</td>
-					</tr>
-					</form>';
-						}
-					?>
-				
-				</table>
-            </div>
-        </div>
-    </div><!--// End of jointreff -->
-</div> <!--// End of main_body -->
+            </table>
+        </form>
+    </div>
+    <div class="createTreff">
+        <input class="createButton" type="submit" value="Join Treff!" name="join" />
+    </div>
+</div>';
 
-<?php include 'footer.php'; ?>
+include 'footer.php';
