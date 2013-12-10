@@ -116,7 +116,7 @@ function validateJoin() {
         return false;
     }
 
-	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
+	if (form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
         alert("Incomplete Address");
         return false;
     }
@@ -124,6 +124,26 @@ function validateJoin() {
 	return true;
 }
 
+function validateSearch() {
+    var form = document.getElementById("joinForm");
+    var checkEmail = regExEmail.test(form.email.value);
+
+    if (form.email.value == "") {
+        alert("Enter Email");
+        return false;
+    }
+
+    if (!checkEmail) {
+        alert("Invalid Email");
+        return false;
+    }
+
+    return true;
+}
+
+function submitJoin() {
+    $('input:checked').closest("form").submit();
+}
 
 function validateEmailAjax() {
 	var form = document.getElementById("registrationForm");
