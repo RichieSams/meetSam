@@ -16,6 +16,31 @@ else
     errorPage();
 }
 
+////////// Global Varialbles //////////////
+$map;
+$geocoder;
+$bounds = "new google.maps.LatLngBounds()";
+$markersArray = [];
+
+//Needed for directions piece
+$directionsDisplay;
+$directionsService = "new google.maps.DirectionsService()";
+
+//Get place Variables
+$typePlace = "cafe";
+$infowindow;
+
+//Start and end Point Variables
+$origin1 = '303 w 35th, Austin, Tx';
+$destinationA = '3201 Guadalupe St, Austin, TX';
+
+//Variables for
+$halfDist;
+$totStepd = 0;
+$firstStep, $lastStepS, $lastStepE, $endPoint, $totPath;
+
+////////// Global Varialbles /////////////
+
 
 $connect = connectMySql();
 
@@ -86,3 +111,89 @@ $mg->sendMessage($domain,
 
 
 header("Location: treff.php?idHash=$creatorIdHash");
+
+
+
+
+
+//Find the Driving Distanc Mid point
+function getLatlng(location)
+{
+    
+}
+
+//Get Lat Lngs
+function getLatlng(location)
+{
+
+}
+
+
+//Get places around a LatLng
+function getPlace(location)
+{
+
+}
+
+//Get arch distance petween two points via lat and lon.
+function archDist(latLng1, latLng2)
+{
+
+    //Get the relation of two points
+    $lat1 = deg2rad(latLng1->lat);
+    $lon1 = deg2rad(latLng1->lng);
+    $lat2 = deg2rad(latLng2->lat);
+    $lon2 = deg2rad(latLng2->lng);
+    $R = 6371009; // metres
+    $dLat = (lat2-lat1);
+    $dLon = (lon2-lon1);
+    
+    $a = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2);
+    $c = 2 * atan2(sqrt(a), sqrt(1-a));
+    $d = R * c;
+    
+    return $d;
+    
+    //Get the mid point as the crow flies
+    $Bx = cos(lat2) * cos(dLon);
+    $By = cos(lat2) * sin(dLon);
+    $lat3 = atan2(sin(lat1)+sin(lat2),
+                          sqrt( (cos(lat1)+Bx)*(cos(lat1)+Bx) + By*By ) );
+    $lon3 = lon1 + atan2(By, cos(lat1) + Bx);
+    
+    //Convert back to dgrees
+    lat3 = rad2deg(lat3);
+    lon3 = rad2deg(lon3);
+    
+    //Create and return Goggle latlng object
+    $middlePoint = "new google.maps.LatLng(lat3, lon3)";
+
+    //return middlePoint;
+}
+
+//Check mid point to see if within range.
+function checkRange(midDistance)
+{
+    $percentCalc = midDistance/halfDist;
+    if(percentCalc <= 1.5)
+    {
+        if(percentCalc >= .95)
+        {
+            //alert("good"+percentCalc);
+            return "good";
+        }
+        else
+        {
+            //alert("low"+percentCalc);
+            return "low";
+        }
+    }
+    else
+    {
+        //alert("high"+percentCalc);
+        return "high";
+    }
+}
+
+
+
