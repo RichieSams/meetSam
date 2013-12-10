@@ -124,3 +124,29 @@ function isUserAnonymous($connection, $email)
 
     return $anonymous == "1";
 }
+
+function curl_get($baseUrl, array $data = array(), array $options = array()) {
+    // Build the url
+    $url = $baseUrl;
+
+    if (count($data) > 0) {
+        $url .= "?" . http_build_query($data);
+    }
+
+    $defaults = array(
+        CURLOPT_URL => $url,
+        CURLOPT_HEADER => 0,
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLOPT_TIMEOUT => 4
+    );
+
+    $ch = curl_init();
+
+    curl_setopt_array($ch, ($options + $defaults));
+    if(!$result = curl_exec($ch)) {
+        trigger_error(curl_error($ch));
+    }
+
+    curl_close($ch);
+    return $result;
+}
