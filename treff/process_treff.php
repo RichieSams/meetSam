@@ -14,27 +14,27 @@ if (isset($_POST)) {
 }
 
 ////////// Global Varialbles //////////////
-$map;
-$geocoder;
-$bounds = "new google.maps.LatLngBounds()";
-$markersArray = [];
 
-//Needed for directions piece
-$directionsDisplay;
-$directionsService = "new google.maps.DirectionsService()";
+//    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
+    $goKey = "AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ";
 
 //Get place Variables
 $typePlace = "cafe";
-$infowindow;
+$radius = 50;
+$midStreet;
+$midCity;
+$midState;
+$midName;
 
-//Start and end Point Variables
-$origin1 = '303 w 35th, Austin, Tx';
-$destinationA = '3201 Guadalupe St, Austin, TX';
-
-//Variables for
+//Variables for calculating
 $halfDist;
 $totStepd = 0;
-$firstStep; $lastStepS; $lastStepE; $endPoint; $totPath;
+$startPoint; $lastStepS; $lastStepE; $endPoint; $totPath;
+
+$emails = array();
+$idHashes = array();
+$addresses = array();
+
 
 ////////// Global Varialbles /////////////
 
