@@ -20,7 +20,7 @@ var markersArray = [];
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 
-var origin1 = '8766 Iglesia, el paso, TX';
+var origin1 = '303 w 35th, Austin, TX';
 var destinationA = '2330 Guadalupe St, Austin, TX';
 
 var halfDist;
