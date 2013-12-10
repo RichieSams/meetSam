@@ -232,7 +232,25 @@ function archDist($latLng1, $latLng2)
     $d = R * c;
     
     return $d;
+}
+
+//Get arch distance petween two points via lat and lon.
+function archDist($latLng1, $latLng2)
+{
+
+    //Get the relation of two points
+    $lat1 = deg2rad(latLng1->lat);
+    $lon1 = deg2rad(latLng1->lng);
+    $lat2 = deg2rad(latLng2->lat);
+    $lon2 = deg2rad(latLng2->lng);
+    $R = 6371009; // metres
+    $dLat = (lat2-lat1);
+    $dLon = (lon2-lon1);
     
+    $a = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2);
+    $c = 2 * atan2(sqrt(a), sqrt(1-a));
+    $d = R * c;
+        
     //Get the mid point as the crow flies
     $Bx = cos(lat2) * cos(dLon);
     $By = cos(lat2) * sin(dLon);
@@ -245,9 +263,9 @@ function archDist($latLng1, $latLng2)
     lon3 = rad2deg(lon3);
     
     //Create and return Goggle latlng object
-    $middlePoint = "new google.maps.LatLng(lat3, lon3)";
+    $middlePoint = array();
 
-    //return middlePoint;
+    return middlePoint;
 }
 
 //Check mid point to see if within range.
@@ -273,6 +291,8 @@ function checkRange($midDistance)
         return "high";
     }
 }
+
+getTreff();
 
 
 // Get the meeting name
