@@ -21,6 +21,7 @@ $result = $connect->query("SELECT userId, meetingId FROM MeetingUsers WHERE idHa
 
 if ($result->num_rows == 1) {
     $mateUserId = $result->fetch_assoc()['userId'];
+    $meetingId = $result->fetch_assoc()['meetingId'];
 } else {
     // Redirect
     errorPage();
