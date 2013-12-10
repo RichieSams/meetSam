@@ -6,7 +6,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] != 0) {
 }
 
 include_once 'functions.php';
-createHeader(array("style.css"), array("validate.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js#sthash.J5zZTqH1.dpuf"));
+createHeader(array("style.css"), array("http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js#sthash.J5zZTqH1.dpuf", "validate.js"));
 
 echo '
 <script src="lib/sha3.js"></script>
@@ -41,11 +41,12 @@ echo '
 
 	<div class="registration">
 		<h2>Register</h2>
-		<form id = "registrationForm" action="loginprocess.php"	method="POST" onsubmit="return validateRegistration();">
+		<form id = "registrationForm" action="loginprocess.php"	method="POST" onsubmit="return validateRegistration();" >
 
             <table>
 				<tr>
-					<td><input type="text" name="name" maxlength="50" placeholder="Email Address"/></td>
+					<td><input  class = "valEmail" type="text" name="name" maxlength="50" placeholder="Email Address"  onchange="validateEmailAjax();"/>
+					<span class="valEmail"></span></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="street" maxlength="50" size="37" placeholder="Street Adress"/></td>
@@ -58,7 +59,10 @@ echo '
 					</td>
 				</tr>
 				<tr>
-					<td><input type="password" name="pass1" maxlength="32" placeholder="Password"/></td>
+					<td>
+						<input class = "valPass" type="password" name="pass1" maxlength="32" placeholder="Password" onchange="validatePassAjax();"/> 
+						<span class="valPass"></span>
+					</td>
 				</tr>
 				<tr>
 					<td><input type="password" name="pass2" maxlength="32" placeholder="Confirm Password"/></td>

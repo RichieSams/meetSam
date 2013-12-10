@@ -348,6 +348,21 @@ body {
 	padding-right: 5px;
 }
 
+.valEmail, .valPass{
+	clear: left;
+	clear: right;
+	float:left;
+	margin-right: 5px;
+	}
+
+.failedEmail{
+	color: red;
+}
+
+.confirmedEmail{
+	color:#20e544;
+}
+
 .regPassword1, .treffName{
 	clear:left;
 }
