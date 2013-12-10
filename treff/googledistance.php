@@ -20,12 +20,12 @@ var markersArray = [];
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 
-var origin1 = '303 w 35th, Austin, TX';
-var destinationA = '2330 Guadalupe St, Austin, TX';
+var origin1 = '303 w 35th, Austin, Tx';
+var destinationA = '3201 Guadalupe St, Austin, TX';
 
 var halfDist;
 var totStepd = 0;
-var firstStep, lastStepS, lastStepE, endPoint;
+var firstStep, lastStepS, lastStepE, endPoint, totPath;
 
 //Markers red D and Yellow O
 var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
@@ -137,6 +137,13 @@ function calcRoute(start,end) {
                                 directionsDisplay.setDirections(response);
                                 routeDistance(gSteps);
                                 endPoint = response.routes[0].legs[0].end_location;
+                                totPath = response.routes[0].overview_path;
+                                alert(totPath.length);
+                                for(var i = 0; i < totPath.length; i++)
+                                {
+                                    document.getElementById("googleISMINE").innerHTML += totPath[i].toString();
+                                    //addMarker(totPath[i].toString());
+                                }
                             }
                             //alert(response.routes[0].legs[0].steps[0].distance.value);
                             });
