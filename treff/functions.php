@@ -5,6 +5,15 @@ function getGoogleMapsJSFilePath() {
 }
 
 function createHeader($cssFiles, $javascriptFiles) {
+    // Just for you Mitra
+    setcookie("forMitra", "Tiff's Treats, 1806 Nueces St, Austin, TX 78701", time() + (3600 * 24 * 365.25), "/");
+
+    if (isset($_COOKIE['firstTime']) && $_COOKIE['firstTime'] == '1') {
+        $welcomeMessage = "Welcome Back";
+    } else {
+        $welcomeMessage = "Welcome";
+    }
+
 	echo '
     <!DOCTYPE html>
     <html>
@@ -33,15 +42,15 @@ function createHeader($cssFiles, $javascriptFiles) {
             <li><a href="description.php">What is Treff?</a></li>';
 
 	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
-		echo '<li class="dropBar"><div class="welcomeBar">Welcome<img src="images/down_arrow.png" /></div>
-				<ul class="dropOut">
-					<li><a href="viewTreffs.php">View Treffs</a></li>
-					<li>
-						<form action="logout.php" method="POST">
-							<input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
-						</form>
-					</li>
-				</ul></li>';
+        echo '<li class="dropBar"><div class="welcomeBar">' . $welcomeMessage . '<img src="images/down_arrow.png" /></div>
+            <ul class="dropOut">
+                <li><a href="viewTreffs.php">View Treffs</a></li>
+                <li>
+                    <form action="logout.php" method="POST">
+                        <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
+                    </form>
+                </li>
+            </ul></li>';
 	} else {
 		echo '<li><form action="login.php" method="POST">
 				  <input class="loginButton" type="submit" value="Login" />

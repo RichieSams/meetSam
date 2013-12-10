@@ -38,6 +38,8 @@ function checkLogin() {
 
     if ($success) {
         $_SESSION["userId"] = $row['userId'];
+        // Create the cookie and set it to expire in a week
+        setcookie("firstTime", "1", time() + (3600 * 24 * 7), "/");
     }
 
     $connection->close();
@@ -75,6 +77,8 @@ function addUser() {
 		$_SESSION["userId"] = $connection->insert_id;
 	}
 
+    // Create the cookie and set it to expire in a week
+    setcookie("firstTime", "1", time() + (3600 * 24 * 7), "/");
 
     $connection->close();
 }
@@ -85,6 +89,8 @@ function addAnonymousUser() {
     $connection->query("INSERT INTO Users (anonymous) VALUES(TRUE);");
 
     $_SESSION["userId"] = $connection->insert_id;
+    // Create the cookie and set it to expire in a week
+    setcookie("firstTime", "0", time() + (3600 * 24 * 7), "/");
 
     $connection->close();
 }
