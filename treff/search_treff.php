@@ -3,39 +3,79 @@
 session_start();
 
 include_once 'functions.php';
-createHeader(array("style.css"), array("validate.js"));
+createHeader(array("style.css"), array("lib/jquery-1.10.2.min.js", "validate.js"));
 
-?>
+if (isset($_POST['search'])) {
+    $connection = connectMySql();
 
-<div class="main_body">
-    <div class="jointreff">
-        <form id="joinForm" action="process_treff.php" method="POST" onsubmit="return validateJoin();">
-            <div class="joinInfo">
-                <table>
-                    <tr>
-                        <td><input type="text" name="name" maxlength="50" placeholder="Email Address" /></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="meetingId" placeholder="Meeting Id" /></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="street" maxlength="50" size="37" placeholder="Street Address" /></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" name="city" maxlength="50" placeholder="City" />
-                            <input type="text" name="state" maxlength="2" size="3" placeholder="State" />
-                            <input type="text" name="zip" maxlength="5" size="5" placeholder="Zip" />
-                        </td>
-                    </tr>
-                </table>
-            </div>
+    $query = "SELECT m.name, mu.idHash
+                  FROM MeetingUsers AS mu
+                  INNER JOIN Meetings AS m
+                  ON m.meetingId=mu.meetingId
+                  INNER JOIN Users AS u
+                  ON mu.userId=u.UserId
+                  WHERE u.email='" . $_POST['email'] . "'";
 
-            <div class="joinlogin">
-                <input class="joinButton" type="submit" value="Submit"/>
-            </div>
-        </form>
-    </div><!--// End of jointreff -->
-</div> <!--// End of main_body -->
+    if (isset($_POST['meetingId']) && $_POST['meetingId'] != "") {
+        $query .=  " AND mu.meetingId=" . $_POST['meetingId'];
+    } if ($_POST['meetingName'] && $_POST['meetingName'] != "") {
+        $query .=  " AND m.name=" . $_POST['meetingName'];
+    }
 
-<?php include 'footer.php'; ?>
+    $result = $connection->query($query);
+
+    echo '
+    <div class="main_body">
+        <table>
+            <tr>
+                <th>Treff Name</th>
+            </tr>';
+
+    while ($row = $result->fetch_assoc()) {
+        echo '<tr>
+                  <td>
+                      <form action="jointreff.php" method="POST">
+                          <input name="selectedTreff" type="radio" />' . $row['name'] . '
+                          <input name="idHash" type="hidden" value="' . $row['idHash'] . '" />
+                          <input name="email" type="hidden" value="' . $_POST['email'] . '" />
+                      </form>
+                  </td>
+              </tr>';
+    }
+
+    $result->free();
+    $connection->close();
+
+    echo '
+        </table>
+        <div><button onclick="submitJoin();">Submit</button></div>
+    </div>';
+} else {
+    echo '
+    <div class="main_body">
+        <div class="jointreff">
+            <h1 class="heading">Search for a Treff to Join</h1>
+            <form id="joinForm" action="'. $_SERVER['PHP_SELF'] . '" method="POST" onsubmit="return validateSearch();">
+                <div class="joinInfo">
+                    <table>
+                        <tr>
+                            <td><input type="text" name="email" maxlength="50" placeholder="Your Email Address" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="meetingId" placeholder="Meeting Id" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="meetingName" maxlength="50" size="37" placeholder="Meeting Name" /></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="searchDiv">
+                    <input name="search" class="searchButton" type="submit" value="Search"/>
+                </div>
+            </form>
+        </div><!--// End of jointreff -->
+    </div> <!--// End of main_body -->';
+}
+
+include 'footer.php';

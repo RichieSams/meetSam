@@ -197,6 +197,11 @@ body {
     margin: 0 180px 0 100px;
 }
 
+.heading {
+    width: 900px;
+    text-align: center;
+    margin: 0px auto 20px auto;
+}
 
 .joinlogin {
     width: 145px;
@@ -204,8 +209,22 @@ body {
 	text-align: center;
 }
 
+.searchDiv {
+    float: left;
+    width: 145px;
+}
+
+.searchButton {
+    width: 145px;
+    height: 70px;
+    font-size: 20px;
+    background: linear-gradient(-45deg, #F2F2F2 ,#ffa273);
+    border: 1px solid #b3b3b3;
+    color: #000000;
+    margin: 10px auto auto auto;
+}
+
 .joinButton{
-	float: left;
 	width: 145px;
 	height: 70px;
 	font-size: 20px;
@@ -223,7 +242,7 @@ body {
     color: #000000;
 }
 
-.joinlogin a{
+.joinlogin a {
 	display: block;
     float: left;
 	height: 136px;
