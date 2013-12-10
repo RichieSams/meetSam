@@ -33,7 +33,7 @@ function createHeader($cssFiles, $javascriptFiles) {
             <li><a href="description.php">What is Treff?</a></li>';
 
 	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
-		echo '<li class="dropBar"><div class="welcomeBar">Welcome<div class="arrow-down"></div></div>
+		echo '<li class="dropBar"><div class="welcomeBar">Welcome<img src="images/down_arrow.png" /></div>
 				<ul class="dropOut">
 					<li><a href="viewTreffs.php">View Treffs</a></li>
 					<li>

@@ -440,3 +440,31 @@ body {
 }
 
 /*--- End of CLogin/Registration Section ---*/
+
+/*--- Beginning of View Treff Section ---*/
+
+.viewTreffTable{
+
+}
+
+.viewTreffTable td{
+	text-align: center;
+}
+
+.tdName{
+	width: 150px;
+}
+
+.tdCon{
+	width: 100px;
+}
+
+.tdStatus{
+	width: 300px;
+}
+
+.tdLast{
+
+}
+
+/*--- End of View Treff Section ---*/
