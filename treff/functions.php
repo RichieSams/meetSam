@@ -142,7 +142,7 @@ function curl_get($baseUrl, array $data = array(), array $options = array()) {
         CURLOPT_URL => $url,
         CURLOPT_HEADER => 0,
         CURLOPT_RETURNTRANSFER => TRUE,
-        CURLOPT_TIMEOUT => 4
+        CURLOPT_TIMEOUT => 0
     );
 
     $ch = curl_init();
@@ -154,4 +154,41 @@ function curl_get($baseUrl, array $data = array(), array $options = array()) {
 
     curl_close($ch);
     return $result;
+}
+
+class LatLng {
+    public $lat;
+    public $lng;
+
+    public function __construct($lat, $lng) {
+        $this->lat = $lat;
+        $this->lng = $lng;
+    }
+}
+
+function decodePolyLine($string) {
+    $points = array();
+    $index = $i = 0;
+    $previous = array(0,0);
+    while( $i < strlen($string)  ) {
+        $shift = $result = 0x00;
+        do {
+            $bit = ord(substr($string,$i++)) - 63;
+            $result |= ($bit & 0x1f) << $shift;
+            $shift += 5;
+        } while( $bit >= 0x20 ) ;
+
+        $diff = ($result & 1) ? ~($result >> 1) : ($result >> 1);
+        $number = $previous[$index % 2] + $diff;
+        $previous[$index % 2] = $number;
+        $index++;
+        $points[] = $number * 1e-5;
+    }
+
+    $returnPoints = array();
+    for ($i = 0; $i < count($points); $i += 2) {
+        $returnPoints[$i / 2] = new LatLng($points[$i], $points[$i + 1]);
+    }
+
+    return $returnPoints;
 }
