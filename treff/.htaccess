@@ -2,13 +2,13 @@ Options +FollowSymlinks
 RewriteEngine on
 
 # Treff redirects
-#RewriteCond %{ENV:REDIRECT_STATUS} ^$
-#RewriteCond %{QUERY_STRING} ^idHash=(.+)
-#RewriteRule ^treff.php$ /treff/%1/? [R,NC,L]
-#RewriteRule ^treff/(.+)/$ /treff.php?idHash=$1 [NC,L]
-#
-## JoinTreff redirects
-#RewriteCond %{ENV:REDIRECT_STATUS} ^$
-#RewriteCond %{QUERY_STRING} ^idHash=(.+)
-#RewriteRule ^search_treff.php$ /search/%1/? [R,NC,L]
-#RewriteRule ^search/(.+)/$ /search_treff.php?idHash=$1 [NC,L]
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{QUERY_STRING} ^idHash=(.+)
+RewriteRule ^treff.php$ /treff/%1/? [R,NC,L]
+RewriteRule ^treff/(.+)/$ /treff.php?idHash=$1 [NC,L]
+
+# JoinTreff redirects
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{QUERY_STRING} ^idHash=(.+)
+RewriteRule ^search_treff.php$ /search/%1/? [R,NC,L]
+RewriteRule ^search/(.+)/$ /search_treff.php?idHash=$1 [NC,L]
