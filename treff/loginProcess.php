@@ -62,18 +62,20 @@ function addUser() {
 
     // Add user to table
 	if ($result->num_rows > 0 && $result->fetch_assoc()['anonymous'] == '1') {
-		$connection->query("UPDATE Users
-                            SET street = '$street', city = '$city', state = '$state', zip = '$zip', password = '$pass1', anonymous = 0
-						    WHERE email = '$email'");
-		$_SESSION["userId"] = $result['userId'];
-	} else{
+			$connection->query("UPDATE Users
+								SET street = '$street', city = '$city', state = '$state', zip = '$zip', password = '$pass1', anonymous = 0
+								WHERE email = '$email'");
+			$_SESSION["userId"] = $result['userId'];
+			$result->free();
+	}
+	 else{
 		$connection->query("INSERT INTO Users (email, password, street, city, state, zip)
 						    VALUES ('$email', '$pass1', '$street', '$city', '$state', '$zip')");
 
 		$_SESSION["userId"] = $connection->insert_id;
 	}
 
-    $result->free();
+
     $connection->close();
 }
 

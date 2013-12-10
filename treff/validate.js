@@ -45,7 +45,7 @@ function validateRegistration() {
         return false;
     }
 	
-	if (form.pass1.value != form.pass1.value){
+	if (form.pass1.value != form.pass2.value){
 		alert("Passwords do not match");
 		return false;
 	}
@@ -82,24 +82,7 @@ function validateTreff () {
         return false;
     }
 
-
-    // Convert the address to Lat and Lon and fill the hidden inputs with the values.
-    // TODO: Disable the address inputs so their values aren't sent. (Since we only care about Lat/Lon
-    var address = "'" + form.street.value + ", " + form.city.value + ", " + form.state.value + "  " + form.zip.value + "'";
-    getLatLon(address, validateTreffCallback);
-
-    // We rely on the callback to actually submit the form. If we were to submit here
-    // the lat/lon values from google API would not be set.
-	return false;
-}
-
-function validateTreffCallback(lat, lon) {
-    var form = document.getElementById("treffForm");
-
-    form.startingLat.value = lat;
-    form.startingLon.value = lon;
-
-    form.submit();
+	return true;
 }
 
 function validateJoin() {
@@ -116,7 +99,7 @@ function validateJoin() {
         return false;
     }
 
-	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
+	if (form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
         alert("Incomplete Address");
         return false;
     }
@@ -124,6 +107,26 @@ function validateJoin() {
 	return true;
 }
 
+function validateSearch() {
+    var form = document.getElementById("joinForm");
+    var checkEmail = regExEmail.test(form.email.value);
+
+    if (form.email.value == "") {
+        alert("Enter Email");
+        return false;
+    }
+
+    if (!checkEmail) {
+        alert("Invalid Email");
+        return false;
+    }
+
+    return true;
+}
+
+function submitJoin() {
+    $('input:checked').closest("form").submit();
+}
 
 function validateEmailAjax() {
 	var form = document.getElementById("registrationForm");
@@ -155,14 +158,35 @@ function validatePassAjax() {
 	var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
 
 	var	pass1 = form.pass1.value;
-
+	
 	if(passDig && passLen) {
 		$("span.valPass").html("<div class='confirmedEmail'>Valid</div>");
 		validPassword = true;
 	}
 	else{
-		$("span.valPass").html("<div class='failedEmail'>Invalid/div>");
+		$("span.valPass").html("<div class='failedEmail'>Invalid</div>");
 		validPassword = false;
 	}
 	
+}
+
+ function validateNewPass() {
+	var form = document.getElementById("registrationForm");	
+	var passDig = /[0-9]/.test(form.pass1.value);
+	var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
+
+	if (form.pass1.value != form.pass2.value){
+		alert("Passwords do not match");
+		return false;
+	}
+
+	if (! passDig || !passLen) {
+        alert("Invalid Password");
+        return false;
+    }
+	
+    form.pass1.value = CryptoJS.SHA256(form.name + form.pass1);
+    form.pass2.value = CryptoJS.SHA256(form.name + form.pass2);
+
+	return true;
 }
