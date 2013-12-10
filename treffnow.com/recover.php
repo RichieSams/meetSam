@@ -49,7 +49,6 @@ function startReset($hash){
 
 
 function confirm(){
-	createHeader(array("style.css"), array());
 	$hash= $_POST['hash'];
 	$connection = connectMySql();
 	$result = $connection->query("Select * 
@@ -65,9 +64,15 @@ function confirm(){
 							WHERE email = '$email'");
 		$connection->query("DELETE FROM ForgottenPassword
 							WHERE hash='$hash'");
-		
-		Echo '<h2>Your password has been reset. Happy Treffing!</h2>';
-		
+        $result = $connection->query("SELECT userId
+                                      FROM Users
+                                      WHERE email='$email'");
+
+        $row = $result->fetch_assoc();
+        $_SESSION['userId'] = $row['userId'];
+
+        createHeader(array("style.css"), array());
+		echo '<h2>Your password has been reset. Happy Treffing!</h2>';
 	}
 	
 	else {
