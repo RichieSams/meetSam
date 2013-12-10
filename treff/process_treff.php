@@ -92,6 +92,23 @@ $json = json_decode($result, true);
 $polyline = $json['routes'][0]['overview_polyline']['points'];
 $points = decodePolyLine($polyline);
 
+//Get the start and end address for specific meeting for 
+function startEnd ()
+{
+    $result = $connect->query("SELECT startingStreet, startingCity, startingState, startingZip, startingCountry
+                           FROM MeetingUsers
+                           WHERE meetingId=$meetingId");
+
+    $addresses = array();
+    $index = 0;
+    while ($row = $result->fetch_assoc()) {
+        $addresses[$index] = $row['startingStreet'] . ", " . $row['startingCity'] . ", " . $row['startingState'] . " " . $row['startingZip'] . ", " . $row['startingCountry'];
+        $index++;
+    }
+}
+
+
+
 //Find the Driving Distanc Mid point
 function getLatlng($location)
 {
@@ -101,7 +118,7 @@ function getLatlng($location)
 //Get Lat Lngs
 function getLatlng($location)
 {
-
+    
 }
 
 
@@ -110,6 +127,9 @@ function getPlace($location)
 {
 
 }
+
+
+
 
 //Get arch distance petween two points via lat and lon.
 function archDist($latLng1, $latLng2)
