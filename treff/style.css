@@ -186,25 +186,20 @@ body {
 
 /*--- Join Treff Section ---*/
 .jointreff form{
-    margin: 0 180px 0 100px;
-    width: 300px;
+    margin: auto;
+    width: 900px;
+    overflow: hidden;
 }
 
 .joinInfo{
 	float: left;
-}
-
-.infoJoin {
-    width: 900px;
-    margin-top: auto;
-	margin-bottom: auto;
-    margin-right: 116px;
-    float: left;
+    width: 300px;
+    margin: 0 180px 0 100px;
 }
 
 
 .joinlogin {
-	display: inline;
+    width: 145px;
     float: left;
 	text-align: center;
 }
@@ -217,6 +212,7 @@ body {
 	background: linear-gradient(-45deg, #F2F2F2 ,#ffa273);
     border: 1px solid #b3b3b3;
     color: #000000;
+    margin: 20px auto auto auto;
 }
 
 .joinButton:hover {
