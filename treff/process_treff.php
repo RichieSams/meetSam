@@ -45,7 +45,7 @@ if($result)
 {
     // Update status of Meetings
     $connect->query("UPDATE Meetings
-                        SET status = 1,
+                        SET status = "Processing",
                         WHERE idHash = '" . $meetingId . "'");
 }
 else
