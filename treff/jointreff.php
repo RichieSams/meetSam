@@ -16,13 +16,13 @@ createHeader(array("style.css"), array("validate.js"));
 
 $connection = connectMySql();
 
-$result = $connection->query("SELECT Meetings.name AS treffName
-                              FROM MeetingUsers
-                              INNER JOIN Meetings
-                              ON Meetings.meetingId = MeetingUsers.meetingId
-                              WHERE MeetingUsers.idHash='$idHash'");
+$result = $connection->query("SELECT m.name
+                              FROM MeetingUsers AS mu
+                              INNER JOIN Meetings AS m
+                              ON m.meetingId = mu.meetingId
+                              WHERE mu.idHash='$idHash'");
 
-$treffName = $result->fetch_assoc()['treffName'];
+$treffName = $result->fetch_assoc()['name'];
 $result->free();
 
 $email = isset($_POST['email']) ? $_POST['email'] : "";
