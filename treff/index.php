@@ -1,8 +1,8 @@
 <?php
+
 session_start();
 include_once 'functions.php';
 createHeader(array("style.css"), array());
-
 
 ?>
 
@@ -22,7 +22,7 @@ createHeader(array("style.css"), array());
 			<a href="create1.php">Create a Treff</a>
 		</div>
 		<div class="join">
-			<a href="jointreff.php">Join a Treff</a>
+			<a href="search_treff.php">Join a Treff</a>
 		</div>
 	</div> <!--// End of login -->
 </div> <!--// End of main_body -->

@@ -27,9 +27,9 @@ $result->free();
 
 echo '
 <div class="main_body">
-    <div class="information">
-        <h1>Join "' . $treffName . '"</h1>
-        <form id="treffForm" value="process_treff.php" method="POST" onsubmit="return validateJoin();">
+    <form id="joinForm" action="process_treff.php" method="POST" onsubmit="return validateJoin();">
+        <div class="information">
+            <h1>Join "' . $treffName . '"</h1>
             <input type="hidden" name="idHash" value="'. $idHash . '" />
             <table>
                 <tr>
@@ -47,11 +47,11 @@ echo '
                     </td>
                 </tr>
             </table>
-        </form>
-    </div>
-    <div class="createTreff">
-        <input class="createButton" type="submit" value="Join Treff!" name="join" />
-    </div>
+        </div>
+        <div class="createTreff">
+            <input class="createButton" type="submit" value="Join Treff!" name="join" />
+        </div>
+    </form>
 </div>';
 
 include 'footer.php';

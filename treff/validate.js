@@ -102,31 +102,22 @@ function validateTreffCallback(lat, lon) {
 
 function validateJoin() {
     var form = document.getElementById("joinForm");
-    var checkEmail = regExEmail.test(form.name.value);
+    var checkEmail = regExEmail.test(form.email.value);
 
-    if (form.name.value == "") {
+    if (form.email.value == "") {
         alert("Enter Email");
         return false;
     }
 
-	if (checkEmail != true) {
+	if (!checkEmail) {
         alert("Invalid Email");
         return false;
     }
 
-	if (checkEmail != true) {
-        alert("Invalid Email");
-        return false;
-    }
-
-    if (form.meetingId.value == "") {
-        alert("Enter Meeting Id");
-        return false;
-    }
 	if ( form.street.value == "" || form.city.value == "" || form.zip.value == "" || form.state.value == "") {
         alert("Incomplete Address");
         return false;
     }
-	
+
 	return true;
 }
