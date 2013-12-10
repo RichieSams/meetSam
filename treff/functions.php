@@ -98,7 +98,8 @@ function getMeetingName($id)
 {
     $connect = connectMySql();
     $result = $connect->query("SELECT name FROM Meetings where meetingId='$id'");
-    $name = $result->fetch_assoc()['name'];
+    $name = $result->fetch_assoc();
+    $name = $name['name'];
     $result->free();
 
     return $name;
@@ -110,7 +111,8 @@ function getPassword($column, $value)
     $connect = connectMySql();
 
     $result = $connect->query("SELECT password FROM Users where $column='$value'");
-    $password = $result->fetch_assoc()['password'];
+    $password = $result->fetch_assoc();
+    $password = $password['password'];
     $result->free();
 	
 	return $password;
@@ -124,7 +126,8 @@ function isCurrentUserAnonymous($connection) {
 
     $userId = $_SESSION['userId'];
     $result = $connection->query("SELECT anonymous FROM Users where userId='$userId'");
-    $anonymous = $result->fetch_assoc()['anonymous'];
+    $anonymous = $result->fetch_assoc();
+    $anonymous = $anonymous['anonymous'];
     $result->free();
 
     return $anonymous == "1";
@@ -133,7 +136,8 @@ function isCurrentUserAnonymous($connection) {
 //Returns if user is anonymous based on email. Returns 1 or 0
 function isUserAnonymous($connection, $email) {
     $result = $connection->query("SELECT anonymous FROM Users where email='$email'");
-    $anonymous = $result->fetch_assoc()['anonymous'];
+    $anonymous = $result->fetch_assoc();
+    $anonymous = $anonymous['anonymous'];
     $result->free();
 
     return $anonymous == "1";

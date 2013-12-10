@@ -22,7 +22,9 @@ $result = $connection->query("SELECT m.name
                               ON m.meetingId = mu.meetingId
                               WHERE mu.idHash='$idHash'");
 
-$treffName = $result->fetch_assoc()['name'];
+$treffName = $result->fetch_assoc();
+$treffName = $treffName['name'];
+
 $result->free();
 
 $email = isset($_POST['email']) ? $_POST['email'] : "";

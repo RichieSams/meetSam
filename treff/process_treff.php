@@ -127,7 +127,8 @@ $result = $connect->query("SELECT name
                            FROM Meetings
                            WHERE meetingId=$meetingId");
 
-$meetingName = $result->fetch_assoc()['name'];
+$meetingName = $result->fetch_assoc();
+$meetingName = $meetingName['name'];
 $result->free();
 
 // Send emails

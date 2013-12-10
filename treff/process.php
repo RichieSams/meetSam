@@ -23,7 +23,8 @@ $meetingId = $connect->insert_id;
 $result = $connect->query("SELECT userId FROM Users WHERE email='" . $_POST['treffMateEmail'] . "'");
 
 if ($result->num_rows > 0) {
-    $mateUserId = $result->fetch_assoc()['userId'];
+    $mateUserId = $result->fetch_assoc();
+    $mateUserId = $mateUserId['userId'];
 } else {
     $connect->query("INSERT INTO Users (email, anonymous) VALUES('" . $_POST['treffMateEmail'] . "', TRUE);");
 

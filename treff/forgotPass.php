@@ -14,8 +14,11 @@ if (isset($_POST["forgot"])){
     $result = $connection->query("SELECT anonymous
                                   FROM Users
                                   WHERE email='$email'");
-
-	if ($result->num_rows > 0 && $result->fetch_assoc()['anonymous'] != "1") {
+    
+    $value = $result->fetch_assoc();
+    $value = $value['anonymous'];
+    
+	if ($result->num_rows > 0 && $value != "1") {
 		confirmation($connection, $email);
 	}
 	else{
