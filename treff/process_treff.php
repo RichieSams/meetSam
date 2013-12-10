@@ -22,9 +22,8 @@ $result = $connect->query("SELECT userId FROM Users WHERE email='" . $formData['
 if ($result->num_rows == 1) {
     $mateUserId = $result->fetch_assoc()['userId'];
 } else {
-    $connect->query("INSERT INTO Users (email, anonymous) VALUES('" . $formData['treffMateEmail'] . "', TRUE);");
-
-    $mateUserId = $connect->insert_id;
+    // Redirect
+    errorPage();
 }
 
 // Update entries in MeetingUsers table
