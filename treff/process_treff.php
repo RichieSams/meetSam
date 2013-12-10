@@ -176,12 +176,11 @@ function getPlace($latLng, $radius = 50, $typePlace = "cafe") {
         $location->latLng = $latLng;
 
         $placeArray = explode(",", $json['results'][0]['vicinity']);
-        $location->street = trim($placeArray[0]);
-        $location->city = trim($placeArray[1]);
+        $location->street =  htmlentities(str_replace("'", "\'", trim($placeArray[0])));;
+        $location->city =  htmlentities(str_replace("'", "\'", trim($placeArray[1])));
         // $midCountry = $placeArray[count($placeArray)];
 
-        $location->name = $json['results'][0]['name'];
-        var_dump($location);
+        $location->name = htmlentities(str_replace("'", "\'", $json['results'][0]['name']));
         return $location;
     } else if($json['status'] == "ZERO_RESULTS") {
         $radius += 50;
