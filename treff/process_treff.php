@@ -75,16 +75,23 @@ if($result) {
     errorPage();
 }
 
-$result = $connect->query("SELECT startingStreet, startingCity, startingState, startingZip, startingCountry
-                           FROM MeetingUsers
+$result = $connect->query("SELECT u.email, mu.idHash, mu.startingStreet, mu.startingCity, mu.startingState, mu.startingZip, mu.startingCountry
+                           FROM MeetingUsers AS mu
+                           INNER JOIN Users AS u
+                           ON mu.userId = u.userId
                            WHERE meetingId=$meetingId");
 
+$emails = array();
+$idHashes = array();
 $addresses = array();
 $index = 0;
 while ($row = $result->fetch_assoc()) {
+    $emails[$index] = $row['email'];
+    $idHashes[$index] = $row['idHash'];
     $addresses[$index] = $row['startingStreet'] . ", " . $row['startingCity'] . ", " . $row['startingState'] . " " . $row['startingZip'] . ", " . $row['startingCountry'];
     $index++;
 }
+$result->free();
 
 $result = curl_get("http://maps.googleapis.com/maps/api/directions/json", array("origin"=>$addresses[0], "destination"=>$addresses[1], "sensor"=>"false"));
 $json = json_decode($result, true);
@@ -253,32 +260,29 @@ function checkRange(midDistance)
 }
 
 
-//// Send emails
-//$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
-//$domain = "treffnow.com";
-//
-//
-//# Send confirmation email to creator
-//$mg->sendMessage($domain,
-//    array('from'    => 'Treff <noreply@treffnow.com>',
-//          'to'      => $_POST['creatorEmail'],
-//          'subject' => 'Confirmation for creating the Treff "' . $_POST['treffName'] . '"',
-//          'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
-//                       "This is a confirmation email for the Treff you created. Below is a link to the meeting main page.\n" .
-//                       "http://treffnow.com/treff/$creatorIdHash\n\n" .
-//                       "Happy Treffing,\n" .
-//                       "The Treff Team"));
-//
-//# Send confirmation email to mate
-//$mg->sendMessage($domain,
-//    array('from'    => 'Treff <noreply@treffnow.com>',
-//          'to'      => $_POST['treffMateEmail'],
-//          'subject' => 'Invitation to Treff "' . $_POST['treffName'] . '"',
-//          'text'    => "Welcome to Treff, a service for creating meeting points between people!\n\n" .
-//                       $_POST['creatorEmail'] . " has invited you to their Treff. Below is a link to the meeting main page.\n" .
-//                       "http://treffnow.com/join/$mateIdHash\n\n" .
-//                       "Happy Treffing,\n" .
-//                       "The Treff Team"));
-//
-//
+// Get the meeting name
+$result = $connect->query("SELECT name
+                           FROM Meetings
+                           WHERE meetingId=$$meetingId");
+
+$meetingName = $result->fetch_assoc()['name'];
+$result->free();
+
+// Send emails
+$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
+$domain = "treffnow.com";
+
+for ($i = 0; $i < count($emails); $i++) {
+    $mg->sendMessage($domain,
+        array('from'    => 'Treff <noreply@treffnow.com>',
+            'to'      => $emails[$i],
+            'subject' => 'Your Treff "' . $meetingName . '" is Ready',
+            'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
+                         "This is a notification that everyone in your Treff has confirmed and the meeting point has been determined. Below is a link to the meeting main page.\n" .
+                         "http://treffnow.com/treff/" . $idHashes[$i] . "\n\n" .
+                         "Happy Treffing,\n" .
+                         "The Treff Team"));
+}
+
+
 //header("Location: treff.php?idHash=$creatorIdHash");
