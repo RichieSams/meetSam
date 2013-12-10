@@ -99,6 +99,8 @@ $json = json_decode($result, true);
 $polyline = $json['routes'][0]['overview_polyline']['points'];
 $points = decodePolyLine($polyline);
 
+$totalDistance = $json['routes'][0]['legs'][0]['distance']['value'];
+
 
 //Find the Driving Distanc Mid point
 function getLatlng(location)
