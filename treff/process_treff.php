@@ -81,9 +81,6 @@ $result = $connect->query("SELECT u.email, mu.idHash, mu.startingStreet, mu.star
                            ON mu.userId = u.userId
                            WHERE meetingId=$meetingId");
 
-$emails = array();
-$idHashes = array();
-$addresses = array();
 $index = 0;
 while ($row = $result->fetch_assoc()) {
     $emails[$index] = $row['email'];
