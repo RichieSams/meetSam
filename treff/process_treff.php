@@ -88,13 +88,22 @@ while ($row = $result->fetch_assoc()) {
     $addresses[$index] = $row['startingStreet'] . ", " . $row['startingCity'] . ", " . $row['startingState'] . " " . $row['startingZip'] . ", " . $row['startingCountry'];
     $index++;
 }
+
+
 $result->free();
 
 $result = curl_get("http://maps.googleapis.com/maps/api/directions/json", array("origin"=>$addresses[0], "destination"=>$addresses[1], "sensor"=>"false"));
+
 $json = json_decode($result, true);
 
 $polyline = $json['routes'][0]['overview_polyline']['points'];
 $points = decodePolyLine($polyline);
+
+$startPoint = new LatLng($json['routes'][0]['legs'][0]['start_location']['lat'],$json['routes'][0]['legs'][0]['start_location']['lng']);
+$endPoint = new LatLng($json['routes'][0]['legs'][0]['end_location']['lat'], $json['routes'][0]['legs'][0]['end_location']['lng']);
+
+$totalDistance = $json['routes'][0]['legs'][0]['distance']['value'];
+
 
 //Get the start and end address for specific meeting for 
 function startEnd ()
