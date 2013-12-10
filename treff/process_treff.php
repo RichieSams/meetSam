@@ -17,12 +17,12 @@ $meetingId = $connect->insert_id;
 
 // Create a userId for the invitee
 // But first, check if their email is already registered
-$result = $connect->query("SELECT userId FROM Users WHERE email='" . $_POST['treffMateEmail'] . "'");
+$result = $connect->query("SELECT userId FROM Users WHERE email='" . $formData['email'] . "'");
 
 if ($result->num_rows > 0) {
     $mateUserId = $result->fetch_assoc()['userId'];
 } else {
-    $connect->query("INSERT INTO Users (email, anonymous) VALUES('" . $_POST['treffMateEmail'] . "', TRUE);");
+    $connect->query("INSERT INTO Users (email, anonymous) VALUES('" . $formData['treffMateEmail'] . "', TRUE);");
 
     $mateUserId = $connect->insert_id;
 }
