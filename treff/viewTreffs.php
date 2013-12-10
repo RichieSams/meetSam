@@ -21,12 +21,10 @@ createHeader(array("style.css"), array());
 
     echo '
     <div class="main_body">
-        <table class = "viewTreffTable">
-            <tr>
-                <th>Your Treff\'s</th>
-            </tr>
+		<div class="viewTreff"><h2>Your Treff\'s</h2></div>
+        <table class = "viewTreffTable">            
 			<tr>
-				<td class="tdName"><u>Treff Name</td><td class="tdCon"><u>Confirmed</td><td class="tdStatus"><u>Treff Status</td><td class="tdLast"><u>Last Activity</td>
+				<td class="tdName"><u>Treff Name</u></td><td class="tdCon"><u>Confirmed</u></td><td class="tdStatus"><u>Treff Status</u></td><td class="tdLast"><u>Last Activity</u></td>
 			</tr>';
 
     while ($row = $result->fetch_assoc()) {

@@ -444,13 +444,21 @@ body {
 /*--- Beginning of View Treff Section ---*/
 
 .viewTreffTable{
-
+	margin: auto;
+	padding: 0px 0px 50px 0px;
 }
 
-.viewTreffTable td{
+.viewTreffTable td {
 	text-align: center;
+	font-size: 25px;
+	height: 35px;
 }
 
+.viewTreff  {
+	font-size: 35px;
+	text-align: center;
+	
+}
 .tdName{
 	width: 150px;
 }
