@@ -17,9 +17,9 @@ $meetingId = $connect->insert_id;
 
 // Create a userId for the invitee
 // But first, check if their email is already registered
-$result = $connect->query("SELECT userId FROM Users WHERE email='" . $formData['email'] . "'");
+$result = $connect->query("SELECT userId FROM Users WHERE email='" . $formData['idHash'] . "'");
 
-if ($result->num_rows > 0) {
+if ($result->num_rows == 1) {
     $mateUserId = $result->fetch_assoc()['userId'];
 } else {
     $connect->query("INSERT INTO Users (email, anonymous) VALUES('" . $formData['treffMateEmail'] . "', TRUE);");
@@ -27,18 +27,13 @@ if ($result->num_rows > 0) {
     $mateUserId = $connect->insert_id;
 }
 
-// Create the idHashes
-$creatorIdHash = md5($meetingId . $_SESSION['userId']);
-$mateIdHash = md5($meetingId . $mateUserId);
-
-var_dump("INSERT INTO MeetingUsers
-                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", '" . $_POST['street'] . "', '" . $_POST['city'] . "', '" . $_POST['state'] . "', '" . $_POST['zip'] . "', '" . $_POST['country'] . "'),
-                        ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL, NULL, NULL, NULL)");
-
-// Create entries in MeetingUsers table
-$connect->query("INSERT INTO MeetingUsers
-                 VALUES ('" . $creatorIdHash. "', " . $meetingId . ", " . $_SESSION['userId'] . ", '" . $_POST['street'] . "', '" . $_POST['city'] . "', '" . $_POST['state'] . "', '" . $_POST['zip'] . "', '" . $_POST['country'] . "'),
-                        ('" . $mateIdHash. "', " . $meetingId . ", " . $mateUserId . ", NULL, NULL, NULL, NULL, NULL)");
+// Update entries in MeetingUsers table
+$connect->query("UPDATE MeetingUsers
+                 SET startingStreet ='" . $formData['street'] . "',
+                      startingCity = '" . $formData['city'] . "',
+                      startingState = '" . $formData['state']  . "',
+                      startingZip = '" . $formData['country'] . "'
+                WHERE idHash = '" . $formData['idHash'] . "'");
 
 // Send emails
 $mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
