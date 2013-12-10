@@ -28,13 +28,27 @@ if ($result->num_rows == 1) {
 }
 
 // Update entries in MeetingUsers table
-$connect->query("UPDATE MeetingUsers
-                 SET startingStreet ='" . $formData['street'] . "',
-                      startingCity = '" . $formData['city'] . "',
-                      startingState = '" . $formData['state']  . "',
-                      startingZip = '" . $formData['country'] . "'
-                WHERE idHash = '" . $formData['idHash'] . "'");
+$result = $connect->query("UPDATE MeetingUsers
+                            SET startingStreet ='" . $formData['street'] . "',
+                            startingCity = '" . $formData['city'] . "',
+                            startingState = '" . $formData['state']  . "',
+                            startingZip = '" . $formData['country'] . "'
+                            WHERE idHash = '" . $formData['idHash'] . "'");//"
 
+if($result)
+{
+    // Update status of Meetings
+    $connect->query("UPDATE Meetings
+                        SET status = 1,
+                        WHERE idHash = '" . $meetingId . "'");
+}
+else
+{
+    // Redirect
+    errorPage();
+}
+                    
+                
 // Send emails
 $mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
 $domain = "treffnow.com";
