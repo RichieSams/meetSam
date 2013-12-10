@@ -38,7 +38,9 @@ $result = $connect->query("UPDATE MeetingUsers
                             SET startingStreet ='" . $formData['street'] . "',
                             startingCity = '" . $formData['city'] . "',
                             startingState = '" . $formData['state']  . "',
-                            startingZip = '" . $formData['country'] . "'
+                            startingZip = '" . $formData['zip'] . "',
+                            startingCountry = '" . $formData['country'] . "',
+                            confirmed = 1
                             WHERE idHash = '" . $formData['idHash'] . "'");//"
 
 if($result)
