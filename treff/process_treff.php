@@ -6,10 +6,9 @@ include_once 'functions.php';
 require 'lib/vendor/autoload.php';
 use Mailgun\Mailgun;
 
-$formData = $_POST;
-
-if (!isset($_SESSION['userId']) || $_SESSION['userId'] == 0) {
-    header("Location: index.php");
+if (!isset($_POST))
+{
+    $formData = $_POST;
 }
 
 $connect = connectMySql();
