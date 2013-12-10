@@ -53,7 +53,7 @@
          <form id="joinForm" action="process_treff.php" method="POST" onsubmit="return validateJoin();">
             <table>
                 <tr>
-                    <td><input type="text" name="name" maxlength="50" placeholder="Email Address" value="<?php echo $email?>"/></td>
+                    <td><input type="text" name="email" maxlength="50" placeholder="Email Address" value="<?php echo $email?>"/></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="meetingId" placeholder="Meeting Id" value="<?php echo $treffId?>"/></td>
