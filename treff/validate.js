@@ -1,4 +1,6 @@
 var regExEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-z]{2,4})$/;
+var validEmail = false;
+var validPassword = false;
 
 function validateLogin() {
     var form = document.getElementById("loginForm");
@@ -20,8 +22,8 @@ function validateLogin() {
 function validateRegistration() {
     var form = document.getElementById("registrationForm");
     var checkEmail = regExEmail.test(form.name.value)
-	var passDig = /[0-9]/.test(form.pass1.value);
-	var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
+	//var passDig = /[0-9]/.test(form.pass1.value);
+	//var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
 
     if (form.name.value == "" || form.pass1.value == "" || form.street.value == "" || form.city.value == "" ) {
         alert("Incomplete Registration");
@@ -33,12 +35,12 @@ function validateRegistration() {
         return false;
     }
 
-    if (checkEmail != true) {
+    if (! validEmail) {
         alert("Invalid Email");
         return false;
     }
 
-	 if (passDig != true || passLen != true) {
+	 if (! validPassword) {
         alert("Invalid Password");
         return false;
     }
@@ -120,4 +122,47 @@ function validateJoin() {
     }
 
 	return true;
+}
+
+
+function validateEmailAjax() {
+	var form = document.getElementById("registrationForm");
+    var checkEmail = regExEmail.test(form.name.value);
+
+	var email = form.name.value;
+	var	passTerm = form.pass1.value;
+
+	$.post("check_email.php", { name: email }, function(responseText) {
+				if(! checkEmail) {
+					$("span.valEmail").html("<div class='failedEmail'>Email Invalid</div>");
+					validEmail = false;
+				}
+				else if(responseText == '2'){
+					$("span.valEmail").html("<div class='failedEmail'>Email Exists</div>");
+					validEmail = false;
+				}
+				else{
+					$("span.valEmail").html("<div class='confirmedEmail'>Valid Email</div>");
+					validEmail = true;
+				}
+	});
+
+}
+
+function validatePassAjax() {
+	var form = document.getElementById("registrationForm");
+    var passDig = /[0-9]/.test(form.pass1.value);
+	var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
+
+	var	pass1 = form.pass1.value;
+
+	if(passDig && passLen) {
+		$("span.valPass").html("<div class='confirmedEmail'>Valid</div>");
+		validPassword = true;
+	}
+	else{
+		$("span.valPass").html("<div class='failedEmail'>Invalid/div>");
+		validPassword = false;
+	}
+	
 }
