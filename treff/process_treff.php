@@ -89,7 +89,8 @@ while ($row = $result->fetch_assoc()) {
 $result = curl_get("http://maps.googleapis.com/maps/api/directions/json", array("origin"=>$addresses[0], "destination"=>$addresses[1], "sensor"=>"false"));
 $json = json_decode($result, true);
 
-
+$polyline = $json['routes'][0]['overview_polyline']['points'];
+$points = decodePolyLine($polyline);
 
 
 //Find the Driving Distanc Mid point
