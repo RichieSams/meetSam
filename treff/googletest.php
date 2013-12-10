@@ -1,6 +1,7 @@
 <?php
 //    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
     $goKey = "AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ";
+    echo deg2rad("30.948584");
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,7 @@ var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
 var centerDefault = '510 W 32nd St, Austin, TX';
 var secAddress = '303 W 35th St, Austin, TX';
+var totPath;
 
 //Get directions using google API
 function getDirects(address)
@@ -68,6 +70,7 @@ function getLatlng(address, callbackFunction) {
                      });
 }
 
+
 //Goggle API for geocoding.
 function calcRoute(start,end) {
     var request = {
@@ -77,7 +80,13 @@ function calcRoute(start,end) {
     };
     directionsService.route(request, function(response, status) {
                             if (status == google.maps.DirectionsStatus.OK) {
-                            directionsDisplay.setDirections(response);
+                                directionsDisplay.setDirections(response);
+                                totPath = response.routes[0].overview_path;
+                                alert(totPath.length);
+                                for(var i = 0; i < totPath.length; i++)
+                                {
+                                    document.getElementById("googleISMINE").innerHTML += totPath[i].toString();
+                                }
                             }
                             });
 }
@@ -98,6 +107,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
         <button type="button" onclick="alert('Email Sent');"><h1>Send Reminder Email</h1></button>
         <div id="directions-panel">Click on buttons above for more info.
+        </div>
+        <div id="googleISMINE">
         </div>
 
 
