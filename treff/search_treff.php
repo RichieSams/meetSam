@@ -9,12 +9,12 @@ if (isset($_POST['search'])) {
     $connection = connectMySql();
 
     $query = "SELECT m.name, mu.idHash
-                  FROM MeetingUsers AS mu
-                  INNER JOIN Meetings AS m
-                  ON m.meetingId=mu.meetingId
-                  INNER JOIN Users AS u
-                  ON mu.userId=u.UserId
-                  WHERE u.email='" . $_POST['email'] . "'";
+              FROM MeetingUsers AS mu
+              INNER JOIN Meetings AS m
+              ON m.meetingId=mu.meetingId
+              INNER JOIN Users AS u
+              ON mu.userId=u.UserId
+              WHERE u.email='" . $_POST['email'] . "' AND mu.confirmed=FALSE";
 
     if (isset($_POST['meetingId']) && $_POST['meetingId'] != "") {
         $query .=  " AND mu.meetingId=" . $_POST['meetingId'];
@@ -24,15 +24,16 @@ if (isset($_POST['search'])) {
 
     $result = $connection->query($query);
 
-    echo '
-    <div class="main_body">
-        <table>
-            <tr>
-                <th>Treff Name</th>
-            </tr>';
+    if ($result->num_rows > 0) {
+        echo '
+        <div class="main_body">
+            <table>
+                <tr>
+                    <th>Treff Name</th>
+                </tr>';
 
-    while ($row = $result->fetch_assoc()) {
-        echo '<tr>
+        while ($row = $result->fetch_assoc()) {
+            echo '<tr>
                   <td>
                       <form action="jointreff.php" method="POST">
                           <input name="selectedTreff" type="radio" />' . $row['name'] . '
@@ -41,15 +42,23 @@ if (isset($_POST['search'])) {
                       </form>
                   </td>
               </tr>';
+        }
+
+        echo '
+            </table>
+            <div><button onclick="submitJoin();">Submit</button></div>
+        </div>';
+    } else {
+        echo '
+        <div class="main_body">
+            <h1 class="heading">You have no Treffs to join. You can create a Treff <a href="create1.php">here</a></h1>
+        </div>';
     }
 
     $result->free();
     $connection->close();
 
-    echo '
-        </table>
-        <div><button onclick="submitJoin();">Submit</button></div>
-    </div>';
+
 } else {
     echo '
     <div class="main_body">

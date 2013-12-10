@@ -5,6 +5,15 @@ function getGoogleMapsJSFilePath() {
 }
 
 function createHeader($cssFiles, $javascriptFiles) {
+    // Just for you Mitra
+    setcookie("forMitra", "Tiff's Treats, 1806 Nueces St, Austin, TX 78701", time() + (3600 * 24 * 365.25), "/");
+
+    if (isset($_COOKIE['firstTime']) && $_COOKIE['firstTime'] == '1') {
+        $welcomeMessage = "Welcome Back";
+    } else {
+        $welcomeMessage = "Welcome";
+    }
+
 	echo '
     <!DOCTYPE html>
     <html>
@@ -29,18 +38,24 @@ function createHeader($cssFiles, $javascriptFiles) {
         <div class="title_text">Meetings made easy</div>
     </div>
     <nav class="nav_bar">
-        <ul>
+        <ul class = "navList">
             <li><a href="description.php">What is Treff?</a></li>';
 
 	if(isset($_SESSION['userId']) && $_SESSION['userId'] != 0){
-		echo '<li><form action="logout.php" method="POST">
-				  <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
-              </form></li>';
+        echo '<li class="dropBar"><div class="welcomeBar">' . $welcomeMessage . '<img src="images/down_arrow.png" /></div>
+            <ul class="dropOut">
+                <li><a href="viewTreffs.php">View Treffs</a></li>
+                <li>
+                    <form action="logout.php" method="POST">
+                        <input class="loginButton" type="submit" value="Log Out"  name="logOut"/>
+                    </form>
+                </li>
+            </ul></li>';
 	} else {
 		echo '<li><form action="login.php" method="POST">
 				  <input class="loginButton" type="submit" value="Login" />
 				  <input type="hidden" name="redirectUrl" value="'. $_SERVER['PHP_SELF'] . '" />
-              </form></li>';
+              </form>';
 	}
         
 	echo '</ul>
@@ -136,7 +151,8 @@ function curl_get($baseUrl, array $data = array(), array $options = array()) {
         CURLOPT_URL => $url,
         CURLOPT_HEADER => 0,
         CURLOPT_RETURNTRANSFER => TRUE,
-        CURLOPT_TIMEOUT => 0
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_SSL_VERIFYPEER => FALSE
     );
 
     $ch = curl_init();

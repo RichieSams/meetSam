@@ -61,7 +61,7 @@ body {
     background: #548dd4 linear-gradient(to right, #F2F2F2, #548dd4, #F2F2F2);
 }
 
-.nav_bar ul{
+.navList{
     margin: 0 auto;
     width: 900px;
     list-style: none;
@@ -87,7 +87,7 @@ body {
     float: left;
 }
 
-.nav_bar ul li a, .nav_bar ul li div, .loginButton {
+.nav_bar ul li a, .nav_bar ul li div, .loginButton , .welcomeBar{
     display: block;
     margin: 0px;
     width: 450px;
@@ -105,6 +105,35 @@ body {
     font-size: 14px;
     text-align: center;
     color: #000000;
+}
+
+.arrow-down {
+	display: block;
+	width: 0px; 
+	height: 0px; 
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	
+	border-top: 10px solid #000000;
+}
+
+.dropOut{
+	display:none;
+	position: absolute;
+	width: 435px;
+	background: #548dd4 linear-gradient(to right, #548dd4, #F2F2F2);
+	list-style: none;
+	text-align: center;
+	border-bottom: 1px solid #F2F2F2;
+}
+
+.dropOut li{
+	text-align: center;
+	margin-left: -40px;
+}
+
+.dropBar:hover  > .dropOut{
+	display:block;
 }
 
 .nav_bar ul li a:hover, .footer ul li a:hover, .loginButton:hover{
@@ -411,3 +440,39 @@ body {
 }
 
 /*--- End of CLogin/Registration Section ---*/
+
+/*--- Beginning of View Treff Section ---*/
+
+.viewTreffTable{
+	margin: auto;
+	padding: 0px 0px 50px 0px;
+}
+
+.viewTreffTable td {
+	text-align: center;
+	font-size: 25px;
+	height: 35px;
+}
+
+.viewTreff  {
+	font-size: 35px;
+	text-align: center;
+	
+}
+.tdName{
+	width: 150px;
+}
+
+.tdCon{
+	width: 100px;
+}
+
+.tdStatus{
+	width: 300px;
+}
+
+.tdLast{
+
+}
+
+/*--- End of View Treff Section ---*/
