@@ -15,26 +15,9 @@ if (isset($_POST)) {
 
 ////////// Global Varialbles //////////////
 
-//    Google API key: AIzaSyAjxT5HgGwUQy1E9P6_8vcvo7q_i7Z1mx4
-    $goKey = "AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ";
-
-//Get place Variables
-$typePlace = "cafe";
-$radius = 50;
-$midStreet;
-$midCity;
-$midState;
-$midName;
-
-//Variables for calculating
-$halfDist;
-$totStepd = 0;
-$startPoint; $lastStepS; $lastStepE; $endPoint; $totPath;
-
 $emails = array();
 $idHashes = array();
 $addresses = array();
-
 
 ////////// Global Varialbles /////////////
 
@@ -104,103 +87,124 @@ $endPoint = new LatLng($json['routes'][0]['legs'][0]['end_location']['lat'], $js
 
 $totalDistance = $json['routes'][0]['legs'][0]['distance']['value'];
 
+// Calculate the halfway distance
+$halfDist = $totalDistance / 2;
 
-//Get the start and end address for specific meeting for 
-function getTreff ($addresses, $totalDistance, $points)
-{
-    //Creat Half of the driving distance
-    $halfDist = $totalDistance/2;
-    
-    $i = 0;
-    while(checkRange($totStepd) == "low")
-    {
-        $totStepd += archDist($points[$i], $points[$i+1]);
-        $lastStepS = $points[$i];
-        $lastStepE = $points[$i+1];
-        $i++;
-    }
-    
-    if(checkRange($totStepd) == "good")
-    {
-        $midpoint = getPlace($lastStepE);
-        goTable();
-    }
-    elseif(checkRange($totStepd) == "high")
-    {
-        calcMidpoint();
-        goTable();
-    }
-    
+$i = 0;
+$totalStepped = 0;
+while($totalStepped < $halfDist) {
+    $totalStepped += archDist($points[$i], $points[$i+1]);
+    $lastStepStart = $points[$i];
+    $lastStepEnd = $points[$i+1];
+    $i++;
+}
+
+$midpoint = archMidpoint($lastStepStart, $lastStepEnd);
+$midpointLocation = getPlace($midpoint);
+
+$result = $connect->query("UPDATE Meetings
+                           SET midpointStreet = '" . $midpointLocation->street . "',
+                               midpointCity = '" . $midpointLocation->city . "',
+                               midpointState = '" .$midpointLocation->state . "',
+                               midpointCountry = '" . $midpointLocation->country . "',
+                               midpointName = '" . $midpointLocation->name . "',
+                               midpointLat = " . $midpoint->lat . ",
+                               midpointLng = " . $midpoint->lng . "
+                           WHERE meetingId = " .  $meetingId);
+
+if($result) {
+    // Update status of Meetings
+    $connect->query("UPDATE Meetings
+                     SET status = 'Ready'
+                     WHERE meetingId = " . $meetingId);
+
+} else {
+    errorPage();
+}
+
+// Get the meeting name
+$result = $connect->query("SELECT name
+                           FROM Meetings
+                           WHERE meetingId=$meetingId");
+
+$meetingName = $result->fetch_assoc()['name'];
+$result->free();
+
+// Send emails
+$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
+$domain = "treffnow.com";
+
+for ($i = 0; $i < count($emails); $i++) {
+    $mg->sendMessage($domain,
+        array('from'    => 'Treff <noreply@treffnow.com>',
+            'to'      => $emails[$i],
+            'subject' => 'Your Treff "' . $meetingName . '" is Ready',
+            'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
+                "This is a notification that everyone in your Treff has confirmed and the meeting point has been determined. Below is a link to the meeting main page.\n" .
+                "http://treffnow.com/treff/" . $idHashes[$i] . "\n\n" .
+                "Happy Treffing,\n" .
+                "The Treff Team"));
 }
 
 
-//Final Put in to Table
-function goTable()
-{
-    $result = $connect->query("UPDATE Meetings
-                           SET midpointStreet = '" . $midStreet . "',
-                               midpointCity = '" . $midCity . "',
-                              midpointState = '" . $midState . "',
-                              midpointCountry = '" . $midCountry . "',
-                              midpointName = '" . $midName . "',
-                              midpointLat = '" . $midpoint->lat . "',
-                              midpointLng = '" . $midpoint->lng . "',
-                           WHERE meetingId = '" .  $meetingId ");
-    
-    if($result)
-    {
-        // Update status of Meetings
-        $connect->query("UPDATE Meetings
-                         SET status = 'Ready',
-                         WHERE idHash = '" . $meetingId . "'");
-        header('Location: http://treffnow.com/treff.php?idHash='.formData['idHash'], TRUE);
-    }
-    else
-    {
-        errorPage();
-    }
+header('Location: http://treffnow.com/treff.php?idHash='. $_POST['idHash'], TRUE);
+
+
+
+class Location {
+    public $name;
+    public $street;
+    public $city;
+    public $state;
+    public $zip;
+    public $country;
+    public $latLng;
 }
 
 
 //Get places around a LatLng
-function getPlace($location)
-{
-    $locationString = $location->lat.",".$location->lng;
-    $place = curl_get("http://maps.googleapis.com/maps/api/place/nearbysearch/json","location"=>$locationString, "radius"=>$radius, "types"=>$typePlace, "sensor"=>"false","key"=>$goKey));
-    if($place->status = "OK")
-    {
-        $placeArray = explode($place->formatted_address);
-        $midStreet = $placeArray[0];
-        $midCity = $placeArray[count($placeArray)-1];
-        $midCountry = $placeArray[count($placeArray)];
-        $midName = $place->name;
-        return $place->location;
-    }
-    elseif($place->status = "ZERO_RESULTS")
-    {
+function getPlace($latLng, $radius = 50, $typePlace = "cafe") {
+    $goKey = "AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ";
+
+    $locationString = $latLng->lat.",".$latLng->lng;
+
+    $result = curl_get("https://maps.googleapis.com/maps/api/place/nearbysearch/json", array("location"=>$locationString, "radius"=>$radius, "types"=>$typePlace, "sensor"=>"false","key"=>$goKey));
+    $json = json_decode($result, true);
+
+    if($json['status'] == "OK") {
+        $location = new Location();
+        $location->latLng = $latLng;
+
+        $placeArray = explode(",", $json['results'][0]['vicinity']);
+        $location->street = trim($placeArray[0]);
+        $location->city = trim($placeArray[1]);
+        // $midCountry = $placeArray[count($placeArray)];
+
+        $location->name = $json['results'][0]['name'];
+        var_dump($location);
+        return $location;
+    } else if($json['status'] == "ZERO_RESULTS") {
         $radius += 50;
-        getPlace($location);
-    }
-    else
-    {
+        return getPlace($latLng, $radius, $typePlace);
+    } else {
         errorPage();
     }
 }
 
-//Calculate the mid point if out side of range
-function calcMidpoint()
-{
-    $a = cartesian($endpoint);
-    $b = cartesian($lastStepS);
-    $c = cartesian($lastStepE);
-    
-    $midpointLat = 1/3*(a->lat+b->lat+c->lat);
-    $midpointLng = 1/3*(a->lng+b->lng+c->lng);
-
-    $midpoint = new LatLng($midpointLat, $midpointLng)
-
-    getPlace($midpoint)
-}
+////Calculate the mid point if out side of range
+//function calcMidpoint()
+//{
+//    $a = cartesian($endpoint);
+//    $b = cartesian($lastStepStart);
+//    $c = cartesian($lastStepEnd);
+//
+//    $midpointLat = 1/3*($a->lat+$b->lat+$c->lat);
+//    $midpointLng = 1/3*($a->lng+$b->lng+$c->lng);
+//
+//    $midpoint = new LatLng($midpointLat, $midpointLng);
+//
+//    getPlace($midpoint);
+//}
 
 //Get the cartesianconversion
 function cartesian($latLng)
@@ -217,107 +221,48 @@ function cartesian($latLng)
 //Get arch distance petween two points via lat and lon.
 function archDist($latLng1, $latLng2)
 {
-
     //Get the relation of two points
-    $lat1 = deg2rad(latLng1->lat);
-    $lon1 = deg2rad(latLng1->lng);
-    $lat2 = deg2rad(latLng2->lat);
-    $lon2 = deg2rad(latLng2->lng);
+    $lat1 = deg2rad($latLng1->lat);
+    $lon1 = deg2rad($latLng1->lng);
+    $lat2 = deg2rad($latLng2->lat);
+    $lon2 = deg2rad($latLng2->lng);
     $R = 6371009; // metres
-    $dLat = (lat2-lat1);
-    $dLon = (lon2-lon1);
+    $dLat = ($lat2-$lat1);
+    $dLon = ($lon2-$lon1);
     
-    $a = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2);
-    $c = 2 * atan2(sqrt(a), sqrt(1-a));
-    $d = R * c;
+    $a = sin($dLat/2) * sin($dLat/2) + sin($dLon/2) * sin($dLon/2) * cos($lat1) * cos($lat2);
+    $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+    $d = $R * $c;
     
     return $d;
 }
 
 //Get arch distance petween two points via lat and lon.
-function archDist($latLng1, $latLng2)
+function archMidpoint($latLng1, $latLng2)
 {
-
     //Get the relation of two points
-    $lat1 = deg2rad(latLng1->lat);
-    $lon1 = deg2rad(latLng1->lng);
-    $lat2 = deg2rad(latLng2->lat);
-    $lon2 = deg2rad(latLng2->lng);
+    $lat1 = deg2rad($latLng1->lat);
+    $lon1 = deg2rad($latLng1->lng);
+    $lat2 = deg2rad($latLng2->lat);
+    $lon2 = deg2rad($latLng2->lng);
     $R = 6371009; // metres
-    $dLat = (lat2-lat1);
-    $dLon = (lon2-lon1);
+    $dLat = ($lat2-$lat1);
+    $dLon = ($lon2-$lon1);
     
-    $a = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2);
-    $c = 2 * atan2(sqrt(a), sqrt(1-a));
-    $d = R * c;
+    $a = sin($dLat/2) * sin($dLat/2) + sin($dLon/2) * sin($dLon/2) * cos($lat1) * cos($lat2);
+    $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+    $d = $R * $c;
         
     //Get the mid point as the crow flies
-    $Bx = cos(lat2) * cos(dLon);
-    $By = cos(lat2) * sin(dLon);
-    $lat3 = atan2(sin(lat1)+sin(lat2),
-                          sqrt( (cos(lat1)+Bx)*(cos(lat1)+Bx) + By*By ) );
-    $lon3 = lon1 + atan2(By, cos(lat1) + Bx);
+    $Bx = cos($lat2) * cos($dLon);
+    $By = cos($lat2) * sin($dLon);
+    $lat3 = atan2(sin($lat1)+sin($lat2), sqrt( (cos($lat1)+$Bx)*(cos($lat1)+$Bx) + $By*$By ) );
+    $lon3 = $lon1 + atan2($By, cos($lat1) + $Bx);
     
     //Convert back to dgrees
-    lat3 = rad2deg(lat3);
-    lon3 = rad2deg(lon3);
-    
-    //Create and return Goggle latlng object
-    $middlePoint = array();
+    $lat3 = rad2deg($lat3);
+    $lon3 = rad2deg($lon3);
 
-    return middlePoint;
+    return new LatLng($lat3, $lon3);
 }
 
-//Check mid point to see if within range.
-function checkRange($midDistance)
-{
-    $percentCalc = midDistance/halfDist;
-    if(percentCalc <= 1.5)
-    {
-        if(percentCalc >= .95)
-        {
-            //alert("good"+percentCalc);
-            return "good";
-        }
-        else
-        {
-            //alert("low"+percentCalc);
-            return "low";
-        }
-    }
-    else
-    {
-        //alert("high"+percentCalc);
-        return "high";
-    }
-}
-
-getTreff();
-
-
-// Get the meeting name
-$result = $connect->query("SELECT name
-                           FROM Meetings
-                           WHERE meetingId=$$meetingId");
-
-$meetingName = $result->fetch_assoc()['name'];
-$result->free();
-
-// Send emails
-$mg = new Mailgun("key-3g4koukbw35jwaa0ldtd32sqjzq-7948");
-$domain = "treffnow.com";
-
-for ($i = 0; $i < count($emails); $i++) {
-    $mg->sendMessage($domain,
-        array('from'    => 'Treff <noreply@treffnow.com>',
-            'to'      => $emails[$i],
-            'subject' => 'Your Treff "' . $meetingName . '" is Ready',
-            'text'    => "Thank you for using Treff! We hope your experience was simple and timely.\n\n" .
-                         "This is a notification that everyone in your Treff has confirmed and the meeting point has been determined. Below is a link to the meeting main page.\n" .
-                         "http://treffnow.com/treff/" . $idHashes[$i] . "\n\n" .
-                         "Happy Treffing,\n" .
-                         "The Treff Team"));
-}
-
-
-//header("Location: treff.php?idHash=$creatorIdHash");
