@@ -34,7 +34,7 @@ $destinationA = '3201 Guadalupe St, Austin, TX';
 //Variables for
 $halfDist;
 $totStepd = 0;
-$firstStep, $lastStepS, $lastStepE, $endPoint, $totPath;
+$firstStep; $lastStepS; $lastStepE; $endPoint; $totPath;
 
 ////////// Global Varialbles /////////////
 
