@@ -151,7 +151,8 @@ function curl_get($baseUrl, array $data = array(), array $options = array()) {
         CURLOPT_URL => $url,
         CURLOPT_HEADER => 0,
         CURLOPT_RETURNTRANSFER => TRUE,
-        CURLOPT_TIMEOUT => 0
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_SSL_VERIFYPEER => FALSE
     );
 
     $ch = curl_init();
