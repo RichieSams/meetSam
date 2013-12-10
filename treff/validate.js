@@ -82,24 +82,7 @@ function validateTreff () {
         return false;
     }
 
-
-    // Convert the address to Lat and Lon and fill the hidden inputs with the values.
-    // TODO: Disable the address inputs so their values aren't sent. (Since we only care about Lat/Lon
-    var address = "'" + form.street.value + ", " + form.city.value + ", " + form.state.value + "  " + form.zip.value + "'";
-    getLatLon(address, validateTreffCallback);
-
-    // We rely on the callback to actually submit the form. If we were to submit here
-    // the lat/lon values from google API would not be set.
-	return false;
-}
-
-function validateTreffCallback(lat, lon) {
-    var form = document.getElementById("treffForm");
-
-    form.startingLat.value = lat;
-    form.startingLon.value = lon;
-
-    form.submit();
+	return true;
 }
 
 function validateJoin() {
