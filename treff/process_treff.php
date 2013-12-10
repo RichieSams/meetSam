@@ -16,10 +16,6 @@ if (isset($_POST)) {
 
 $connect = connectMySql();
 
-$meetingId = $connect->insert_id;
-
-// Create a userId for the invitee
-// But first, check if their email is already registered
 $result = $connect->query("SELECT userId, meetingId FROM MeetingUsers WHERE idHash='" . $formData['idHash'] . "'");
 
 if ($result->num_rows == 1) {
