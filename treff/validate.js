@@ -45,7 +45,7 @@ function validateRegistration() {
         return false;
     }
 	
-	if (form.pass1.value != form.pass1.value){
+	if (form.pass1.value != form.pass2.value){
 		alert("Passwords do not match");
 		return false;
 	}
@@ -155,14 +155,35 @@ function validatePassAjax() {
 	var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
 
 	var	pass1 = form.pass1.value;
-
+	
 	if(passDig && passLen) {
 		$("span.valPass").html("<div class='confirmedEmail'>Valid</div>");
 		validPassword = true;
 	}
 	else{
-		$("span.valPass").html("<div class='failedEmail'>Invalid/div>");
+		$("span.valPass").html("<div class='failedEmail'>Invalid</div>");
 		validPassword = false;
 	}
 	
+}
+
+ function validateNewPass() {
+	var form = document.getElementById("registrationForm");	
+	var passDig = /[0-9]/.test(form.pass1.value);
+	var passLen = /^[A-Za-z0-9!_-]{6,10}$/.test(form.pass1.value);
+
+	if (form.pass1.value != form.pass2.value){
+		alert("Passwords do not match");
+		return false;
+	}
+
+	if (! passDig || !passLen) {
+        alert("Invalid Password");
+        return false;
+    }
+	
+    form.pass1.value = CryptoJS.SHA256(form.name + form.pass1);
+    form.pass2.value = CryptoJS.SHA256(form.name + form.pass2);
+
+	return true;
 }

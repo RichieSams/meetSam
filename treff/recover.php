@@ -21,13 +21,19 @@ function startReset($hash){
 		<div class="main_body">
 		<div class=resetTable">
 		<h2>Please enter and re-enter your new password to keep Treffing.</h2>
-			<form id ="newPassForm" action="' . $_SERVER['PHP_SELF'] . '" method="POST" onsubmit="return validateNewPass();">
+			<form id = "registrationForm" action= "' . $_SERVER['PHP_SELF'] . '" method="POST" onsubmit="return validateNewPass();" >
 				<table>
 					<tr>
-						<td><input type="password" name="pass1" maxlength="32" placeholder="New Password"/></td>
+						<td>
+							<input class = "valPass" type="password" name="pass1" maxlength="32" placeholder="New Password"/> 
+							<span class="valPass"></span>
+						</td>
 					</tr>
 					<tr>
 						<td><input type="password" name="pass2" maxlength="32" placeholder="Re-enter Password"/></td>
+					</tr>
+					<tr>
+						<td><div class="requirements">*6-32 characters with at least one number(!, _, - Allowed)</div></td>
 					</tr>
 				</table>
 		</div>
@@ -57,13 +63,19 @@ function confirm(){
 		$connection->query("UPDATE Users
 							SET password = '$pass1'
 							WHERE email = '$email'");
+		$connection->query("DELETE FROM ForgottenPassword
+							WHERE hash='$hash'");
 		
 		Echo '<h2>Your password has been reset. Happy Treffing!</h2>';
 		
 	}
 	
 	else {
-		Echo '<h2> Sorry, your time ran out to change your password</h2>';
+		$connection = connectMySql();
+		$connection->query("DELETE FROM ForgottenPassword
+							WHERE hash='$hash'");
+		
+		Echo '<h2> Sorry, your time ran out to change your password.</h2>';
 	}
 	include 'footer.php';
 }
