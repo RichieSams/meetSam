@@ -25,6 +25,8 @@ $result = $connection->query("SELECT Meetings.name AS treffName
 $treffName = $result->fetch_assoc()['treffName'];
 $result->free();
 
+$email = isset($_POST['email']) ? $_POST['email'] : "";
+
 echo '
 <div class="main_body">
     <form id="joinForm" action="process_treff.php" method="POST" onsubmit="return validateJoin();">
@@ -33,7 +35,7 @@ echo '
             <input type="hidden" name="idHash" value="'. $idHash . '" />
             <table>
                 <tr>
-                    <td><input type="text" name="email" maxlength="50" placeholder="Email Address"/></td>
+                    <td><input type="text" name="email" maxlength="50" value="' . $email . '"placeholder="Email Address"/></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="street" maxlength="50" size="37" placeholder="Street Address"/></td>
