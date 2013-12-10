@@ -13,10 +13,6 @@ if (!isset($_POST))
 
 $connect = connectMySql();
 
-// Create entry in Meetings Table
-$connect->query("INSERT INTO Meetings (name)
-                 VALUES ('" . $_POST['treffName'] . "')");
-
 $meetingId = $connect->insert_id;
 
 // Create a userId for the invitee
