@@ -106,32 +106,59 @@ $totalDistance = $json['routes'][0]['legs'][0]['distance']['value'];
 
 
 //Get the start and end address for specific meeting for 
-function startEnd ()
+function getTreff ($addresses, $totalDistance, $points)
 {
-    $result = $connect->query("SELECT startingStreet, startingCity, startingState, startingZip, startingCountry
-                           FROM MeetingUsers
-                           WHERE meetingId=$meetingId");
-
-    $addresses = array();
-    $index = 0;
-    while ($row = $result->fetch_assoc()) {
-        $addresses[$index] = $row['startingStreet'] . ", " . $row['startingCity'] . ", " . $row['startingState'] . " " . $row['startingZip'] . ", " . $row['startingCountry'];
-        $index++;
+    //Creat Half of the driving distance
+    $halfDist = $totalDistance/2;
+    
+    $i = 0;
+    while(checkRange($totStepd) == "low")
+    {
+        $totStepd += archDist($points[$i], $points[$i+1]);
+        $lastStepS = $points[$i];
+        $lastStepE = $points[$i+1];
+        $i++;
     }
-}
-
-
-
-//Find the Driving Distanc Mid point
-function getLatlng($location)
-{
+    
+    if(checkRange($totStepd) == "good")
+    {
+        $midpoint = getPlace($lastStepE);
+        goTable();
+    }
+    elseif(checkRange($totStepd) == "high")
+    {
+        calcMidpoint();
+        goTable();
+    }
     
 }
 
-//Get Lat Lngs
-function getLatlng($location)
+
+//Final Put in to Table
+function goTable()
 {
+    $result = $connect->query("UPDATE Meetings
+                           SET midpointStreet = '" . $midStreet . "',
+                               midpointCity = '" . $midCity . "',
+                              midpointState = '" . $midState . "',
+                              midpointCountry = '" . $midCountry . "',
+                              midpointName = '" . $midName . "',
+                              midpointLat = '" . $midpoint->lat . "',
+                              midpointLng = '" . $midpoint->lng . "',
+                           WHERE meetingId = '" .  $meetingId ");
     
+    if($result)
+    {
+        // Update status of Meetings
+        $connect->query("UPDATE Meetings
+                         SET status = 'Ready',
+                         WHERE idHash = '" . $meetingId . "'");
+        header('Location: http://treffnow.com/treff.php?idHash='.formData['idHash'], TRUE);
+    }
+    else
+    {
+        errorPage();
+    }
 }
 
 
