@@ -6,10 +6,16 @@ include_once 'functions.php';
 require 'lib/vendor/autoload.php';
 use Mailgun\Mailgun;
 
-if (!isset($_POST))
+if (isset($_POST))
 {
     $formData = $_POST;
 }
+else
+{
+    // Redirect
+    errorPage();
+}
+
 
 $connect = connectMySql();
 
