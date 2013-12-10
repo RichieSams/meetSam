@@ -165,11 +165,54 @@ function goTable()
 //Get places around a LatLng
 function getPlace($location)
 {
-
+    $locationString = $location->lat.",".$location->lng;
+    $place = curl_get("http://maps.googleapis.com/maps/api/place/nearbysearch/json","location"=>$locationString, "radius"=>$radius, "types"=>$typePlace, "sensor"=>"false","key"=>$goKey));
+    if($place->status = "OK")
+    {
+        $placeArray = explode($place->formatted_address);
+        $midStreet = $placeArray[0];
+        $midCity = $placeArray[count($placeArray)-1];
+        $midCountry = $placeArray[count($placeArray)];
+        $midName = $place->name;
+        return $place->location;
+    }
+    elseif($place->status = "ZERO_RESULTS")
+    {
+        $radius += 50;
+        getPlace($location);
+    }
+    else
+    {
+        errorPage();
+    }
 }
 
+//Calculate the mid point if out side of range
+function calcMidpoint()
+{
+    $a = cartesian($endpoint);
+    $b = cartesian($lastStepS);
+    $c = cartesian($lastStepE);
+    
+    $midpointLat = 1/3*(a->lat+b->lat+c->lat);
+    $midpointLng = 1/3*(a->lng+b->lng+c->lng);
 
+    $midpoint = new LatLng($midpointLat, $midpointLng)
 
+    getPlace($midpoint)
+}
+
+//Get the cartesianconversion
+function cartesian($latLng)
+{
+    $R = 6371009;
+    $x = $R*sin(90-$latLng->lat)*cas($latLng->lng);
+    $y = $R*sin(90-$latLng->lat)*sin($latLng->lng);
+    
+    $ll = new LatLng($x,$y);
+    
+    return $ll;
+}
 
 //Get arch distance petween two points via lat and lon.
 function archDist($latLng1, $latLng2)
