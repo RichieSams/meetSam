@@ -18,7 +18,7 @@ echo '
 		<form id ="loginForm" action="loginprocess.php" method="POST" onsubmit="return validateLogin();">
             <table>
 				<tr>
-                  <td><input type="text" name="name" maxlength="50" placeholder="Email Address"/></td>
+                  <td><input type="email" name="name" maxlength="50" placeholder="Email Address"/></td>
 				</tr>
 				<tr>
                   <td><input type="password" name="pass" maxlength="32" placeholder="Password"/></td>
@@ -45,7 +45,7 @@ echo '
 
             <table>
 				<tr>
-					<td><input  class = "valEmail" type="text" name="name" maxlength="50" placeholder="Email Address"  onchange="validateEmailAjax();"/>
+					<td><input  class = "valEmail" type="email" name="name" maxlength="50" placeholder="Email Address"  onchange="validateEmailAjax();"/>
 					<span class="valEmail"></span></td>
 				</tr>
 				<tr>
