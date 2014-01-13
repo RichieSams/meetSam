@@ -20,7 +20,8 @@ function initialize() {
     directionsDisplay.setPanel(document.getElementById('directions-panel'));
 }
 
-function setMapCenterFromAddress(address, setMarker) {
+function setMapCenterFromAddress(address, setMarker, locName) {
+    locName = typeof locName !== 'undefined' ? locName : "";
     geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
