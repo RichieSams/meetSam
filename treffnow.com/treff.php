@@ -30,7 +30,7 @@ $result->free();
 if ($status == 'Ready') {
     echo '
     <script type="text/javascript">
-        setMapCenterFromAddress(\'' . $midpointAddress . '\', true);
+        setMapCenterFromAddress(\'' . $midpointAddress . '\', true, \'' . addslashes($locName) . '\');
     </script>';
 } else {
     echo '
