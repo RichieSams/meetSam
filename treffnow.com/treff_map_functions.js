@@ -26,10 +26,24 @@ function setMapCenterFromAddress(address, setMarker, locName) {
         if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
             if (setMarker) {
-                centerpointMarker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
+                            centerpointMarker = new google.maps.Marker({
+                                                                        map: map,
+                                                                        position: results[0].geometry.location
+                                                                        });
+             google.maps.event.addListener(centerpointMarker, 'click', function() {
+                 if(locName == "")
+                 {
+                     infowindow.setContent("Waiting on the response to the invite.");
+                     infowindow.open(map, centerpointMarker);
+                  }
+                  else
+                   {
+                       infowindow.setContent("O's Campus Cafe (in LBJ Building)");
+                       infowindow.open(map, centerpointMarker);
+                   }
+               });
+
+
             }
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
