@@ -3,6 +3,8 @@ var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
 var centerpointMarker;
+var infowindow = new google.maps.InfoWindow();
+;
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
