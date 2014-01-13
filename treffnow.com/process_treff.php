@@ -164,7 +164,7 @@ class Location {
 
 
 //Get places around a LatLng
-function getPlace($latLng, $radius = 50, $typePlace = "cafe") {
+function getPlace($latLng, $typePlace = "cafe", $radius = 50) {
     $goKey = "AIzaSyDzzYC0JTMf2UPapIJXkNbv9NEobpCBfPQ";
 
     $locationString = $latLng->lat.",".$latLng->lng;
