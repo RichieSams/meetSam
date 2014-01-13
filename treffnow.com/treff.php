@@ -17,7 +17,7 @@ $userId = $row['userId'];
 $startingAddress = $row['startingStreet'] . ", " . $row['startingCity'] . ", " . $row['startingState'] . " " . $row['startingZip'] . ", " . $row['startingCountry'];
 $result->free();
 
-$result = $connection->query("SELECT midpointStreet, midpointCity, midpointState, midpointZip, midpointCountry, status
+$result = $connection->query("SELECT midpointStreet, midpointCity, midpointState, midpointZip, midpointCountry, midpointName, status
                               FROM Meetings
                               WHERE meetingId=$meetingId");
 
