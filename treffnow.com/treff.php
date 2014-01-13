@@ -23,6 +23,7 @@ $result = $connection->query("SELECT midpointStreet, midpointCity, midpointState
 
 $row = $result->fetch_assoc();
 $midpointAddress = $row['midpointStreet'] . ", " . $row['midpointCity'] . ", " . $row['midpointState'] . " " . $row['midpointZip'] . ", " . $row['midpointCountry'];
+$locName = $row['midpointName'];
 $status = $row['status'];
 $result->free();
 
