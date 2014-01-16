@@ -1,5 +1,0 @@
-blaise:pascal
-charles:babbage
-herman:hollerith
-konrad:zuse
-howard:aiken
