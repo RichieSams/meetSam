@@ -38,7 +38,7 @@ function setMapCenterFromAddress(address, setMarker, locName) {
                   }
                   else
                    {
-                       infowindow.setContent("O's Campus Cafe (in LBJ Building)");
+                       infowindow.setContent(locName);
                        infowindow.open(map, centerpointMarker);
                    }
                });
